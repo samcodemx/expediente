@@ -1,0 +1,9 @@
+*activar el entorno y correr el servidor*
+
+./venv/scripts/activate
+python manage.py runserver
+
+
+Credenciales admin para localhost/admin:
+user: admin
+pass: su
