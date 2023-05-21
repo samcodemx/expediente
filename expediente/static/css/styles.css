@@ -1,0 +1,118 @@
+/* ========================================
+Variables
+========================================= */
+:root{
+  --main-color: #4275A3;
+  --bg-color: #E7EFF6;
+  --white-color: #fff;
+}
+
+/* ========================================
+Estilos Generales
+========================================= */
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1.6rem;
+  user-select: none;
+  overscroll-behavior: contain;
+  background-color: var(--bg-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================
+Formulario de Login
+========================================= */
+.login{
+  min-width: 100%;
+  height: 100vh;
+  padding: 8rem;
+  position: fixed;
+  z-index: 9999;
+}
+
+.login__container{
+  background-color: var(--white-color);
+  border-radius: 2rem;
+  height: 100%;
+  display: flex;
+  gap: 4rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5rem;
+}
+
+.login-form{
+  width: 100%;
+}
+
+.login-form__form{
+  width: 50rem;
+  margin: auto;
+}
+
+.login-form label{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.login-form #id_username, .login-form #id_password{
+  width: 100%;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  outline: none;
+}
+
+.login__logo{
+  height: 13rem;
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+}
+
+.login__img{
+  height: 100%;
+  border-radius: 1rem;
+}
+
+.login__submit{
+  background-color: var(--main-color);
+  width: 60%;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  color: var(--white-color);
+  margin: auto;
+  display: block;
+}
+
+
+/* ========================================
+Estilos del home/crearExpediente
+========================================= */

@@ -1,15 +1,22 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load static %} {% block content %}
+<section class="login">
+  <div class="login__container">
+    <!-- Mensaje de error al iniciar sesion -->
+    {% if error_message %}
+    <p>{{ error_message }}</p>
+    {% endif %}
+    <!-- Formulario de Login -->
+    <div class="login-form">
+    <form class="login-form__form" method="post">
+      <img class="login__logo" src="{% static 'img/logo.png' %}" alt="Logo Medical 360" />
+      {% csrf_token %} {{ form.as_p }}
+      <button class="login__submit" type="submit">Iniciar sesión</button>
+    </form>
+</div>
+    <!-- Imagen del login -->
+        <img class="login__img" src="{% static 'img/login.webp' %}" alt="Imagen del Login" />
+  </div>
+</section>
 
-{% block content %}
-<h1>Login</h1>
-
-{% if error_message %}  
-<p>{{ error_message }}</p>
-{% endif %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Log In</button>
-</form>
 
 {% endblock %}
