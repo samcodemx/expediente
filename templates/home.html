@@ -1,8 +1,53 @@
-{% extends "base.html" %}
-
-{% block content %}
-
+{% extends "base.html" %} {% load static %} {% block content %} {% comment %}
 <h1>Welcome to the Home Page!</h1>
 <p>You are logged in as {{ request.user.username }}.</p>
+{% endcomment %}
+<nav class="navbar">
+  <div class="navbar__container">
+    <!-- Logo del navbar -->
+    <img
+      class="navbar__logo"
+      src="{% static 'img/logo.png' %}"
+      alt="Logo Medical 360"
+    />
+    <!-- Menu de opciones -->
+    <ul class="navbar__menu">
+      <li class="navbar__menu-item">
+        <a class="navbar__menu-link navbar__menu-link-active" href="#"
+          >Crear expediente</a
+        >
+      </li>
+      <li class="navbar__menu-item">
+        <a class="navbar__menu-link" href="#">Consultar</a>
+      </li>
+      <li class="navbar__menu-item">
+        <a class="navbar__menu-link" href="#">Ayuda</a>
+      </li>
+    </ul>
+    <!-- Dropdown para cerrar sesion -->
+    <img
+      id="showToggle"
+      class="dropdown__img"
+      src="{% static 'img/user.png' %}"
+      alt="Imagen de Perfil"
+    />
+    <!-- Contenedor del dropdown -->
+    <div class="sub-menu-wrap" id="subMenu">
+        <!-- Sub del Dropdown -->
+      <div class="sub-menu">
+        <div class="user-info">
+          <img class="dropdown__img" src="{% static 'img/user.png' %}" alt="Imagen de Perfil"/>
+          <p>Dr. Samuel Medina</p>
+        </div>
+        
+        <hr class="dropdown__hr">
 
+        <!-- Enlaces del dropdown -->
+        <a href="#" class="sub-menu-link">Gestionar doctores</a>
+        <a href="#" class="sub-menu-link">Cerrar sesión</a>
+
+      </div>
+    </div>
+  </div>
+</nav>
 {% endblock %}
