@@ -3,6 +3,10 @@
 ./venv/scripts/activate
 python manage.py runserver
 
+cd theme > cd static_src > npm install
+python manage.py tailwind install
++++ static_src > npm install +++
+python manage.py tailwind start
 
 Credenciales admin para localhost/admin:
 user: admin
