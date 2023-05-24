@@ -28,3 +28,7 @@ def logout_view(request):
 @login_required
 def home_view(request):
     return render(request, 'home.html')
+
+# Crear nuevo expediente
+def createExp_view(request):
+    return render(request, 'expedientes/create.html' )
