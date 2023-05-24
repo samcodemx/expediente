@@ -1,120 +1,76 @@
-{% extends "base.html" %} {% load static %} {% block content %} 
-<!-- {% comment %}
-<h1>Welcome to the Home Page!</h1>
-<p>You are logged in as {{ request.user.username }}.</p>
-{% endcomment %} -->
-<!-- ========================================
-   = Section comment =
-======================================== -->
-<nav class="navbar">
-  <div class="navbar__container">
-    <!-- Logo del navbar -->
+{% extends "base.html" %} {% load static %} {% block content %}
+<section class="lg:px-0">
+  <nav
+    class="py-2 border-b-2 border-background bg-white md:px-6">
+
+    <div class="lg:px-0 lg:container lg:mx-auto flex justify-between items-center">
+          <!-- Imagen Navbar -->
     <img
-      class="navbar__logo"
-      src="{% static 'img/logo.png' %}"
-      alt="Logo Medical 360"
-    />
-    <!-- Menu de opciones -->
-    <ul class="navbar__menu">
-      <li class="navbar__menu-item">
-        <a class="navbar__menu-link navbar__menu-link-active" href="#"
-          >Crear expediente</a
+    class="h-14"
+    src="{% static 'img/logo.png' %}"
+    alt="Logo Medical 360"
+  />
+  <!-- Dropdown -->
+  <div>
+    <button
+      id="dropdownUserAvatarButton"
+      data-dropdown-toggle="dropdownAvatar"
+      class="flex mx-3 text-sm rounded-full md:mr-0 border-2 border-background"
+      type="button"
+    >
+      <img
+        class="w-10 h-10 rounded-full"
+        src="{% static 'img/user.png' %}"
+        alt="user photo"
+      />
+    </button>
+
+    <!-- Dropdown menu -->
+    <div
+      id="dropdownAvatar"
+      class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+    >
+      <div class="px-4 py-3 text-sm text-gray-900">
+        <div>Dr. Samuel Medina</div>
+        <div class="font-medium truncate">email@ejemplo.com</div>
+      </div>
+      <ul
+        class="py-2 text-sm text-gray-700 dark:text-gray-200"
+        aria-labelledby="dropdownUserAvatarButton"
+      >
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-background"
+            >Crear expediente</a
+          >
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-background"
+            >Consultar expedientes</a
+          >
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-background">Ayuda</a>
+        </li>
+      </ul>
+      <div class="py-2">
+        <a
+          href="#"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-background"
+          >Cerrar sesión</a
         >
-      </li>
-      <li class="navbar__menu-item">
-        <a class="navbar__menu-link" href="admin/">Consultar</a>
-      </li>
-      <li class="navbar__menu-item">
-        <a class="navbar__menu-link" href="#">Ayuda</a>
-      </li>
-    </ul>
-    <!-- Dropdown para cerrar sesion -->
-    <img
-      id="showToggle"
-      class="dropdown__img"
-      src="{% static 'img/user.png' %}"
-      alt="Imagen de Perfil"
-    />
-    <!-- Contenedor del dropdown -->
-    <div class="sub-menu-wrap" id="subMenu">
-        <!-- Sub del Dropdown -->
-      <div class="sub-menu">
-        <div class="user-info">
-          <img class="dropdown__img" src="{% static 'img/user.png' %}" alt="Imagen de Perfil"/>
-          <p>Dr. Samuel Medina</p>
-        </div>
-        
-        <hr class="dropdown__hr">
-
-        <!-- Enlaces del dropdown -->
-        <a href="#" class="sub-menu-link">Gestionar doctores</a>
-        <a href="#" class="sub-menu-link">Cerrar sesión</a>
-
       </div>
     </div>
   </div>
-</nav>
+    </div>
 
-<section class="consultar-expedientes">
-  <div class="consultar-expedientes__container container">
-    <h1 class="section__title">Expedientes registrados</h1>
-    <p>Consulta y filtra los expedientes médicos aquí.</p>
+  </nav>
+
+  <div class=" py-10 border-b-2 border-gray-200 bg-white md:px-6">
+    <div class="lg:container lg:mx-auto">
+      <h1 class="uppercase font-semibold text-main text-xl">Expedientes registrados</h1>  
+      <p>Consulta y filtra todos los expedientes médicos aquí.</p>
+    </div>
+
   </div>
-  <!-- ========================================
-     Mostrar expedientes
-  ======================================== -->
-  <div>
-    <!-- Formulario del buscador -->
-    <form class="search__form container">
-      <!-- Buscador -->
-      <div class="search-bar">
-        <input class="search__input" type="text">
-        <svg class="search__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-        </svg>
-      </div>
-      <button class="search__submit" type="submit">Nuevo</button>
-    </form>
-
-        <div class="expedientes__container container">
-          <div class="expediente__header">
-            <p class="expediente__no">Expediente</p>
-            <p class="expediente__name">Nombre</p>
-            <p class="expediente__company">Empresa</p>
-            <p class="expediente__dr">Doctor</p>
-            <p class="expediente__options"></p>
-          </div>
-
-          <div class="expediente__list">
-                    <!-- ========================================
-         AQUI IMPRIME EL LISTADO DE EXPEDIENTES
-         expediente__item
-      ======================================== -->
-            <div class="expediente__item">
-              <p class="expediente__no">001</p>
-              <p class="expediente__name">Martín Hernández Medina</p>
-              <p class="expediente__company">Samsung</p>
-              <p class="expediente__dr">Dr. Samuel Medina</p>
-              <a class="expediente__options expediente__link" href="#">Ver</a>
-            </div>
-
-            <div class="expediente__item">
-              <p class="expediente__no">002</p>
-              <p class="expediente__name">Jorge Suñiga Juárez</p>
-              <p class="expediente__company">Google</p>
-              <p class="expediente__dr">Dr. Samuel Medina</p>
-              <a class="expediente__options expediente__link" href="#">Ver</a>
-            </div>
-
-            <div class="expediente__item">
-              <p class="expediente__no">003</p>
-              <p class="expediente__name">Emilia Gómez Rogríguez</p>
-              <p class="expediente__company">FEMSA</p>
-              <p class="expediente__dr">Dr. Samuel Medina</p>
-              <a class="expediente__options expediente__link" href="#">Ver</a>
-            </div>
-
-          </div>
-        </div>
 </section>
 {% endblock %}

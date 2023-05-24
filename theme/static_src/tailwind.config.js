@@ -1,3 +1,4 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
 /**
  * This is a minimal config.
  *
@@ -13,6 +14,7 @@ module.exports = {
 
         /*  Templates within theme app (<tailwind_app_name>/templates), e.g. base.html. */
         '../templates/**/*.html',
+        './node_modules/flowbite/**/*.js',
 
         /*
          * Main templates directory of the project (BASE_DIR/templates).
@@ -42,7 +44,16 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+                  // Fuente
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        'background' : '#E7EFF6',
+        'main': '#4275A3',
+      }
+        },
     },
     plugins: [
         /**
@@ -54,5 +65,6 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
+        require('flowbite/plugin'),
     ],
 }

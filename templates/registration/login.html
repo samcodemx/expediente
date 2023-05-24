@@ -1,21 +1,24 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-<section class="login">
-  <div class="login__container">
+<section class="h-screen flex content-center justify-center items-center w-full border bg-background">
+  <form class="bg-white rounded-xl p-10 space-y-5 mx-auto md:w-4/5 lg:w-3/6 xl:w-2/6 shadow" method="post">
     <!-- Mensaje de error al iniciar sesion -->
     {% if error_message %}
-    <p>{{ error_message }}</p>
+    <p class="bg-red-200 text-red-500">{{ error_message }}</p>
     {% endif %}
     <!-- Formulario de Login -->
-    <div class="login-form">
-    <form class="login-form__form" method="post">
-      <img class="login__logo" src="{% static 'img/logo.png' %}" alt="Logo Medical 360" />
-      {% csrf_token %} {{ form.as_p }}
-      <button class="login__submit" type="submit">Iniciar sesión</button>
-    </form>
-</div>
-    <!-- Imagen del login -->
-        <img class="login__img" src="{% static 'img/login.webp' %}" alt="Imagen del Login" />
-  </div>
+    <img
+      class="h-28 m-auto"
+      src="{% static 'img/logo.png' %}"
+      alt="Logo Medical 360"
+    />
+    {% csrf_token %} {{ form.as_p }}
+    <button 
+      class="bg-main w-full p-2 rounded-lg text-white font-semibold" 
+      type="submit">
+      Iniciar sesión
+    </button>
+
+  </form>
 </section>
 
 
