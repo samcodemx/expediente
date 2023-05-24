@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>Welcome to the Home Page!</h1>
-<p>You are logged in as {{ request.user.username }}.</p>
+<p>You are logged in as {% if request.user.medico.nombre %} {{ request.user.medico.nombre }} {{request.user.medico.apellido_pat}} 
+    {% else %} {{ request.user.username }}. {% endif %}</p>
 
 {% endblock %}
