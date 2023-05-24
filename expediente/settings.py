@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     "medical.apps.MedicalConfig",
     "tailwind",
     "theme",
-    "django_browser_reload"
+    "django_browser_reload",
+    "fontawesomefree"
 ]
 
 TAILWIND_APP_NAME = "theme"

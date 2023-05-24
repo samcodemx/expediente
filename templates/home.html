@@ -1,76 +1,176 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <section class="lg:px-0">
-  <nav
-    class="py-2 border-b-2 border-background bg-white md:px-6">
-
-    <div class="lg:px-0 lg:container lg:mx-auto flex justify-between items-center">
-          <!-- Imagen Navbar -->
-    <img
-    class="h-14"
-    src="{% static 'img/logo.png' %}"
-    alt="Logo Medical 360"
-  />
-  <!-- Dropdown -->
-  <div>
-    <button
-      id="dropdownUserAvatarButton"
-      data-dropdown-toggle="dropdownAvatar"
-      class="flex mx-3 text-sm rounded-full md:mr-0 border-2 border-background"
-      type="button"
-    >
-      <img
-        class="w-10 h-10 rounded-full"
-        src="{% static 'img/user.png' %}"
-        alt="user photo"
-      />
-    </button>
-
-    <!-- Dropdown menu -->
+  <nav class="py-2 border-b-2 border-background bg-white md:px-6">
     <div
-      id="dropdownAvatar"
-      class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+      class="lg:px-0 lg:container lg:mx-auto flex justify-between items-center"
     >
-      <div class="px-4 py-3 text-sm text-gray-900">
-        <div>Dr. Samuel Medina</div>
-        <div class="font-medium truncate">email@ejemplo.com</div>
-      </div>
-      <ul
-        class="py-2 text-sm text-gray-700 dark:text-gray-200"
-        aria-labelledby="dropdownUserAvatarButton"
-      >
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-background"
-            >Crear expediente</a
-          >
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-background"
-            >Consultar expedientes</a
-          >
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-background">Ayuda</a>
-        </li>
-      </ul>
-      <div class="py-2">
-        <a
-          href="#"
-          class="block px-4 py-2 text-sm text-gray-700 hover:bg-background"
-          >Cerrar sesión</a
+      <!-- Imagen Navbar -->
+      <img
+        class="h-14"
+        src="{% static 'img/logo.png' %}"
+        alt="Logo Medical 360"
+      />
+      <!-- Dropdown -->
+      <div>
+        <button
+          id="dropdownUserAvatarButton"
+          data-dropdown-toggle="dropdownAvatar"
+          class="flex mx-3 text-sm rounded-full md:mr-0 border-2 border-background"
+          type="button"
         >
+          <img
+            class="w-10 h-10 rounded-full"
+            src="{% static 'img/user.png' %}"
+            alt="user photo"
+          />
+        </button>
+
+        <!-- Dropdown menu -->
+        <div
+          id="dropdownAvatar"
+          class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+        >
+          <div class="px-4 py-3 text-sm text-gray-900">
+            <div>Dr. Samuel Medina</div>
+            <div class="font-medium truncate">email@ejemplo.com</div>
+          </div>
+          <ul
+            class="py-2 text-sm text-gray-700 dark:text-gray-200"
+            aria-labelledby="dropdownUserAvatarButton"
+          >
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-background"
+                >Crear expediente</a
+              >
+            </li>
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-background"
+                >Consultar expedientes</a
+              >
+            </li>
+            <li>
+              <a href="#" class="block px-4 py-2 hover:bg-background">Ayuda</a>
+            </li>
+          </ul>
+          <div class="py-2">
+            <a
+              href="/logout"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-background"
+              >Cerrar sesión</a
+            >
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-    </div>
-
   </nav>
 
-  <div class=" py-10 border-b-2 border-gray-200 bg-white md:px-6">
+  <!-- Header -->
+  <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
     <div class="lg:container lg:mx-auto">
-      <h1 class="uppercase font-semibold text-main text-xl">Expedientes registrados</h1>  
+      <h1 class="uppercase font-semibold text-main text-xl">
+        Expedientes registrados
+      </h1>
       <p>Consulta y filtra todos los expedientes médicos aquí.</p>
     </div>
+  </div>
 
+  <!-- Buscador y Boton para agregar un nuevo expediente -->
+  <div class="py-10 md:px-6">
+    <div
+      class="lg:container lg:mx-auto flex justify-between gap-5 items-center"
+    >
+      <!-- Barra de Busqueda -->
+      <form class="w-full">
+        <label
+          for="default-search"
+          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+          >Search</label
+        >
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+          >
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5 text-gray-500 dark:text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+          </div>
+          <input
+            type="search"
+            id="default-search"
+            class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-main focus:border-main"
+            placeholder="Buscar expediente..."
+            required
+          />
+        </div>
+      </form>
+      <!-- Boton para agregar expediente nuevo -->
+      <form class="">
+        <button
+          type="submit"
+          class="text-whitebg-main bg-main hover:bg-sky-800 transition-colors text-white font-medium rounded-lg text-sm px-8 py-4"
+        >
+          Nuevo
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="md:px-6">
+    <div class="lg:container lg:mx-auto flex flex-col gap-4">
+      <div class="w-full">
+        <!-- ========================================
+           IMPRIMIR AQUI TODAS LOS EXPEDIENTES DESDE
+           LA BASE DE DATOS:
+        ======================================== -->
+        <!-- Tarjeta -->
+        <div
+          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm">
+          <!-- Datos del paciente -->
+          <div>
+            <!-- No. Expediente -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Expediente:</span>
+              <p>5588</p>
+            </div>
+            <!-- Nombre -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Nombre:</span>
+              <p>Martín Hernández Medina</p>
+            </div>
+            <!-- Empresa -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Empresa:</span>
+              <p>Samsung</p>
+            </div>
+            <!-- Doctor -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Doctor:</span>
+              <p>Dr. Samuel Medina</p>
+            </div>
+          </div>
+          <!-- Botones de la tarjeta -->
+          <div class="flex gap-2">
+            <button class="border-2 border-blue-500 h-10 w-10 rounded-lg" type="button"><i class="fas fa-file-alt"></i></button>
+            <button class="border-2 border-yellow-400 h-10 w-10 rounded-lg" type="button"><i class="text-yellow-400 fas fa-pen"></i></button>
+            <button class="border-2 border-red-400 h-10 w-10 rounded-lg" type="button"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+        <!-- ./ Tarjeta -->
+        
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}
