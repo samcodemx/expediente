@@ -14,7 +14,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('/')
         else:
             error_message = 'Invalid username or password'
     else:
@@ -28,3 +28,7 @@ def logout_view(request):
 @login_required
 def home_view(request):
     return render(request, 'home.html')
+
+# Crear nuevo expediente
+def createExp_view(request):
+    return render(request, 'expedientes/create.html' )

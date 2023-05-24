@@ -1,0 +1,103 @@
+@use "../base/variables" as v;
+// @use "../base/mixins" as m;
+
+.navbar{
+    width: 100%;
+    background-color: v.$white;
+    padding: 1rem 2rem;
+    border-bottom: 3px solid v.$bg-color;
+}
+
+.navbar__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__logo{
+    height: 8rem;
+}
+
+.navbar__menu{
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.navbar__menu-link{
+    font-weight: 500;
+    text-decoration: none;
+    color: v.$black;
+}
+
+.navbar__menu-link-active{
+    color: v.$main-color;
+}
+
+.dropdown__img{
+    width: 5rem;
+    position: relative;
+    cursor: pointer;
+}
+
+
+//   .dropdown__img:hover~.sub-menu-wrap{
+//     opacity: 100%;
+//   }
+ 
+  .sub-menu-wrap{
+    position: absolute;
+    top: 10rem;
+    right: 2rem;
+    width: 30rem;
+    // max-height: 0rem;
+    // overflow: hidden;
+    display: none;
+    transition: display 0.3s;
+  }
+
+  .sub-menu{
+    background-color: v.$white;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    z-index: 10000  ;
+  }
+
+  .sub-menu-wrap.open-menu{
+    // max-height: 40rem;
+    display: block;
+  }
+
+  .user-info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    p{
+        color: v.$main-color;
+        font-weight: 500;
+    }
+  }
+
+.dropdown__hr{
+    border: 0;
+    height: 2px;
+    width: 100%;
+    background-color: v.$bg-color;
+    margin: 1rem 0;
+}
+
+.sub-menu-link{
+    display: block;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: 0.3s all ease;
+    color: #64748b;
+    &:hover{
+        background-color: #f8fafc;
+    }
+}
+

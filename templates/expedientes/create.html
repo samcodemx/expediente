@@ -1,0 +1,371 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<section class="lg:px-0">
+ <!-- ========================================
+    AQUI VA EL NAVBAR
+ ======================================== -->
+ {% include "plantillas/navbar.html" %}
+
+  <!-- Header -->
+  <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
+    <div class="lg:container lg:mx-auto">
+      <h1 class="uppercase font-semibold text-main text-xl">
+        Nuevo Expediente
+      </h1>
+      <p>Registra un nuevo expediente aquí.</p>
+    </div>
+  </div>
+
+  {% comment %} <div class="md:px-6 py-10">
+    <div class="lg:container lg:mx-auto flex flex-col gap-4">
+      <div class="w-full space-y-5">
+        <!-- ========================================
+           IMPRIMIR AQUI TODAS LOS EXPEDIENTES DESDE
+           LA BASE DE DATOS:
+        ======================================== -->
+        <!-- Tarjeta -->
+        <div
+          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
+        >
+          <!-- Datos del paciente -->
+          <div>
+            <!-- No. Expediente -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Expediente:</span>
+              <p>5588</p>
+            </div>
+            <!-- Nombre -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Nombre:</span>
+              <p>Martín Hernández Medina</p>
+            </div>
+            <!-- Empresa -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Empresa:</span>
+              <p>Samsung</p>
+            </div>
+            <!-- Doctor -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Doctor:</span>
+              <p>Dr. Samuel Medina</p>
+            </div>
+          </div>
+          <!-- Botones de la tarjeta -->
+          <div class="flex gap-2">
+            <button
+              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-blue-400"
+                ><i class="fas fa-file-alt"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-yellow-300"
+                ><i class="fas fa-pen"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-red-400"
+                ><i class="fas fa-trash"></i
+              ></span>
+            </button>
+          </div>
+        </div>
+        <!-- ./ Tarjeta -->
+
+        <!-- Tarjeta -->
+        <div
+          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
+        >
+          <!-- Datos del paciente -->
+          <div>
+            <!-- No. Expediente -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Expediente:</span>
+              <p>5678</p>
+            </div>
+            <!-- Nombre -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Nombre:</span>
+              <p>Ana Martínez</p>
+            </div>
+            <!-- Empresa -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Empresa:</span>
+              <p>ABC Corporation</p>
+            </div>
+            <!-- Doctor -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Doctor:</span>
+              <p>Dr. David Smith</p>
+            </div>
+          </div>
+          <!-- Botones de la tarjeta -->
+          <div class="flex gap-2">
+            <button
+              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-blue-400"
+                ><i class="fas fa-file-alt"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-yellow-300"
+                ><i class="fas fa-pen"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-red-400"
+                ><i class="fas fa-trash"></i
+              ></span>
+            </button>
+          </div>
+        </div>
+        <!-- ./ Tarjeta -->
+
+        <!-- Tarjeta -->
+        <div
+          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
+        >
+          <!-- Datos del paciente -->
+          <div>
+            <!-- No. Expediente -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Expediente:</span>
+              <p>9012</p>
+            </div>
+            <!-- Nombre -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Nombre:</span>
+              <p>Pedro Rodríguez</p>
+            </div>
+            <!-- Empresa -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Empresa:</span>
+              <p>XYZ Industries</p>
+            </div>
+            <!-- Doctor -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Doctor:</span>
+              <p>Dr. Sarah Johnson</p>
+            </div>
+          </div>
+          <!-- Botones de la tarjeta -->
+          <div class="flex gap-2">
+            <button
+              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-blue-400"
+                ><i class="fas fa-file-alt"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-yellow-300"
+                ><i class="fas fa-pen"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-red-400"
+                ><i class="fas fa-trash"></i
+              ></span>
+            </button>
+          </div>
+        </div>
+        <!-- ./ Tarjeta -->
+
+        <!-- Tarjeta -->
+        <div
+          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
+        >
+          <!-- Datos del paciente -->
+          <div>
+            <!-- No. Expediente -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Expediente:</span>
+              <p>3456</p>
+            </div>
+            <!-- Nombre -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Nombre:</span>
+              <p>Laura Sánchez</p>
+            </div>
+            <!-- Empresa -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Empresa:</span>
+              <p>Acme Solutions</p>
+            </div>
+            <!-- Doctor -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Doctor:</span>
+              <p>Dr. Michael Brown</p>
+            </div>
+          </div>
+          <!-- Botones de la tarjeta -->
+          <div class="flex gap-2">
+            <button
+              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-blue-400"
+                ><i class="fas fa-file-alt"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-yellow-300"
+                ><i class="fas fa-pen"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-red-400"
+                ><i class="fas fa-trash"></i
+              ></span>
+            </button>
+          </div>
+        </div>
+        <!-- ./ Tarjeta -->
+
+        <!-- Tarjeta -->
+        <div
+          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
+        >
+          <!-- Datos del paciente -->
+          <div>
+            <!-- No. Expediente -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Expediente:</span>
+              <p>7890</p>
+            </div>
+            <!-- Nombre -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Nombre:</span>
+              <p>Juan López</p>
+            </div>
+            <!-- Empresa -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Empresa:</span>
+              <p>GlobalTech Ltd.</p>
+            </div>
+            <!-- Doctor -->
+            <div class="md:flex gap-2">
+              <span class="font-bold">Doctor:</span>
+              <p>Dr. Jennifer Davis</p>
+            </div>
+          </div>
+          <!-- Botones de la tarjeta -->
+          <div class="flex gap-2">
+            <button
+              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-blue-400"
+                ><i class="fas fa-file-alt"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-yellow-300"
+                ><i class="fas fa-pen"></i
+              ></span>
+            </button>
+            <button
+              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
+              type="button"
+            >
+              <span class="group-hover:text-white text-red-400"
+                ><i class="fas fa-trash"></i
+              ></span>
+            </button>
+          </div>
+        </div>
+        <!-- ./ Tarjeta -->
+
+                <!-- Tarjeta -->
+                <div
+                class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
+              >
+                <!-- Datos del paciente -->
+                <div>
+                  <!-- No. Expediente -->
+                  <div class="md:flex gap-2">
+                    <span class="font-bold">Expediente:</span>
+                    <p>1234</p>
+                  </div>
+                  <!-- Nombre -->
+                  <div class="md:flex gap-2">
+                    <span class="font-bold">Nombre:</span>
+                    <p>María García</p>
+                  </div>
+                  <!-- Empresa -->
+                  <div class="md:flex gap-2">
+                    <span class="font-bold">Empresa:</span>
+                    <p>MegaCorp International</p>
+                  </div>
+                  <!-- Doctor -->
+                  <div class="md:flex gap-2">
+                    <span class="font-bold">Doctor:</span>
+                    <p>Dr. Christopher Wilson</p>
+                  </div>
+                </div>
+                <!-- Botones de la tarjeta -->
+                <div class="flex gap-2">
+                  <button
+                    class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+                    type="button"
+                  >
+                    <span class="group-hover:text-white text-blue-400"
+                      ><i class="fas fa-file-alt"></i
+                    ></span>
+                  </button>
+                  <button
+                    class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+                    type="button"
+                  >
+                    <span class="group-hover:text-white text-yellow-300"
+                      ><i class="fas fa-pen"></i
+                    ></span>
+                  </button>
+                  <button
+                    class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
+                    type="button"
+                  >
+                    <span class="group-hover:text-white text-red-400"
+                      ><i class="fas fa-trash"></i
+                    ></span>
+                  </button>
+                </div>
+              </div>
+              <!-- ./ Tarjeta -->
+
+      </div>
+    </div>
+  </div> {% endcomment %}
+</section>
+{% endblock %}
