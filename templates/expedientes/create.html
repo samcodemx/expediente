@@ -15,357 +15,167 @@
     </div>
   </div>
 
-  {% comment %} <div class="md:px-6 py-10">
-    <div class="lg:container lg:mx-auto flex flex-col gap-4">
-      <div class="w-full space-y-5">
-        <!-- ========================================
-           IMPRIMIR AQUI TODAS LOS EXPEDIENTES DESDE
-           LA BASE DE DATOS:
-        ======================================== -->
-        <!-- Tarjeta -->
-        <div
-          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
-        >
-          <!-- Datos del paciente -->
-          <div>
-            <!-- No. Expediente -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Expediente:</span>
-              <p>5588</p>
-            </div>
-            <!-- Nombre -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Nombre:</span>
-              <p>Martín Hernández Medina</p>
-            </div>
-            <!-- Empresa -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Empresa:</span>
-              <p>Samsung</p>
-            </div>
-            <!-- Doctor -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Doctor:</span>
-              <p>Dr. Samuel Medina</p>
-            </div>
-          </div>
-          <!-- Botones de la tarjeta -->
-          <div class="flex gap-2">
-            <button
-              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-blue-400"
-                ><i class="fas fa-file-alt"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-yellow-300"
-                ><i class="fas fa-pen"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-red-400"
-                ><i class="fas fa-trash"></i
-              ></span>
-            </button>
-          </div>
+  <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
+    <div class="flex lg:container lg:mx-auto border-b-2 border-main shadow-sm">
+      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-background font-bold" type="button">Ficha de Identificación</button>
+      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Historia Clínica</button>
+      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Padecimiento Actual</button>
+      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Exploración Física</button>
+      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Exámenes complementarios</button>
+    </div>
+    <!-- ========================================
+       Formulario de Ficha de Identificacion
+    ======================================== -->
+    <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg">
+      {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
+      <div class="w-full flex gap-4">
+        <div class="w-6/12">
+          <label for="name" class="block mb-2 text-sm font-semibold">Nombre(s)</label>
+          <input id="name" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
         </div>
-        <!-- ./ Tarjeta -->
 
-        <!-- Tarjeta -->
-        <div
-          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
-        >
-          <!-- Datos del paciente -->
-          <div>
-            <!-- No. Expediente -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Expediente:</span>
-              <p>5678</p>
-            </div>
-            <!-- Nombre -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Nombre:</span>
-              <p>Ana Martínez</p>
-            </div>
-            <!-- Empresa -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Empresa:</span>
-              <p>ABC Corporation</p>
-            </div>
-            <!-- Doctor -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Doctor:</span>
-              <p>Dr. David Smith</p>
-            </div>
-          </div>
-          <!-- Botones de la tarjeta -->
-          <div class="flex gap-2">
-            <button
-              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-blue-400"
-                ><i class="fas fa-file-alt"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-yellow-300"
-                ><i class="fas fa-pen"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-red-400"
-                ><i class="fas fa-trash"></i
-              ></span>
-            </button>
-          </div>
+        <div class="w-3/12">
+          <label for="p_lastname" class="block mb-2 text-sm font-semibold">Apellido Paterno</label>
+          <input id="p_lastname" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido Paterno">
         </div>
-        <!-- ./ Tarjeta -->
 
-        <!-- Tarjeta -->
-        <div
-          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
-        >
-          <!-- Datos del paciente -->
-          <div>
-            <!-- No. Expediente -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Expediente:</span>
-              <p>9012</p>
-            </div>
-            <!-- Nombre -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Nombre:</span>
-              <p>Pedro Rodríguez</p>
-            </div>
-            <!-- Empresa -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Empresa:</span>
-              <p>XYZ Industries</p>
-            </div>
-            <!-- Doctor -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Doctor:</span>
-              <p>Dr. Sarah Johnson</p>
-            </div>
-          </div>
-          <!-- Botones de la tarjeta -->
-          <div class="flex gap-2">
-            <button
-              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-blue-400"
-                ><i class="fas fa-file-alt"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-yellow-300"
-                ><i class="fas fa-pen"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-red-400"
-                ><i class="fas fa-trash"></i
-              ></span>
-            </button>
-          </div>
+        <div class="w-3/12">
+          <label for="m_lastname" class="block mb-2 text-sm font-semibold">Apellido Materno</label>
+          <input id="m_lastname" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido Materno">
         </div>
-        <!-- ./ Tarjeta -->
+        
+      </div>
 
-        <!-- Tarjeta -->
-        <div
-          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
-        >
-          <!-- Datos del paciente -->
-          <div>
-            <!-- No. Expediente -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Expediente:</span>
-              <p>3456</p>
-            </div>
-            <!-- Nombre -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Nombre:</span>
-              <p>Laura Sánchez</p>
-            </div>
-            <!-- Empresa -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Empresa:</span>
-              <p>Acme Solutions</p>
-            </div>
-            <!-- Doctor -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Doctor:</span>
-              <p>Dr. Michael Brown</p>
-            </div>
-          </div>
-          <!-- Botones de la tarjeta -->
-          <div class="flex gap-2">
-            <button
-              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-blue-400"
-                ><i class="fas fa-file-alt"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-yellow-300"
-                ><i class="fas fa-pen"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-red-400"
-                ><i class="fas fa-trash"></i
-              ></span>
-            </button>
-          </div>
-        </div>
-        <!-- ./ Tarjeta -->
-
-        <!-- Tarjeta -->
-        <div
-          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
-        >
-          <!-- Datos del paciente -->
-          <div>
-            <!-- No. Expediente -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Expediente:</span>
-              <p>7890</p>
-            </div>
-            <!-- Nombre -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Nombre:</span>
-              <p>Juan López</p>
-            </div>
-            <!-- Empresa -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Empresa:</span>
-              <p>GlobalTech Ltd.</p>
-            </div>
-            <!-- Doctor -->
-            <div class="md:flex gap-2">
-              <span class="font-bold">Doctor:</span>
-              <p>Dr. Jennifer Davis</p>
-            </div>
-          </div>
-          <!-- Botones de la tarjeta -->
-          <div class="flex gap-2">
-            <button
-              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-blue-400"
-                ><i class="fas fa-file-alt"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-yellow-300"
-                ><i class="fas fa-pen"></i
-              ></span>
-            </button>
-            <button
-              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-red-400"
-                ><i class="fas fa-trash"></i
-              ></span>
-            </button>
-          </div>
-        </div>
-        <!-- ./ Tarjeta -->
-
-                <!-- Tarjeta -->
-                <div
-                class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
-              >
-                <!-- Datos del paciente -->
-                <div>
-                  <!-- No. Expediente -->
-                  <div class="md:flex gap-2">
-                    <span class="font-bold">Expediente:</span>
-                    <p>1234</p>
-                  </div>
-                  <!-- Nombre -->
-                  <div class="md:flex gap-2">
-                    <span class="font-bold">Nombre:</span>
-                    <p>María García</p>
-                  </div>
-                  <!-- Empresa -->
-                  <div class="md:flex gap-2">
-                    <span class="font-bold">Empresa:</span>
-                    <p>MegaCorp International</p>
-                  </div>
-                  <!-- Doctor -->
-                  <div class="md:flex gap-2">
-                    <span class="font-bold">Doctor:</span>
-                    <p>Dr. Christopher Wilson</p>
-                  </div>
+      {% comment %} Contenedor de Genero, Fecha de nacimiento, Edad y Estado Civil {% endcomment %}
+      <div class="w-full flex gap-4">
+        {% comment %} Genero {% endcomment %}
+        <div class="w-3/12">
+          <label for="gender" class="block mb-2 text-sm font-semibold">Género</label>
+          <ul id="gender" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
+            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                <div class="flex items-center pl-3">
+                    <input id="horizontal-list-radio-license" type="radio" value="H" name="list-radio" class="w-4 h-4 bg-gray-100 border-gray-30">
+                    <label for="horizontal-list-radio-license" class="w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Hombre</label>
                 </div>
-                <!-- Botones de la tarjeta -->
-                <div class="flex gap-2">
-                  <button
-                    class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
-                    type="button"
-                  >
-                    <span class="group-hover:text-white text-blue-400"
-                      ><i class="fas fa-file-alt"></i
-                    ></span>
-                  </button>
-                  <button
-                    class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
-                    type="button"
-                  >
-                    <span class="group-hover:text-white text-yellow-300"
-                      ><i class="fas fa-pen"></i
-                    ></span>
-                  </button>
-                  <button
-                    class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-                    type="button"
-                  >
-                    <span class="group-hover:text-white text-red-400"
-                      ><i class="fas fa-trash"></i
-                    ></span>
-                  </button>
+            </li>
+            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                <div class="flex items-center pl-3">
+                    <input id="horizontal-list-radio-id" type="radio" value="M" name="list-radio" class="w-4 h-4 bg-gray-100 border-gray-30">
+                    <label for="horizontal-list-radio-id" class="w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Mujer</label>
                 </div>
-              </div>
-              <!-- ./ Tarjeta -->
+            </li>
+        </ul>
+        </div>
+
+        {% comment %} Fecha de Nacimiento {% endcomment %}
+        <div class="w-3/12">
+          <label for="birthday" class="block mb-2 text-sm font-semibold">Fecha de nacimiento</label>
+          <input id="birthday" type="date" class="w-full border-none rounded-md bg-white shadow-sm">
+        </div>
+
+        {% comment %} Edad {% endcomment %}
+        <div class="w-3/12">
+          <label for="age" class="block mb-2 text-sm font-semibold">Edad</label>
+          <input id="age" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. 20 años">
+        </div>
+
+        {% comment %} Estado Civil {% endcomment %}
+        <div class="w-3/12">
+          <label for="civil_status" class="block mb-2 text-sm font-semibold">Estado Civil</label>
+          <select id="civil_status" class="w-full border-none rounded-md bg-white shadow-sm">
+            <option value="">Selecciona uno</option>
+            <option value="soltero">Soltero</option>
+            <option value="casado">Casado</option>
+            <option value="union_libre">Unión libre</option>
+            <option value="divorciado">Divorciado</option>
+            <option value="viudo">Viudo</option>
+          </select>
+        </div>
 
       </div>
-    </div>
-  </div> {% endcomment %}
+
+      {% comment %} Nacionalidad, Grupo y RH, Escolaridad y Ocupacion {% endcomment %}
+      <div class="w-full flex gap-4">
+        {% comment %} Nacionalidad {% endcomment %}
+        <div class="w-3/12">
+          <label for="nacionality" class="block mb-2 text-sm font-semibold">Nacionalidad</label>
+          <input id="nacionality" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano">
+        </div>
+        {% comment %} Grupo y RH {% endcomment %}
+        <div class="w-3/12">
+          <label for="group_rh" class="block mb-2 text-sm font-semibold">Grupo y RH</label>
+          <select id="group_rh" class="w-full border-none rounded-md bg-white shadow-sm">
+            <option value="">Selecciona uno</option>
+            <option value="a+">A+</option>
+            <option value="b+">B+</option>
+            <option value="o+">O+</option>
+            <option value="ab+">AB+</option>
+            <option value="a-">A-</option>
+            <option value="b-">B-</option>
+            <option value="o-">O-</option>
+            <option value="ab-">AB-</option>
+            <option value="desc-">Desconocido</option>
+          </select>
+        </div>
+        {% comment %} Escolaridad {% endcomment %}
+        <div class="w-3/12">
+          <label for="scholarship" class="block mb-2 text-sm font-semibold">Escolaridad</label>
+          <select id="scholarship" class="w-full border-none rounded-md bg-white shadow-sm">
+            <option value="">Selecciona uno</option>
+            <option value="ninguna">Ninguna</option>
+            <option value="primaria">Primaria</option>
+            <option value="primaria_t">Primaria Trunca</option>
+            <option value="secundaria">Secundaria</option>
+            <option value="secundaria_t">Secundaria Trunca</option>
+            <option value="preparatoria">Preparatoria</option>
+            <option value="preparatoria_t">Preparatoria Trunca</option>
+            <option value="tecnico">Carrera Técnica</option>
+            <option value="tecnico_t">Carrera Técnica Trunca</option>
+            <option value="licenciatura">Licenciatura</option>
+            <option value="licenciatura_t">Licenciatura Trunca</option>
+            <option value="superior">Superior</option>
+          </select>
+        </div>
+        {% comment %} Ocupacion {% endcomment %}
+        <div class="w-3/12">
+          <label for="occupation" class="block mb-2 text-sm font-semibold">Ocupación</label>
+          <input id="occupation" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador">
+        </div>
+
+      </div>
+
+      {% comment %} Direccion, Telefono y Religion {% endcomment %}
+      <div class="w-full flex gap-4">
+        {% comment %} Direccion {% endcomment %}
+        <div class="w-6/12">
+          <label for="address" class="block mb-2 text-sm font-semibold">Dirección</label>
+          <input id="address" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente">
+        </div>
+        {% comment %} Telefono {% endcomment %}
+        <div class="w-3/12">
+          <label for="phone" class="block mb-2 text-sm font-semibold">Teléfono</label>
+          <input id="phone" class="w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000">
+        </div>
+        {% comment %} Religion {% endcomment %}
+        <div class="w-3/12">
+          <label for="religion" class="block mb-2 text-sm font-semibold">Religión</label>
+          <input id="religion" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Católico">
+        </div>
+      </div>
+
+      {% comment %} Notas {% endcomment %}
+      <div class="w-full">
+        <label for="notes" class="block mb-2 text-sm font-semibold">Notas</label>
+        <textarea id="notes" class="w-full border-none rounded-md bg-white shadow-sm h-32"></textarea>
+      </div>
+
+      {% comment %} Botones de formulario {% endcomment %}
+      <div class="flex justify-center gap-10 mt-20">
+        <a href="/" class="w-3/12 py-3 border-none bg-red-500 text-center rounded-lg text-white font-semibold">Cancelar</a>
+        <button type="submit" class="w-3/12 py-3 border-none bg-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+      </div>
+    </form>
+  </div>
+
 </section>
 {% endblock %}
