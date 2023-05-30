@@ -71,7 +71,7 @@ class Paciente(models.Model):
     genero = models.CharField(max_length=10, choices=GENERO_CHOICES)
     estado_civil = models.CharField(max_length=15, choices=ESTADO_CIVIL_CHOICES)
     grupo_rh = models.CharField(max_length=4, choices=GRUPO_RH_CHOICES)
-    alergias = models.CharField(max_length=30)
+    alergias = models.CharField(max_length=30, default=None, null=True, blank=True)
     curp = models.CharField(max_length=18, blank=True, null=True)
     nacionalidad = models.CharField(max_length=20, blank=True, null=True)
     escolaridad = models.CharField(max_length=30, choices=ESCOLARIDAD_CHOICES, blank=True, null=True)
