@@ -17,16 +17,20 @@
 
   <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
     <div class="flex lg:container lg:mx-auto border-b-2 border-main shadow-sm">
-      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-background font-bold" type="button">Ficha de Identificación</button>
-      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Historia Clínica</button>
-      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Padecimiento Actual</button>
-      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Exploración Física</button>
-      <button class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Exámenes complementarios</button>
+      <button id="btn_ficha_identificacion" class="py-2 px-4 rounded-t-lg border-gray-200 bg-background font-bold" type="button">Ficha de Identificación</button>
+      <button id="btn_historia_clinica" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Historia Clínica</button>
+      <button id="btn_padecimiento_actual" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Padecimiento Actual</button>
+      <button id="btn_exploracion_fisica" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Exploración Física</button>
+      <button id="btn_examenes_complementarios" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Exámenes complementarios</button>
     </div>
     <!-- ========================================
        Formulario de Ficha de Identificacion
     ======================================== -->
-      {% include "expedientes/forms/ficha-identificacion.html" %}
+      {% include "expedientes/forms/ficha_identificacion.html" %}
+      {% include "expedientes/forms/historia_clinica.html" %}
+      {% include "expedientes/forms/padecimiento_actual.html" %}
+      {% include "expedientes/forms/exploracion_fisica.html" %}
+      {% include "expedientes/forms/examenes_complementarios.html" %}
   </div>
 
 </section>

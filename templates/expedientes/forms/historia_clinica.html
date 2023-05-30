@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <body>
+    <form
+      id="form_historia_clinica"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+    >
+      {% comment %} Antecedentes Heredofamiliares {% endcomment %}
+      <div class="w-full">
+        <label
+          for="hereditary_family_history"
+          class="block mb-2 text-sm font-semibold"
+          >Antecedentes Heredofamiliares</label
+        >
+        <textarea
+          id="hereditary_family_history"
+          class="w-full border-none rounded-md bg-white shadow-sm h-32"
+        ></textarea>
+      </div>
+
+      {% comment %} Antecedentes Personales No Patologicos {% endcomment %}
+      <div class="w-full">
+        <label
+          for="non_pathological_history"
+          class="block mb-2 text-sm font-semibold"
+          >Antecedentes Personales No Patológicos</label
+        >
+        <textarea
+          id="non_pathological_history"
+          class="w-full border-none rounded-md bg-white shadow-sm h-32"
+        ></textarea>
+      </div>
+
+      {% comment %} Antecedentes Personales Patologicos {% endcomment %}
+      <div class="w-full">
+        <label
+          for="pathological_history"
+          class="block mb-2 text-sm font-semibold"
+          >Antecedentes Personales No Patológicos</label
+        >
+        <textarea
+          id="pathological_history"
+          class="w-full border-none rounded-md bg-white shadow-sm h-32"
+        ></textarea>
+      </div>
+
+      {% comment %} Antecedentes Gineco Obstetricos {% endcomment %}
+      <div class="w-full">
+        <label for="obstetric_history" class="block mb-2 text-sm font-semibold"
+          >Antecedentes Gineco-Obstétricos</label
+        >
+        <textarea
+          id="obstetric_history"
+          class="w-full border-none rounded-md bg-white shadow-sm h-32"
+        ></textarea>
+      </div>
+
+      {% comment %} Botones de formulario {% endcomment %}
+      <div class="flex justify-center gap-10 mt-20">
+        <a
+          href="/"
+          class="w-3/12 py-3 border-none bg-red-500 hover:bg-red-600 transition-colors text-center rounded-lg text-white font-semibold"
+          >Cancelar</a
+        >
+        <button
+          type="submit"
+          class="w-3/12 py-3 border-none bg-main text-center rounded-lg text-white font-semibold"
+        >
+          Enviar Datos
+        </button>
+      </div>
+    </form>
+  </body>
+</html>
