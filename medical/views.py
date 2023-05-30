@@ -90,10 +90,10 @@ def guarda_ficha_identificacion(request):
         try:
             ficha.full_clean()  # Validación de campos del modelo
         except ValidationError as e:
-            return render(request, 'expedientes/create.html', {'error': str(e)})
+            return render(request, 'expedientes/create.html', {'msg': str(e)})
             
         ficha.save()
-        return render(request, 'expedientes/create.html', {'error': 'guardado con exito'})  # Puedes redirigir a una página de éxito o hacer cualquier otra acción que necesites
+        return render(request, 'expedientes/create.html', {'msg': 'guardado con exito'})  # Puedes redirigir a una página de éxito o hacer cualquier otra acción que necesites
        
 
     print('aca')

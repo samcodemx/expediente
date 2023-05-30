@@ -26,9 +26,9 @@
     <!-- ========================================
        Formulario de Ficha de Identificacion
     ======================================== -->
-    {% if error %}
+    {% if msg %}
     <div class="error-message">
-      {{ error }}
+      {{ msg }}
     </div>
     {% endif %}
     <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg "method="POST" action="{% url 'medical:guarda_ficha_identificacion' %}">
