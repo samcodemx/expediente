@@ -1,6 +1,6 @@
-console.log('JS...');
 document.addEventListener('DOMContentLoaded', function () {
-/* ========================================
+  console.log('JS...');
+  /* ========================================
   Autoresize para los TextArea
 ========================================= */
   const textAreas = document.querySelectorAll('textarea');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
   Cambiar los formularios
 ========================================= */
   // Obtenemos todos los botones y formularios
-  const botones = document.querySelectorAll('.flex button');
+  const botones = document.querySelectorAll('#botonera button');
   const formularios = document.querySelectorAll('.formulario');
 
   // Función para ocultar todos los formularios
@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
   Cambiar el color de la botonera de formularios
   al dar click
   ========================================= */
-  const buttons = document.querySelectorAll('#botonera button');
+  let buttons = document.querySelectorAll('#botonera button');
+  console.log('Buttons');
 
   function toggleClasesBoton(boton) {
     buttons.forEach(b => {
@@ -63,4 +64,5 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleClasesBoton(this);
     });
   });
+
 });
