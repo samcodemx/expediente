@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function toggleClasesBoton(boton) {
     buttons.forEach(b => {
-      b.classList.remove('bg-background');
+      b.classList.remove('bg-background', 'font-bold');
       b.classList.add('bg-white');
     });
     boton.classList.remove('bg-white');
-    boton.classList.add('bg-background');
+    boton.classList.add('bg-background', 'font-bold');
   }
 
   buttons.forEach(boton => {
