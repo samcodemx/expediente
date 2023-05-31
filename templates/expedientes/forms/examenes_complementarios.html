@@ -1,8 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
-<body>
-    <form id="form_examenes_complementarios" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg">
-        <h2>Examenes Complementarios</h2>
-      </form>
-</body>
+  <body>
+    <form
+      id="form_examenes_complementarios"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+    >
+      <h1 class="text-xl font-bold text-main">Exámenes Complementarios</h1>
+
+      {% comment %} Aspectos Generales {% endcomment %}
+      <div class="w-full">
+        <label for="general_aspects" class="block mb-2 text-sm font-semibold"
+          >Aspectos Generales</label
+        >
+        <textarea
+          id="general_aspects"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Exámenes Complementarios de Aspectos Generales"
+        ></textarea>
+      </div>
+
+      {% comment %} Piel y Tegumentos {% endcomment %}
+      <div class="w-full">
+        <label for="skin_teg" class="block mb-2 text-sm font-semibold"
+          >Piel y Tegumentos</label
+        >
+        <textarea
+          id="skin_teg"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Exámenes Complementarios de Piel y Tegumentos"
+        ></textarea>
+      </div>
+
+      {% comment %} Cabeza y Cuello {% endcomment %}
+      <div class="w-full">
+        <label for="head_neck" class="block mb-2 text-sm font-semibold"
+          >Cabeza y Cuello</label
+        >
+        <textarea
+          id="head_neck"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Exámenes Complementarios de Cabeza y Cuello"
+        ></textarea>
+      </div>
+
+      {% comment %} Torax {% endcomment %}
+      <div class="w-full">
+        <label for="torax" class="block mb-2 text-sm font-semibold"
+          >Torax</label
+        >
+        <textarea
+          id="torax"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Exámenes Complementarios de Torax"
+        ></textarea>
+      </div>
+
+      {% comment %} Abdomen y Pelvis {% endcomment %}
+      <div class="w-full">
+        <label for="abdomen_pelvis" class="block mb-2 text-sm font-semibold"
+          >Aspectos y Pelvis</label
+        >
+        <textarea
+          id="abdomen_pelvis"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Exámenes Complementarios de Abdomen y Pelvis"
+        ></textarea>
+      </div>
+
+      {% comment %} Extremidades {% endcomment %}
+      <div class="w-full">
+        <label for="extremidades" class="block mb-2 text-sm font-semibold"
+          >Extremidades</label
+        >
+        <textarea
+          id="extremidades"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Exámenes Complementarios de Extremidades"
+        ></textarea>
+      </div>
+
+      {% comment %} Sistema Neurologico {% endcomment %}
+      <div class="w-full">
+        <label for="neu_system" class="block mb-2 text-sm font-semibold"
+          >Sistema Neurológico</label
+        >
+        <textarea
+          id="neu_system"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Exámenes Complementarios de Sistema Neurológico"
+        ></textarea>
+      </div>
+
+        {% comment %} Notas {% endcomment %}
+        <div class="w-full">
+          <label for="notes_exams" class="block mb-2 text-sm font-semibold">Notas</label>
+          <textarea id="notes_exams" class="resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+        </div>
+
+       {% comment %} Botones de formulario {% endcomment %}
+       <div class="flex justify-center gap-10 mt-20">
+        <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+        <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+      </div>
+
+    </form>
+  </body>
 </html>

@@ -1,8 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
-<body>
-    <form id="form_exploracion_fisica" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg">
-        <h2>Exploracion Fisica</h2>
-      </form>
-</body>
+  <body>
+    <form
+      id="form_exploracion_fisica"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+    >
+      <h1 class="text-xl font-bold text-main">Exploración Física</h1>
+      {% comment %} Frecuencia Cardiaca, Frecuencia ..., Temperatura y Presion
+      Arterial {%endcomment %}
+      <div class="w-full flex gap-4">
+        {% comment %} Frecuencia Cardiaca {% endcomment %}
+        <div class="w-3/12">
+          <label
+            for="cardiac_frecuency"
+            class="block mb-2 text-sm font-semibold"
+            >FC</label
+          >
+          <input
+            id="cardiac_frecuency"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            placeholder="Ej. 80 bpm"
+          />
+        </div>
+
+        {% comment %} Frecuencia Respiratoria {% endcomment %}
+        <div class="w-3/12">
+          <label
+            for="respiratory_frecuency"
+            class="block mb-2 text-sm font-semibold"
+            >FR</label
+          >
+          <input
+            id="respiratory_frecuency"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            placeholder="Ej. 16 rpm"
+          />
+        </div>
+
+        {% comment %} Temperatura {% endcomment %}
+        <div class="w-3/12">
+          <label for="temperature" class="block mb-2 text-sm font-semibold"
+            >Temp</label
+          >
+          <input
+            id="temperature"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            placeholder="Ej. 37°C"
+          />
+        </div>
+
+        {% comment %} Presion Arterial {% endcomment %}
+        <div class="w-3/12">
+          <label
+            for="arterial_pressure"
+            class="block mb-2 text-sm font-semibold"
+            >PA</label
+          >
+          <input
+            id="arterial_pressure"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="text"
+            placeholder="Ej. 130 mmHg"
+          />
+        </div>
+      </div>
+
+      <div class="w-full flex gap-4">
+        {% comment %} Oxigenacion {% endcomment %}
+        <div class="w-3/12">
+          <label
+            for="oxygenation"
+            class="block mb-2 text-sm font-semibold"
+            >Ox</label
+          >
+          <input
+            id="oxygenation"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            placeholder="Ej. "
+          />
+        </div>
+
+        {% comment %} Glucosa Capilar {% endcomment %}
+        <div class="w-3/12">
+          <label
+            for="capillary_glucose"
+            class="block mb-2 text-sm font-semibold"
+            >GC</label
+          >
+          <input
+            id="capillary_glucose"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            placeholder="Ej. 110 mg/dL"
+          />
+        </div>
+
+        {% comment %} Peso {% endcomment %}
+        <div class="w-3/12">
+          <label
+            for="weight"
+            class="block mb-2 text-sm font-semibold"
+            >Kg</label
+          >
+          <input
+            id="weight"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            placeholder="Ej. 75 kg"
+          />
+        </div>
+
+        {% comment %} Talla {% endcomment %}
+        <div class="w-3/12">
+          <label
+            for="size"
+            class="block mb-2 text-sm font-semibold"
+            >Cm</label
+          >
+          <input
+            id="size"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            placeholder="Ej. 170 cm"
+          />
+        </div>
+
+      </div>
+
+      <div class="w-3/12">
+        <label
+          for="imc"
+          class="block mb-2 text-sm font-semibold"
+          >IMC</label
+        >
+        <input
+          id="imc"
+          class="w-full border-none rounded-md bg-white shadow-sm"
+          type="number"
+          placeholder="Ej. 15 kg/m²"
+        />
+      </div>
+
+      {% comment %} Botones de formulario {% endcomment %}
+      <div class="flex justify-center gap-10 mt-20">
+        <a
+          href="/"
+          class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold"
+          >Cancelar</a
+        >
+        <button
+          type="submit"
+          class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold"
+        >
+          Enviar Datos
+        </button>
+      </div>
+    </form>
+  </body>
 </html>

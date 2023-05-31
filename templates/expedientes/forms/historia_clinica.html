@@ -5,6 +5,7 @@
       id="form_historia_clinica"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
     >
+    <h1 class="text-xl font-bold text-main">Historia Clínica</h1>
       {% comment %} Antecedentes Heredofamiliares {% endcomment %}
       <div class="w-full">
         <label
@@ -14,7 +15,8 @@
         >
         <textarea
           id="hereditary_family_history"
-          class="w-full border-none rounded-md bg-white shadow-sm h-32"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Antecedentes Heredofamiliares"
         ></textarea>
       </div>
 
@@ -27,7 +29,8 @@
         >
         <textarea
           id="non_pathological_history"
-          class="w-full border-none rounded-md bg-white shadow-sm h-32"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Antecedentes Personales No Patológicos"
         ></textarea>
       </div>
 
@@ -36,11 +39,12 @@
         <label
           for="pathological_history"
           class="block mb-2 text-sm font-semibold"
-          >Antecedentes Personales No Patológicos</label
+          >Antecedentes Personales Patológicos</label
         >
         <textarea
           id="pathological_history"
-          class="w-full border-none rounded-md bg-white shadow-sm h-32"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Patológicos Familiares"
         ></textarea>
       </div>
 
@@ -51,24 +55,16 @@
         >
         <textarea
           id="obstetric_history"
-          class="w-full border-none rounded-md bg-white shadow-sm h-32"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los Antecedences Gineco-Obstétricos"
         ></textarea>
       </div>
 
-      {% comment %} Botones de formulario {% endcomment %}
-      <div class="flex justify-center gap-10 mt-20">
-        <a
-          href="/"
-          class="w-3/12 py-3 border-none bg-red-500 hover:bg-red-600 transition-colors text-center rounded-lg text-white font-semibold"
-          >Cancelar</a
-        >
-        <button
-          type="submit"
-          class="w-3/12 py-3 border-none bg-main text-center rounded-lg text-white font-semibold"
-        >
-          Enviar Datos
-        </button>
-      </div>
+        {% comment %} Botones de formulario {% endcomment %}
+        <div class="flex justify-center gap-10 mt-20">
+          <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+          <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+        </div>
     </form>
   </body>
 </html>
