@@ -7,142 +7,161 @@
     >
       <h1 class="text-xl font-bold text-main">Exploración Física</h1>
       {% comment %} Frecuencia Cardiaca, Frecuencia ..., Temperatura y Presion
-      Arterial {%endcomment %}
+      Arterial, Oxigenacion y Glusoca Capilar {%endcomment %}
       <div class="w-full flex gap-4">
         {% comment %} Frecuencia Cardiaca {% endcomment %}
-        <div class="w-3/12">
+        <div class="w-2/12">
           <label
             for="cardiac_frecuency"
             class="block mb-2 text-sm font-semibold"
             >FC</label
           >
-          <input
-            id="cardiac_frecuency"
-            class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
-            placeholder="Ej. 80 bpm"
-          />
+          <div class="w-full flex items-center gap-2">
+            <input
+              id="cardiac_frecuency"
+              class="w-full border-none rounded-md bg-white shadow-sm"
+              type="number"
+              placeholder="Ej. 80 bpm"
+            />
+            <p>Unidad</p>
+          </div>
         </div>
 
         {% comment %} Frecuencia Respiratoria {% endcomment %}
-        <div class="w-3/12">
+        <div class="w-2/12">
           <label
             for="respiratory_frecuency"
             class="block mb-2 text-sm font-semibold"
             >FR</label
           >
-          <input
-            id="respiratory_frecuency"
-            class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
-            placeholder="Ej. 16 rpm"
-          />
+          <div class="w-full flex items-center gap-2">
+            <input
+              id="respiratory_frecuency"
+              class="w-full border-none rounded-md bg-white shadow-sm"
+              type="number"
+              placeholder="Ej. 16 rpm"
+            />
+            <p>Unidad</p>
+          </div>
         </div>
 
         {% comment %} Temperatura {% endcomment %}
-        <div class="w-3/12">
+        <div class="w-2/12">
           <label for="temperature" class="block mb-2 text-sm font-semibold"
             >Temp</label
           >
-          <input
-            id="temperature"
-            class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
-            placeholder="Ej. 37°C"
-          />
+          <div class="w-full flex items-center gap-2">
+            <input
+              id="temperature"
+              class="w-full border-none rounded-md bg-white shadow-sm"
+              type="number"
+              placeholder="Ej. 37°C"
+            />
+            <p>Unidad</p>
+          </div>
         </div>
 
         {% comment %} Presion Arterial {% endcomment %}
-        <div class="w-3/12">
+        <div class="w-2/12">
           <label
             for="arterial_pressure"
             class="block mb-2 text-sm font-semibold"
             >PA</label
           >
-          <input
-            id="arterial_pressure"
-            class="w-full border-none rounded-md bg-white shadow-sm"
-            type="text"
-            placeholder="Ej. 130 mmHg"
-          />
+          <div class="w-full flex items-center gap-2">
+            <input
+              id="arterial_pressure"
+              class="w-full border-none rounded-md bg-white shadow-sm"
+              type="text"
+              placeholder="Ej. 130 mmHg"
+            />
+            <p>Unidad</p>
+          </div>
         </div>
-      </div>
 
-      <div class="w-full flex gap-4">
         {% comment %} Oxigenacion {% endcomment %}
-        <div class="w-3/12">
-          <label
-            for="oxygenation"
-            class="block mb-2 text-sm font-semibold"
+        <div class="w-2/12">
+          <label for="oxygenation" class="block mb-2 text-sm font-semibold"
             >Ox</label
           >
-          <input
-            id="oxygenation"
-            class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
-            placeholder="Ej. "
-          />
+          <div class="w-full flex items-center gap-2">
+            <input
+              id="oxygenation"
+              class="w-full border-none rounded-md bg-white shadow-sm"
+              type="number"
+              placeholder="Ej. "
+            />
+            <p>Unidad</p>
+          </div>
         </div>
 
         {% comment %} Glucosa Capilar {% endcomment %}
-        <div class="w-3/12">
+        <div class="w-2/12">
           <label
             for="capillary_glucose"
             class="block mb-2 text-sm font-semibold"
             >GC</label
           >
-          <input
+          <div class="w-full flex items-center gap-2">
+            <input
             id="capillary_glucose"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="number"
             placeholder="Ej. 110 mg/dL"
           />
-        </div>
+            <p>Unidad</p>
+          </div>
 
+        </div>
+      </div>
+
+      {% comment %} Contenedor Peso, Talla e IMC {% endcomment %}
+      <div class="w-full flex gap-4">
         {% comment %} Peso {% endcomment %}
-        <div class="w-3/12">
-          <label
-            for="weight"
-            class="block mb-2 text-sm font-semibold"
+        <div class="w-2/12">
+          <label for="weight" class="block mb-2 text-sm font-semibold"
             >Kg</label
           >
-          <input
+          <div class="w-full flex items-center gap-2">
+            <input
             id="weight"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="number"
             placeholder="Ej. 75 kg"
           />
+            <p>Unidad</p>
+          </div>
+
         </div>
 
         {% comment %} Talla {% endcomment %}
-        <div class="w-3/12">
-          <label
-            for="size"
-            class="block mb-2 text-sm font-semibold"
-            >Cm</label
-          >
-          <input
+        <div class="w-2/12">
+          <label for="size" class="block mb-2 text-sm font-semibold">Cm</label>
+
+          <div class="w-full flex items-center gap-2">
+            <input
             id="size"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="number"
             placeholder="Ej. 170 cm"
           />
+            <p>Unidad</p>
+          </div>
         </div>
 
-      </div>
-
-      <div class="w-3/12">
-        <label
-          for="imc"
-          class="block mb-2 text-sm font-semibold"
-          >IMC</label
-        >
-        <input
-          id="imc"
-          class="w-full border-none rounded-md bg-white shadow-sm"
-          type="number"
-          placeholder="Ej. 15 kg/m²"
-        />
+        {% comment %} IMC {% endcomment %}
+        <div class="w-2/12">
+          <label for="imc" class="block mb-2 text-sm font-semibold">IMC</label>
+          <div class="w-full flex items-center gap-2">
+            <input
+            id="imc"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            placeholder="Ej. 15 kg/m²"
+          />
+            <p>Unidad</p>
+          </div>
+        </div>
       </div>
 
       {% comment %} Botones de formulario {% endcomment %}
