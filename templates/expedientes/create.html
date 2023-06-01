@@ -1,9 +1,9 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <section class="lg:px-0">
- <!-- ========================================
+  <!-- ========================================
     AQUI VA EL NAVBAR
  ======================================== -->
- {% include "plantillas/navbar.html" %}
+  {% include "plantillas/navbar.html" %}
 
   <!-- Header -->
   <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
@@ -17,23 +17,26 @@
 
   <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
     <div id="botonera" class="flex lg:container lg:mx-auto border-b-2 border-main shadow-sm">
-      <button id="btn_ficha_identificacion" class="py-2 px-4 rounded-t-lg border-gray-200 bg-background font-bold" type="button">Ficha de Identificación</button>
-      <button id="btn_historia_clinica" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Historia Clínica</button>
-      <button id="btn_padecimiento_actual" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Padecimientos Actuales</button>
-      <button id="btn_exploracion_fisica" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Exploración Física</button>
-      <button id="btn_examenes_complementarios" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Exámenes complementarios</button>
+      <button id="btn_ficha_identificacion" class="py-2 px-4 rounded-t-lg border-gray-200 bg-background font-bold"
+        type="button">Ficha de Identificación</button>
+      <button id="btn_historia_clinica" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Historia
+        Clínica</button>
+      <button id="btn_padecimiento_actual" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white"
+        type="button">Padecimientos Actuales</button>
+      <button id="btn_exploracion_fisica" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white"
+        type="button">Exploración Física</button>
+      <button id="btn_examenes_complementarios" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white"
+        type="button">Exámenes complementarios</button>
     </div>
     <!-- ========================================
        Formularios
     ======================================== -->
-        {% if msg %}
+    {% if msg %}
     <div class="error-message">
       {{ msg }}
     </div>
     {% endif %}
-    <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg "method="POST" action="{% url 'medical:guarda_ficha_identificacion' %}">
-      {% csrf_token %}
-      
+
     <div id="form_ficha_identificacion" class="formulario">
       {% include "expedientes/forms/ficha_identificacion.html" %}
     </div>
@@ -45,7 +48,7 @@
     <div id="form_padecimiento_actual" class="formulario" style="display: none;">
       {% include "expedientes/forms/padecimiento_actual.html" %}
     </div>
-    
+
     <div id="form_exploracion_fisica" class="formulario" style="display: none;">
       {% include "expedientes/forms/exploracion_fisica.html" %}
     </div>
@@ -53,7 +56,7 @@
     <div id="form_examenes_complementarios" class="formulario" style="display: none;">
       {% include "expedientes/forms/examenes_complementarios.html" %}
     </div>
-    
+
   </div>
 
 </section>

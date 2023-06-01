@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} {% load static %} {%block titulo%}- Login {%endblock%}{% block content %}
 <section class="h-screen flex content-center justify-center items-center w-full border bg-background">
   <form class="bg-white rounded-xl p-10 space-y-5 mx-auto md:w-4/5 lg:w-3/6 xl:w-2/6 shadow" method="post" action="{% url 'medical:login' %}">
     <!-- Mensaje de error al iniciar sesion -->

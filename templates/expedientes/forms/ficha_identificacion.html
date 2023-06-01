@@ -1,149 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
-    <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg">
-      <h1 class="text-xl font-bold text-main">Ficha de Identificación</h1>
-        {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
-        <div class="w-full flex gap-4">
-          <div class="w-6/12">
-            <label for="name" class="block mb-2 text-sm font-semibold">Nombre(s)</label>
-            <input id="name" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
-          </div>
-  
-          <div class="w-3/12">
-            <label for="p_lastname" class="block mb-2 text-sm font-semibold">Apellido Paterno</label>
-            <input id="p_lastname" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido Paterno">
-          </div>
-  
-          <div class="w-3/12">
-            <label for="m_lastname" class="block mb-2 text-sm font-semibold">Apellido Materno</label>
-            <input id="m_lastname" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido Materno">
-          </div>
-          
-        </div>
-  
-        {% comment %} Contenedor de Genero, Fecha de nacimiento, Edad y Estado Civil {% endcomment %}
-        <div class="w-full flex gap-4">
-          {% comment %} Genero {% endcomment %}
-          <div class="w-4/12 md:w-4/12">
-            <label for="gender" class="block mb-2 text-sm font-semibold">Género</label>
-            <ul id="gender" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
-              <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-                  <div class="flex items-center pl-3">
-                      <input id="horizontal-list-radio-license" type="radio" value="H" name="list-radio" class="w-4 h-4 bg-gray-100 border-gray-30">
-                      <label for="horizontal-list-radio-license" class="w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Hombre</label>
-                  </div>
-              </li>
-              <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-                  <div class="flex items-center pl-3">
-                      <input id="horizontal-list-radio-id" type="radio" value="M" name="list-radio" class="w-4 h-4 bg-gray-100 border-gray-30">
-                      <label for="horizontal-list-radio-id" class="w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Mujer</label>
-                  </div>
-              </li>
-          </ul>
-          </div>
-  
-          {% comment %} Fecha de Nacimiento {% endcomment %}
-          <div class="w-3/12">
-            <label for="birthday" class="block mb-2 text-sm font-semibold">Fecha de nacimiento</label>
-            <input id="birthday" type="date" class="w-full border-none rounded-md bg-white shadow-sm">
-          </div>
-  
-          {% comment %} Edad {% endcomment %}
-          <div class="w-2/12 md:w-3/12">
-            <label for="age" class="block mb-2 text-sm font-semibold">Edad</label>
-            <input id="age" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. 20 años">
-          </div>
-  
-          {% comment %} Estado Civil {% endcomment %}
-          <div class="w-3/12">
-            <label for="civil_status" class="block mb-2 text-sm font-semibold">Estado Civil</label>
-            <select id="civil_status" class="w-full border-none rounded-md bg-white shadow-sm">
-              <option value="">Selecciona uno</option>
-              <option value="soltero">Soltero</option>
-              <option value="casado">Casado</option>
-              <option value="union_libre">Unión libre</option>
-              <option value="divorciado">Divorciado</option>
-              <option value="viudo">Viudo</option>
-            </select>
-          </div>
-  
-        </div>
-  
-        {% comment %} Nacionalidad, Grupo y RH, Escolaridad y Ocupacion {% endcomment %}
-        <div class="w-full flex gap-4">
-          {% comment %} Nacionalidad {% endcomment %}
-          <div class="w-3/12">
-            <label for="nacionality" class="block mb-2 text-sm font-semibold">Nacionalidad</label>
-            <input id="nacionality" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano">
-          </div>
-          {% comment %} Grupo y RH {% endcomment %}
-          <div class="w-3/12">
-            <label for="group_rh" class="block mb-2 text-sm font-semibold">Grupo y RH</label>
-            <select id="group_rh" class="w-full border-none rounded-md bg-white shadow-sm">
-              <option value="">Selecciona uno</option>
-              <option value="a+">A+</option>
-              <option value="b+">B+</option>
-              <option value="o+">O+</option>
-              <option value="ab+">AB+</option>
-              <option value="a-">A-</option>
-              <option value="b-">B-</option>
-              <option value="o-">O-</option>
-              <option value="ab-">AB-</option>
-              <option value="desc-">Desconocido</option>
-            </select>
-          </div>
-          {% comment %} Escolaridad {% endcomment %}
-          <div class="w-3/12">
-            <label for="scholarship" class="block mb-2 text-sm font-semibold">Escolaridad</label>
-            <select id="scholarship" class="w-full border-none rounded-md bg-white shadow-sm">
-              <option value="">Selecciona uno</option>
-              <option value="ninguna">Ninguna</option>
-              <option value="primaria">Primaria</option>
-              <option value="primaria_t">Primaria Trunca</option>
-              <option value="secundaria">Secundaria</option>
-              <option value="secundaria_t">Secundaria Trunca</option>
-              <option value="preparatoria">Preparatoria</option>
-              <option value="preparatoria_t">Preparatoria Trunca</option>
-              <option value="tecnico">Carrera Técnica</option>
-              <option value="tecnico_t">Carrera Técnica Trunca</option>
-              <option value="licenciatura">Licenciatura</option>
-              <option value="licenciatura_t">Licenciatura Trunca</option>
-              <option value="superior">Superior</option>
-            </select>
-          </div>
-          {% comment %} Ocupacion {% endcomment %}
-          <div class="w-3/12">
-            <label for="occupation" class="block mb-2 text-sm font-semibold">Ocupación</label>
-            <input id="occupation" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador">
-          </div>
-  
-        </div>
-  
-        {% comment %} Direccion, Telefono y Religion {% endcomment %}
-        <div class="w-full flex gap-4">
-          {% comment %} Direccion {% endcomment %}
-          <div class="w-6/12">
-            <label for="address" class="block mb-2 text-sm font-semibold">Dirección</label>
-            <input id="address" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente">
-          </div>
-          {% comment %} Telefono {% endcomment %}
-          <div class="w-3/12">
-            <label for="phone" class="block mb-2 text-sm font-semibold">Teléfono</label>
-            <input id="phone" class="w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000">
-          </div>
-          {% comment %} Religion {% endcomment %}
-          <div class="w-3/12">
-            <label for="religion" class="block mb-2 text-sm font-semibold">Religión</label>
-            <input id="religion" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Católico">
-          </div>
-        </div>
-  
-        {% comment %} Notas {% endcomment %}
-        <div class="w-full">
-          <label for="notes_ficha" class="block mb-2 text-sm font-semibold">Notas</label>
-          <textarea id="notes_ficha" class="resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
-        </div>
+  <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg "method="POST" action="{% url 'medical:guarda_ficha_identificacion' %}">
+    {% csrf_token %}
+
+    <div class="w-full flex gap-4">
+      <div class="w-6/12">
+        <label for="nombre" class="block mb-2 text-sm font-semibold">Nombre(s)</label>
+        <input id="nombre" name="nombre" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
+      </div>
+
+      <div class="w-3/12">
+        <label for="p_lastname" class="block mb-2 text-sm font-semibold">Apellido Paterno</label>
+        <input id="apellido_pat" name="apellido_pat" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido Paterno">
+      </div>
+
+      <div class="w-3/12">
+        <label for="m_lastname" class="block mb-2 text-sm font-semibold">Apellido Materno</label>
+        <input id="apellido_mat" name="apellido_mat" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido Materno">
+      </div>
+      
+    </div>
+
+    {% comment %} Contenedor de Genero, Fecha de nacimiento, Edad y Estado Civil {% endcomment %}
+    <div class="w-full flex gap-4">
+      {% comment %} Genero {% endcomment %}
+      <div class="w-3/12">
+        <label for="gender" class="block mb-2 text-sm font-semibold">Género</label>
+        <ul id="genero" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
+          <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+              <div class="flex items-center pl-3">
+                  <input id="genero" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+                  <label for="horizontal-list-radio-license" class="w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Masculino</label>
+              </div>
+          </li>
+          <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+              <div class="flex items-center pl-3">
+                  <input id="genero" type="radio" value="F" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+                  <label for="horizontal-list-radio-id" class="w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Femenino</label>
+              </div>
+          </li>
+      </ul>
+      </div>
+
+      {% comment %} Fecha de Nacimiento {% endcomment %}
+      <div class="w-3/12">
+        <label for="birthday" class="block mb-2 text-sm font-semibold">Fecha de nacimiento</label>
+        <input id="fecha_nacimiento" name="fecha_nacimiento" type="date" class="w-full border-none rounded-md bg-white shadow-sm">
+      </div>
+
+      {% comment %} Edad {% endcomment %}
+      <div class="w-3/12">
+        <label for="age" class="block mb-2 text-sm font-semibold">Edad</label>
+        <input id="edad" name="edad" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. 20 años">
+      </div>
+
+      {% comment %} Estado Civil {% endcomment %}
+      <div class="w-3/12">
+        <label for="civil_status" class="block mb-2 text-sm font-semibold">Estado Civil</label>
+        <select id="estado_civil" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
+          <option value="">Selecciona uno</option>
+          <option value="soltero">Soltero</option>
+          <option value="casado">Casado</option>
+          <option value="union_libre">Unión libre</option>
+          <option value="divorciado">Divorciado</option>
+          <option value="viudo">Viudo</option>
+        </select>
+      </div>
+
+    </div>
+
+    {% comment %} Nacionalidad, Grupo y RH, Escolaridad y Ocupacion {% endcomment %}
+    <div class="w-full flex gap-4">
+      {% comment %} Nacionalidad {% endcomment %}
+      <div class="w-3/12">
+        <label for="nacionality" class="block mb-2 text-sm font-semibold">Nacionalidad</label>
+        <input id="nacionalidad" name="nacionalidad" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano">
+      </div>
+      {% comment %} Grupo y RH {% endcomment %}
+      <div class="w-3/12">
+        <label for="group_rh" class="block mb-2 text-sm font-semibold">Grupo y RH</label>
+        <select id="grupo_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
+          <option value="">Selecciona uno</option>
+          <option value="a+">A+</option>
+          <option value="b+">B+</option>
+          <option value="o+">O+</option>
+          <option value="ab+">AB+</option>
+          <option value="a-">A-</option>
+          <option value="b-">B-</option>
+          <option value="o-">O-</option>
+          <option value="ab-">AB-</option>
+          <option value="desc">Desconocido</option>
+        </select>
+      </div>
+      {% comment %} Escolaridad {% endcomment %}
+      <div class="w-3/12">
+        <label for="scholarship" class="block mb-2 text-sm font-semibold">Escolaridad</label>
+        <select id="escolaridad" name="escolaridad" class="w-full border-none rounded-md bg-white shadow-sm">
+          <option value="">Selecciona uno</option>
+          <option value="ninguna">Ninguna</option>
+          <option value="primaria">Primaria</option>
+          <option value="primaria_t">Primaria Trunca</option>
+          <option value="secundaria">Secundaria</option>
+          <option value="secundaria_t">Secundaria Trunca</option>
+          <option value="preparatoria">Preparatoria</option>
+          <option value="preparatoria_t">Preparatoria Trunca</option>
+          <option value="tecnico">Carrera Técnica</option>
+          <option value="tecnico_t">Carrera Técnica Trunca</option>
+          <option value="licenciatura">Licenciatura</option>
+          <option value="licenciatura_t">Licenciatura Trunca</option>
+          <option value="superior">Superior</option>
+        </select>
+      </div>
+      {% comment %} Ocupacion {% endcomment %}
+      <div class="w-3/12">
+        <label for="occupation" class="block mb-2 text-sm font-semibold">Ocupación</label>
+        <input id="ocupacion" name="ocupacion" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador">
+      </div>
+
+    </div>
+
+    {% comment %} Direccion, Telefono y Religion {% endcomment %}
+    <div class="w-full flex gap-4">
+      {% comment %} Direccion {% endcomment %}
+      <div class="w-6/12">
+        <label for="address" class="block mb-2 text-sm font-semibold">Dirección</label>
+        <input id="direccion" name="direccion" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente">
+      </div>
+      {% comment %} Telefono {% endcomment %}
+      <div class="w-3/12">
+        <label for="phone" class="block mb-2 text-sm font-semibold">Teléfono</label>
+        <input id="telefono_personal" name="telefono_personal" class="w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000">
+      </div>
+      {% comment %} Religion {% endcomment %}
+      <div class="w-3/12">
+        <label for="religion" class="block mb-2 text-sm font-semibold">Religión</label>
+        <input id="religion" name="religion"  class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Católico">
+      </div>
+    </div>
+
+    {% comment %} Notas {% endcomment %}
+    <div class="w-full">
+      <label for="notes" class="block mb-2 text-sm font-semibold">Notas</label>
+      <textarea id="notas" name="notas" class="w-full border-none rounded-md bg-white shadow-sm h-32"></textarea>
+    </div>
   
         {% comment %} Botones de formulario {% endcomment %}
         <div class="flex justify-center gap-10 mt-20">
