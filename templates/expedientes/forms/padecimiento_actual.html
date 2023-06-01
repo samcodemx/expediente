@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+  <body>
+    <form
+      id="form_padecimiento_actual"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+    >
+    <h1 class="text-xl font-bold text-main">Padecimientos Actuales</h1>
+      {% comment %} Padecimiento Actual {% endcomment %}
+      <div class="w-full">
+        <label for="current_condition" class="block mb-2 text-sm font-semibold"
+          >Padecimiento Actual</label
+        >
+        <textarea
+          id="current_condition"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba el Padecimiento Actual"
+        ></textarea>
+      </div>
+
+      <!-- ========================================
+         Interrogativo por aparatos y sistemas
+      ======================================== -->
+      <div class="w-full space-y-8">
+        <label class="block mb-4 text-sm font-semibold"
+          >Interrogativo por Aparatos y Sistemas</label
+        >
+        {% comment %} Piel y Tegumentos {% endcomment %}
+        <div class="w-full">
+          <label for="skin" class="block mb-2 text-sm font-semibold"
+            >Piel y Tegumentos</label
+          >
+          <textarea
+            id="skin"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+            placeholder="Escriba..."
+          ></textarea>
+        </div>
+
+        {% comment %} Cabeza {% endcomment %}
+        <div class="w-full">
+          <label for="head" class="block mb-2 text-sm font-semibold"
+            >Cabeza</label
+          >
+          <textarea
+            id="head"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+            placeholder="Escriba ..."
+          ></textarea>
+        </div>
+
+        {% comment %} Cuello {% endcomment %}
+        <div class="w-full">
+          <label for="neck" class="block mb-2 text-sm font-semibold"
+            >Cuello</label
+          >
+          <textarea
+            id="neck"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+            placeholder="Escriba ..."
+          ></textarea>
+        </div>
+
+        {% comment %} Torax {% endcomment %}
+        <div class="w-full">
+          <label for="thorax" class="block mb-2 text-sm font-semibold">Torax</label>
+          <textarea
+          id="thorax"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba ..."></textarea>
+        </div>
+
+        {% comment %} Abdomen {% endcomment %}
+        <div class="w-full">
+          <label for="abdomen" class="block mb-2 text-sm font-semibold">Abdomen</label>
+          <textarea
+          id="abdomen"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba ..."></textarea>
+        </div>
+
+        {% comment %} Genitourinario {% endcomment %}
+        <div class="w-full">
+          <label for="genitourinary" class="block mb-2 text-sm font-semibold">Genitourinario</label>
+          <textarea
+          id="genitourinary"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba ..."></textarea>
+        </div>
+
+        {% comment %} Musculo Esqueletico y Extremidades {% endcomment %}
+        <div class="w-full">
+          <label for="skeletal_muscle_and_extremities" class="block mb-2 text-sm font-semibold">Músculo Esquelético y Extremidades</label>
+          <textarea
+          id="skeletal_muscle_and_extremities"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba ..."></textarea>
+        </div>   
+        
+        {% comment %} Neurologico {% endcomment %}
+        <div class="w-full">
+          <label for="neurological" class="block mb-2 text-sm font-semibold">Neurológico</label>
+          <textarea
+          id="neurological"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba ..."></textarea>
+        </div>
+      </div>
+
+        {% comment %} Notas {% endcomment %}
+        <div class="w-full">
+          <label for="notes_padecimientos" class="block mb-2 text-sm font-semibold">Notas</label>
+          <textarea id="notes_padecimientos" class="resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+        </div>
+        
+        {% comment %} Botones de formulario {% endcomment %}
+        <div class="flex justify-center gap-10 mt-20">
+          <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+          <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+        </div>
+    </form>
+  </body>
+</html>
