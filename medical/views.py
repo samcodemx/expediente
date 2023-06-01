@@ -21,12 +21,12 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('/')
             else:
                 error_message = 'Invalid username or password'
     else:
         form = LoginForm()
-    return render(request, 'login.html', {'form': form, 'error_message': error_message})
+    return render(request, 'registration/login.html', {'form': form, 'error_message': error_message})
 
 
 def logout_view(request):
@@ -95,6 +95,5 @@ def guarda_ficha_identificacion(request):
         ficha.save()
         return render(request, 'expedientes/create.html', {'msg': 'guardado con exito'})  # Puedes redirigir a una página de éxito o hacer cualquier otra acción que necesites
        
-
     print('aca')
     return render(request, 'expedientes/create.html')  # Renderiza nuevamente el formulario en caso de una solicitud GET
