@@ -2,18 +2,32 @@
 <!DOCTYPE html>
 <html lang="es">
   <body>
-    <nav class="py-2 border-b-2 border-background bg-white md:px-6">
+    <nav class="py-4 border-b-2 border-background bg-white md:px-6">
       <div
         class="lg:px-0 lg:container lg:mx-auto flex justify-between items-center"
       >
-        <!-- Imagen Navbar -->
+        <!-- ========================================
+           Logo del Navbar
+        ======================================== -->
         <a href="/"
           ><img
             class="h-14"
             src="{% static 'img/logo.png' %}"
             alt="Logo Medical 360"
         /></a>
-        <!-- Dropdown -->
+
+        <!-- ========================================
+           Menu
+        ======================================== -->
+        <div class="flex gap-10">
+          <a href="/" id="files" class="font-semibold text-gray-400 hover:text-main transition-colors">Ver expedientes</a>
+          <a href="/create-file" id="create-file" class="font-semibold text-gray-400 hover:text-main transition-colors">Nuevo expediente</a>
+          <a href="/help" id="help" class="font-semibold text-gray-400 hover:text-main transition-colors">Ayuda</a>
+        </div>
+        
+        <!-- ========================================
+           Dropdown de sesion
+        ======================================== -->
         <div>
           <button
             id="dropdownUserAvatarButton"
@@ -68,6 +82,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </nav>
   </body>
