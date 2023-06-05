@@ -48,8 +48,8 @@
             class="z-10 hidden bg-gray-50 divide-y divide-gray-100 rounded-lg shadow w-44"
           >
             <div class="px-4 py-3 text-sm text-gray-900">
-              <div>Dr. Samuel Medina</div>
-              <div class="font-medium truncate">email@ejemplo.com</div>
+              <div>{% if request.user.medico.nombre %} {{ request.user.medico.nombre }} {{request.user.medico.apellido_pat}} {% else %} {{ request.user.username }} {% endif %}</div>
+              <div class="font-medium truncate">{{request.user.email}}</div>
             </div>
             <ul
               class="py-2 text-sm text-gray-700 dark:text-gray-200"

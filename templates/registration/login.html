@@ -1,6 +1,6 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} {% load static %} {%block titulo%}- Login {%endblock%}{% block content %}
 <section class="h-screen flex content-center justify-center items-center w-full border bg-background">
-  <form class="bg-white rounded-xl p-10 space-y-5 mx-auto md:w-4/5 lg:w-3/6 xl:w-2/6 shadow" method="post">
+  <form class="bg-white rounded-xl p-10 space-y-5 mx-auto md:w-4/5 lg:w-3/6 xl:w-2/6 shadow" method="post" action="{% url 'medical:login' %}">
     <!-- Mensaje de error al iniciar sesion -->
     {% if error_message %}
     <p class="bg-red-200 text-red-500">{{ error_message }}</p>
@@ -11,7 +11,15 @@
       src="{% static 'img/logo.png' %}"
       alt="Logo Medical 360"
     />
-    {% csrf_token %} {{ form.as_p }}
+    {% csrf_token %}
+    <div class="w-6/12">
+      <label for="username" class="block mb-2 text-sm font-semibold">Cédula</label>
+      <input id="username" name="username" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Cédula">
+    </div>
+    <div class="w-6/12">
+      <label for="password" class="block mb-2 text-sm font-semibold">Contraseña</label>
+      <input id="password" name="password" class="w-full border-none rounded-md bg-white shadow-sm" type="password" placeholder="Contraseña">
+    </div>
     <button 
       class="bg-main w-full p-2 rounded-lg text-white font-semibold" 
       type="submit">
