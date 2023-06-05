@@ -5,6 +5,13 @@
       id="form_historia_clinica"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
     >
+
+    {% if msg %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ msg }}
+    </div>
+    {% endif %}
+
     <h1 class="text-xl font-bold text-main">Historia Clínica</h1>
       {% comment %} Antecedentes Heredofamiliares {% endcomment %}
       <div class="w-full">
