@@ -4,6 +4,8 @@
     <form
       id="form_historia_clinica"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+      action="{% url 'medical:guarda_antecedentes' %}"
+      method="post"
     >
 
     {% if msg %}
@@ -24,6 +26,7 @@
           id="hereditary_family_history"
           class="resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
+          name="ahf"
         ></textarea>
       </div>
 
@@ -38,6 +41,7 @@
           id="non_pathological_history"
           class="resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
+          name="apnp"
         ></textarea>
       </div>
 
@@ -52,6 +56,7 @@
           id="pathological_history"
           class="resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
+          name="app"
         ></textarea>
       </div>
 
@@ -64,10 +69,14 @@
           id="obstetric_history"
           class="resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
+          name="ago"
         ></textarea>
       </div>
 
+      <input type="hidden" name="historia_clinica_id" value="{{ historia_clinica_id }}">
+
         {% comment %} Botones de formulario {% endcomment %}
+        {% csrf_token %}
         <div class="flex justify-center gap-10 mt-20">
           <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
           <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>

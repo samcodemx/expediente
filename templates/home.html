@@ -70,7 +70,12 @@
             <!-- Empresa -->
             <div class="md:flex gap-2">
               <span class="font-bold">Empresa:</span>
-              <p>{{paciente.empleador}}</p>
+              {% if paciente.empleador %}
+                <p>{{paciente.empleador}}</p>
+              {% else %}
+                <p>NA</p>
+              {% endif %}
+              <p></p>
             </div>
             <!-- Doctor -->
             <div class="md:flex gap-2">
