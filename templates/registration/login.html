@@ -3,7 +3,7 @@
   <form class="bg-white rounded-xl p-10 space-y-5 mx-auto md:w-4/5 lg:w-3/6 xl:w-2/6 shadow" method="post" action="{% url 'medical:login' %}">
     <!-- Mensaje de error al iniciar sesion -->
     {% if error_message %}
-    <p class="bg-red-200 text-red-500">{{ error_message }}</p>
+    <p class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">{{ error_message }}</p>
     {% endif %}
     <!-- Formulario de Login -->
     <img
@@ -12,16 +12,16 @@
       alt="Logo Medical 360"
     />
     {% csrf_token %}
-    <div class="w-6/12">
+    <div class="w-full">
       <label for="username" class="block mb-2 text-sm font-semibold">Cédula</label>
-      <input id="username" name="username" class="w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Cédula">
+      <input id="username" name="username" class="focus:ring-main focus:ring-2 p-4 w-full border-none rounded-md bg-white shadow" type="text" placeholder="Escribe tu cédula">
     </div>
-    <div class="w-6/12">
+    <div class="w-full">
       <label for="password" class="block mb-2 text-sm font-semibold">Contraseña</label>
-      <input id="password" name="password" class="w-full border-none rounded-md bg-white shadow-sm" type="password" placeholder="Contraseña">
+      <input id="password" name="password" class="focus:ring-main focus:ring-2 p-4 w-full border-none rounded-md bg-white shadow" type="password" placeholder="Escribe tu ontraseña">
     </div>
     <button 
-      class="bg-main w-full p-2 rounded-lg text-white font-semibold" 
+      class="bg-main w-full p-4 rounded-lg text-white font-semibold" 
       type="submit">
       Iniciar sesión
     </button>

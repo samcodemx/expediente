@@ -15,6 +15,8 @@ def login_view(request):
     error_message = ''
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        error_message = 'Completa todos los campos'
+
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -22,8 +24,9 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 return redirect('/')
+                
             else:
-                error_message = 'Invalid username or password'
+                error_message = 'Usuario y/o contraseña incorrectos'
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', {'form': form, 'error_message': error_message})
@@ -53,17 +56,17 @@ def guarda_ficha_identificacion(request):
         genero = request.POST.get('genero')
         estado_civil = request.POST.get('estado_civil')
         grupo_rh = request.POST.get('grupo_rh')
-        #alergias = request.POST.get('alergias')
-        #curp = request.POST.get('curp')
+        alergias = request.POST.get('alergias')
+        curp = request.POST.get('curp')
         nacionalidad = request.POST.get('nacionalidad')
         escolaridad = request.POST.get('escolaridad')
         religion = request.POST.get('religion')
         direccion = request.POST.get('direccion')
         ocupacion = request.POST.get('ocupacion')
-        #empleador = request.POST.get('empleador')
+        empleador = request.POST.get('empleador')
         telefono_personal = request.POST.get('telefono_personal')
-        #nombre_contacto_emergencia = request.POST.get('nombre_contacto_emergencia')
-        #telefono_contacto_emergencia = request.POST.get('telefono_contacto_emergencia')
+        nombre_contacto_emergencia = request.POST.get('nombre_contacto_emergencia')
+        telefono_contacto_emergencia = request.POST.get('telefono_contacto_emergencia')
         notas = request.POST.get('notas')
 
         ficha = Paciente(
@@ -74,26 +77,26 @@ def guarda_ficha_identificacion(request):
             genero=genero,
             estado_civil=estado_civil,
             grupo_rh=grupo_rh,
-            #alergias=alergias,
-            #curp=curp,
+            alergias=alergias,
+            curp=curp,
             nacionalidad=nacionalidad,
             escolaridad=escolaridad,
             religion=religion,
             direccion=direccion,
             ocupacion=ocupacion,
-            #empleador=empleador,
+            empleador=empleador,
             telefono_personal=telefono_personal,
-            #nombre_contacto_emergencia=nombre_contacto_emergencia,
-            #telefono_contacto_emergencia=telefono_contacto_emergencia,
+            nombre_contacto_emergencia=nombre_contacto_emergencia,
+            telefono_contacto_emergencia=telefono_contacto_emergencia,
             notas=notas
         )
         try:
             ficha.full_clean()  # Validación de campos del modelo
         except ValidationError as e:
-            return render(request, 'expedientes/create.html', {'msg': str(e)})
+            return render(request, 'expedientes/create.html', {'msg_ficha_error': 'Favor de llenar todos los campos obligatorios (*)'})
             
         ficha.save()
-        return render(request, 'expedientes/create.html', {'msg': 'guardado con exito'})  # Puedes redirigir a una página de éxito o hacer cualquier otra acción que necesites
+        return render(request, 'expedientes/create.html', {'msg_ficha_success': 'Datos guardados con éxito'})  # Puedes redirigir a una página de éxito o hacer cualquier otra acción que necesites
        
     print('aca')
     return render(request, 'expedientes/create.html')  # Renderiza nuevamente el formulario en caso de una solicitud GET

@@ -31,11 +31,6 @@
     <!-- ========================================
        Formularios
     ======================================== -->
-    {% if msg %}
-    <div class="error-message">
-      {{ msg }}
-    </div>
-    {% endif %}
 
     <div id="form_ficha_identificacion" class="formulario">
       {% include "expedientes/forms/ficha_identificacion.html" %}
@@ -60,4 +55,21 @@
   </div>
 
 </section>
+
+<script>
+  function calcularEdad() {
+    let fechaNacimiento = new Date(document.getElementById("fecha_nacimiento").value);
+    let ahora = new Date();
+
+    let edad = ahora.getFullYear() - fechaNacimiento.getFullYear();
+
+    // Verificar si aún no ha cumplido años
+    if (ahora.getMonth() < fechaNacimiento.getMonth() ||
+        (ahora.getMonth() == fechaNacimiento.getMonth() && ahora.getDate() < fechaNacimiento.getDate())) {
+      edad--;
+    }
+
+    document.getElementById("edad").value = edad;
+  }
+</script>
 {% endblock %}
