@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+      
+      {% if msg_ficha_success %}
+      <script>
+        // Obtener el formulario
+        let formulario = document.getElementById("form_ficha_identificacion");
+      
+        // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
+        formulario.addEventListener("submit", function(event) {
+          event.preventDefault();
+      
+          // Mostrar una alerta SweetAlert2 con el mensaje de error
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ msg_ficha_error }}',
+          });
+        });
+      </script>
+      {% endif %}
+
+      {% if msg_ficha_error %}
+        <script>
+          
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Signed in successfully'
+          })
+        </script>
+      {% endif %}
+
+  <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" method="post">
+      <h1 class="text-xl font-bold text-main">Ficha de Identificación</h1>
+        {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
+        <div class="w-full flex gap-4">
+          <div class="w-6/12">
+            <label for="name" class="block mb-2 text-sm font-semibold">Nombre(s)</label>
+            <input id="nombre" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
+          </div>
+  
+          <div class="w-3/12">
+            <label for="p_lastname" class="block mb-2 text-sm font-semibold">Apellido Paterno</label>
+            <input id="apellido_pat" name="apellido_pat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido paterno">
+          </div>
+  
+          <div class="w-3/12">
+            <label for="m_lastname" class="block mb-2 text-sm font-semibold">Apellido Materno</label>
+            <input id="apellido_mat" name="apellido_mat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido materno">
+          </div>
+          
+        </div>
+  
+        {% comment %} Contenedor de Genero, Fecha de nacimiento, Edad y Estado Civil {% endcomment %}
+        <div class="w-full flex gap-4">
+          {% comment %} Genero {% endcomment %}
+          <div class="w-4/12 md:w-4/12">
+            <label for="gender" class="block mb-2 text-sm font-semibold">Género</label>
+            <ul id="gender" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
+              <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                  <div class="flex items-center pl-3">
+                      <input id="genero" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+                      <label for="horizontal-list-radio-license" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Masculino</label>
+                  </div>
+              </li>
+              <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                  <div class="flex items-center pl-3">
+                      <input id="genero" type="radio" value="F" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+                      <label for="horizontal-list-radio-id" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Femenino</label>
+                  </div>
+              </li>
+          </ul>
+          </div>
+  
+          {% comment %} Fecha de Nacimiento {% endcomment %}
+          <div class="w-3/12">
+            <label for="fecha_nacimiento" class="block mb-2 text-sm font-semibold">Fecha de nacimiento</label>
+            <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="uppercase w-full border-none rounded-md bg-white shadow-sm" onchange="calcularEdad()">
+          </div>
+  
+          {% comment %} Edad {% endcomment %}
+          <div class="w-2/12 md:w-3/12">
+            <label for="edad" class="block mb-2 text-sm font-semibold">Edad</label>
+            <input id="edad" name="edad" class="uppercase w-full border-none rounded-md bg-gray-100 shadow-sm" type="text" disabled>
+          </div>
+  
+          {% comment %} Estado Civil {% endcomment %}
+          <div class="w-3/12">
+            <label for="civil_status" class="block mb-2 text-sm font-semibold">Estado Civil</label>
+            <select id="civil_status" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
+              <option value="">Selecciona uno</option>
+              <option value="SOLTERO">SOLTERO</option>
+              <option value="CASADO">CASADO</option>
+              <option value="UNION_LIBRE">UNIÓN LIBRE</option>
+              <option value="DIVORCIADO">DIVORCIADO</option>
+              <option value="VIUDO">VIUDO</option>
+            </select>
+          </div>
+  
+        </div>
+  
+        {% comment %} Nacionalidad, Grupo y RH, Escolaridad y Ocupacion {% endcomment %}
+        <div class="w-full flex gap-4">
+          {% comment %} Nacionalidad {% endcomment %}
+          <div class="w-3/12">
+            <label for="nacionality" class="block mb-2 text-sm font-semibold">Nacionalidad</label>
+            <input id="nacionality" name="nacionalidad" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano">
+          </div>
+          {% comment %} Grupo y RH {% endcomment %}
+          <div class="w-3/12">
+            <label for="group_rh" class="block mb-2 text-sm font-semibold">Grupo y RH</label>
+            <select id="group_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
+              <option value="">SELECCIONA UNO</option>
+              <option value="A+">A+</option>
+              <option value="B+">B+</option>
+              <option value="O+">O+</option>
+              <option value="AB+">AB+</option>
+              <option value="A-">A-</option>
+              <option value="B-">B-</option>
+              <option value="O-">O-</option>
+              <option value="AB-">AB-</option>
+              <option value="DESC">DESCONOCIDO</option>
+            </select>
+          </div>
+          {% comment %} Escolaridad {% endcomment %}
+          <div class="w-3/12">
+            <label for="scholarship" class="block mb-2 text-sm font-semibold">Escolaridad</label>
+            <select id="scholarship" name="escolaridad" class="uppercase w-full border-none rounded-md bg-white shadow-sm">
+              <option value="">SELECCIONA UNO</option>
+              <option value="NINGUNA">NINGUNA</option>
+              <option value="PRIMARIA">PRIMARIA</option>
+              <option value="PRIMARIA_T">PRIMARIA TRUNCA</option>
+              <option value="SECUNDARIA">SECUNDARIA</option>
+              <option value="SECUNDARIA_T">SECUNDARIA TRUNCA</option>
+              <option value="PREPARATORIA">PREPARATORIA</option>
+              <option value="PREPARATORIA_T">PREPARATORIA TRUNCA</option>
+              <option value="TECNICO">CARRERA TÉCNICA</option>
+              <option value="TECNICO_T">CARRERA TÉCNICA TRUNCA</option>
+              <option value="LICENCIATURA">LICENCIATURA</option>
+              <option value="LICENCIATURA_T">LICENCIATURA TRUNCA</option>
+              <option value="SUPERIOR">SUPERIOR</option>              
+            </select>
+          </div>
+          {% comment %} Ocupacion {% endcomment %}
+          <div class="w-3/12">
+            <label for="occupation" class="block mb-2 text-sm font-semibold">Ocupación</label>
+            <input id="occupation" name="ocupacion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador">
+          </div>
+  
+        </div>
+  
+        {% comment %} Direccion, Telefono y Religion {% endcomment %}
+        <div class="w-full flex gap-4">
+          {% comment %} Direccion {% endcomment %}
+          <div class="w-6/12">
+            <label for="address" class="block mb-2 text-sm font-semibold">Dirección</label>
+            <input id="address" name="direccion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente">
+          </div>
+          {% comment %} Telefono {% endcomment %}
+          <div class="w-3/12">
+            <label for="phone" class="block mb-2 text-sm font-semibold">Teléfono Personal</label>
+            <input id="phone" name="telefono_personal" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000">
+          </div>
+          {% comment %} Religion {% endcomment %}
+          <div class="w-3/12">
+            <label for="religion" class="block mb-2 text-sm font-semibold">Religión</label>
+            <input id="religion" name="religion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Católico">
+          </div>
+        </div>
+
+        {% comment %} Curp, Empleador, Nombre Conctacto Emergencia y Telefono Contacto Emergencia {% endcomment %}
+        <div class="w-full flex gap-4">
+          {% comment %} Curp {% endcomment %}
+          <div class="w-3/12">
+            <label for="curp" class="block mb-2 text-sm font-semibold">Curp</label>
+            <input id="curp" name="curp" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el CURP del paciente">
+          </div>
+
+          {% comment %} Empleador {% endcomment %}
+          <div class="w-3/12">
+            <label for="empleador" class="block mb-2 text-sm font-semibold">Empleador</label>
+            <input id="empleador" name="empleador" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el empleador del paciente">
+          </div>
+
+          {% comment %} Nombre Contacdo de Emergencia {% endcomment %}
+          <div class="w-3/12">
+            <label for="nombre_contacto_emergencia" class="block mb-2 text-sm font-semibold">Contacto de emergencia (Nombre)</label>
+            <input id="nombre_contacto_emergencia" name="nombre_contacto_emergencia" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el nombre del contacto">
+          </div>
+
+          {% comment %} Numero Contacdo de Emergencia {% endcomment %}
+          <div class="w-3/12">
+            <label for="telefono_contacto_emergencia" class="block mb-2 text-sm font-semibold">Contacto de emergencia (Teléfono)</label>
+            <input id="telefono_contacto_emergencia" name="telefono_contacto_emergencia" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Escriba el teléfono del contacto">
+          </div>
+        
+        </div>
+  
+          
+        {% comment %} Alergias {% endcomment %}
+        <div class="w-full">
+          <label for="alergias" class="block mb-2 text-sm font-semibold">Alergias</label>
+          <textarea id="alergias" name="alergias" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba las alergias del paciente"></textarea>
+        </div>
+
+        {% comment %} Notas {% endcomment %}
+        <div class="w-full">
+          <label for="notes_ficha" class="block mb-2 text-sm font-semibold">Notas</label>
+          <textarea id="notes_ficha" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+        </div>
+  
+        {% csrf_token %}
+
+        {% comment %} Botones de formulario {% endcomment %}
+        <div class="flex justify-center gap-10 mt-20">
+          <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+          <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+        </div>
+      </form>
+</body>
+</html>

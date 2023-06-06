@@ -31,37 +31,38 @@ class Paciente(models.Model):
         ('F', 'Femenino'),
     ]
     ESTADO_CIVIL_CHOICES = [
-        ('soltero', 'Soltero'),
-        ('casado', 'Casado'),
-        ('union_libre', 'Union libre'),
-        ('divorciado', 'Divorciado'),
-        ('viudo', 'Viudo'),
+        ('SOLTERO', 'Soltero'),
+        ('CASADO', 'Casado'),
+        ('UNION_LIBRE', 'Union libre'),
+        ('DIVORCIADO', 'Divorciado'),
+        ('VIUDO', 'Viudo'),
     ]
+
     GRUPO_RH_CHOICES = [
-        ('a+', 'A+'),
-        ('b+', 'B+'),
-        ('o+', 'O+'),
-        ('ab+', 'AB+'),
-        ('a-', 'A-'),
-        ('b-', 'B-'),
-        ('o-', 'O-'),
-        ('ab-', 'AB-'),
-        ('desc', 'Desconocido'),
+        ('A+', 'A+'),
+        ('B+', 'B+'),
+        ('O+', 'O+'),
+        ('AB+', 'AB+'),
+        ('A-', 'A-'),
+        ('B-', 'B-'),
+        ('O-', 'O-'),
+        ('AB-', 'AB-'),
+        ('DESC', 'Desconocido'),
     ]
+
     ESCOLARIDAD_CHOICES = [
-        ('ninguna', 'Ninguna'),
-        ('primaria', 'Primaria'),
-        ('primaria_t', 'Primaria Trunca'),
-        ('secundaria', 'Secundaria'),
-        ('secundaria_t', 'Secundaria Trunca'),
-        ('preparatoria', 'Preparatoria'),
-        ('preparatoria_t', 'Preparatoria Trunca'),
-        ('tecnico', 'Carrera Tecnica'),
-        ('tecnico_t', 'Carrera Tecnica Trunca'),
-        ('licenciatura', 'Licenciatura'),
-        ('licenciatura_t', 'Licenciatura Trunca'),
-        ('superior', 'Superior'),
-        
+        ('NINGUNA', 'Ninguna'),
+        ('PRIMARIA', 'Primaria'),
+        ('PRIMARIA_T', 'Primaria Trunca'),
+        ('SECUNDARIA', 'Secundaria'),
+        ('SECUNDARIA_T', 'Secundaria Trunca'),
+        ('PREPARATORIA', 'Preparatoria'),
+        ('PREPARATORIA_T', 'Preparatoria Trunca'),
+        ('TECNICO', 'Carrera Tecnica'),
+        ('TECNICO_T', 'Carrera Tecnica Trunca'),
+        ('LICENCIATURA', 'Licenciatura'),
+        ('LICENCIATURA_T', 'Licenciatura Trunca'),
+        ('SUPERIOR', 'Superior'),
     ]
     
     nombre = models.CharField(max_length=50)
@@ -71,7 +72,7 @@ class Paciente(models.Model):
     genero = models.CharField(max_length=10, choices=GENERO_CHOICES)
     estado_civil = models.CharField(max_length=15, choices=ESTADO_CIVIL_CHOICES)
     grupo_rh = models.CharField(max_length=4, choices=GRUPO_RH_CHOICES)
-    alergias = models.CharField(max_length=30, default=None, null=True, blank=True)
+    alergias = models.CharField(max_length=30)
     curp = models.CharField(max_length=18, blank=True, null=True)
     nacionalidad = models.CharField(max_length=20, blank=True, null=True)
     escolaridad = models.CharField(max_length=30, choices=ESCOLARIDAD_CHOICES, blank=True, null=True)
@@ -91,7 +92,6 @@ class HistoriaClinica(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     fecha = models.DateField()
-    notas = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return str(self.paciente) + ' por ' + str(self.medico) + ' - ' + str(self.fecha)

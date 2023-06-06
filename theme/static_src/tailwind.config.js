@@ -52,6 +52,7 @@ module.exports = {
       colors: {
         'background' : '#E7EFF6',
         'main': '#4275A3',
+        'rojo': '#8F5A5C',
       }
         },
     },

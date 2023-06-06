@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <body>
+    <form
+      id="form_historia_clinica"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+      action="{% url 'medical:guarda_antecedentes' %}"
+      method="post"
+    >
+
+    {% if msg %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ msg }}
+    </div>
+    {% endif %}
+
+    <h1 class="text-xl font-bold text-main">Historia Clínica</h1>
+      {% comment %} Antecedentes Heredofamiliares {% endcomment %}
+      <div class="w-full">
+        <label
+          for="hereditary_family_history"
+          class="block mb-2 text-sm font-semibold"
+          >Antecedentes Heredofamiliares</label
+        >
+        <textarea
+          id="hereditary_family_history"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los antecedentes correspondientes"
+          name="ahf"
+        ></textarea>
+      </div>
+
+      {% comment %} Antecedentes Personales No Patologicos {% endcomment %}
+      <div class="w-full">
+        <label
+          for="non_pathological_history"
+          class="block mb-2 text-sm font-semibold"
+          >Antecedentes Personales No Patológicos</label
+        >
+        <textarea
+          id="non_pathological_history"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los antecedentes correspondientes"
+          name="apnp"
+        ></textarea>
+      </div>
+
+      {% comment %} Antecedentes Personales Patologicos {% endcomment %}
+      <div class="w-full">
+        <label
+          for="pathological_history"
+          class="block mb-2 text-sm font-semibold"
+          >Antecedentes Personales Patológicos</label
+        >
+        <textarea
+          id="pathological_history"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los antecedentes correspondientes"
+          name="app"
+        ></textarea>
+      </div>
+
+      {% comment %} Antecedentes Gineco Obstetricos {% endcomment %}
+      <div class="w-full">
+        <label for="obstetric_history" class="block mb-2 text-sm font-semibold"
+          >Antecedentes Gineco-Obstétricos</label
+        >
+        <textarea
+          id="obstetric_history"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          placeholder="Escriba los antecedentes correspondientes"
+          name="ago"
+        ></textarea>
+      </div>
+
+      <input type="hidden" name="historia_clinica_id" value="{{ historia_clinica_id }}">
+
+        {% comment %} Botones de formulario {% endcomment %}
+        {% csrf_token %}
+        <div class="flex justify-center gap-10 mt-20">
+          <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+          <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+        </div>
+    </form>
+  </body>
+</html>
