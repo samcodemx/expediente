@@ -71,9 +71,6 @@ def validar_datos(datos):
 def guarda_ficha_identificacion_view(request):
     if request.method == 'POST':
         campos_requeridos = ['nombre', 'apellido_pat', 'apellido_mat', 'fecha_nacimiento', 'genero', 'grupo_rh', 'alergias']
-        error_msg = validar_campos_requeridos(request, campos_requeridos)
-        if error_msg:
-            return render(request, 'expedientes/create.html', {'error_msg_ficha': error_msg})
 
         nombre = request.POST.get('nombre').upper()
         apellido_pat = request.POST.get('apellido_pat').upper()
@@ -118,6 +115,10 @@ def guarda_ficha_identificacion_view(request):
             fecha_alta=date.today(),
         )
 
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'error_msg_ficha': error_msg})
+
         error_msg = validar_datos(ficha)
         if error_msg:
             return render(request, 'expedientes/create.html', {'error_msg_ficha': error_msg})
@@ -134,9 +135,6 @@ def guarda_ficha_identificacion_view(request):
 def guarda_antecedentes_view(request):
     if request.method == 'POST':
         campos_requeridos = ['paciente_id','ahf', 'apnp', 'app']
-        error_msg = validar_campos_requeridos(request, campos_requeridos)
-        if error_msg:
-            return render(request, 'expedientes/create.html', {'error_msg_antecedentes': error_msg})
 
         paciente_id = request.POST.get('paciente_id')
         ahf = request.POST.get('ahf').upper()
@@ -156,6 +154,10 @@ def guarda_antecedentes_view(request):
 
         paciente = get_object_or_404(Paciente, id=paciente_id)
 
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_antecedentes': error_msg})
+
         error_msg = validar_datos(antecedentes)
         if error_msg:
             return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_antecedentes': error_msg})
@@ -171,9 +173,6 @@ def guarda_antecedentes_view(request):
 def guarda_padecimiento_view(request):
     if request.method == 'POST':
         campos_requeridos = ['paciente_id','padecimiento_actual','piel_tegumentos','cabeza_cuello','torax','abdomen','genitourinario','musculo_extremidades','neurologico',]
-        error_msg = validar_campos_requeridos(request, campos_requeridos)
-        if error_msg:
-            return render(request, 'expedientes/create.html', {'error_msg_padecimiento': error_msg})
 
         paciente_id = request.POST.get('paciente_id')
         padecimiento_actual = request.POST.get('padecimiento_actual').upper()
@@ -201,10 +200,18 @@ def guarda_padecimiento_view(request):
             notas=notas
         )
 
+        paciente = get_object_or_404(Paciente, id=paciente_id)
+
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_padecimiento': error_msg})
+
         error_msg = validar_datos(padecimiento)
         if error_msg:
-            return render(request, 'expedientes/create.html', {'error_msg_padecimiento': error_msg})
+            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_padecimiento': error_msg})
 
         # Guardar el objeto PadecimientoActual en la base de datos
         padecimiento.save()
         return render(request, 'expedientes/create.html', {'success_msg_padecimiento': 'Padecimiento actual guardado con éxito'})
+    
+    return render(request, 'expedientes/create.html')
