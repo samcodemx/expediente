@@ -27,17 +27,18 @@
     </div>
     {% endif %}
 
-    <h1 class="text-xl font-bold text-main">Historia Clínica</h1>
+    <h1 class="text-xl font-bold text-main uppercase">Antecedentes</h1>
       {% comment %} Antecedentes Heredofamiliares {% endcomment %}
       <div class="w-full">
         <label
           for="hereditary_family_history"
-          class="block mb-2 text-sm font-semibold"
-          >Antecedentes Heredofamiliares</label
+          class="block mb-2 text-sm font-semibold uppercase"
+          >Antecedentes Heredofamiliares <span class="text-red-500">*</span></label
         >
         <textarea
+          name="ahf"
           id="hereditary_family_history"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
           name="ahf"
         ></textarea>
@@ -47,12 +48,13 @@
       <div class="w-full">
         <label
           for="non_pathological_history"
-          class="block mb-2 text-sm font-semibold"
-          >Antecedentes Personales No Patológicos</label
+          class="block mb-2 text-sm font-semibold uppercase"
+          >Antecedentes Personales No Patológicos <span class="text-red-500">*</span></label
         >
         <textarea
+          name="apnp"
           id="non_pathological_history"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
           name="apnp"
         ></textarea>
@@ -62,12 +64,13 @@
       <div class="w-full">
         <label
           for="pathological_history"
-          class="block mb-2 text-sm font-semibold"
-          >Antecedentes Personales Patológicos</label
+          class="block mb-2 text-sm font-semibold uppercase"
+          >Antecedentes Personales Patológicos <span class="text-red-500">*</span></label
         >
         <textarea
+          name="app"
           id="pathological_history"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
           name="app"
         ></textarea>
@@ -75,12 +78,13 @@
 
       {% comment %} Antecedentes Gineco Obstetricos {% endcomment %}
       <div class="w-full">
-        <label for="obstetric_history" class="block mb-2 text-sm font-semibold"
-          >Antecedentes Gineco-Obstétricos</label
+        <label for="obstetric_history" class="block mb-2 text-sm font-semibold uppercase"
+          >Antecedentes Gineco-Obstétricos <span class="text-red-500">*</span></label
         >
         <textarea
+          name="ago"
           id="obstetric_history"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
           name="ago"
         ></textarea>
