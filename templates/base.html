@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Medical 360 {% block titulo %}{%endblock%}</title>
-
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,9 +21,10 @@
 
     {% tailwind_css %}
   </head>
-  <body class="bg-background">
+  <body class="bg-white">
     {% block content %} {% endblock %}
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/formularios.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script type="text/javascript" src="node_modules/flowbite/dist/flowbite.min.js"></script> -->

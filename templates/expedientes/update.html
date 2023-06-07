@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-<section class="lg:px-0 min-h-screen">
+<section class="lg:px-0">
   <!-- ========================================
     AQUI VA EL NAVBAR
  ======================================== -->
@@ -9,13 +9,13 @@
   <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
     <div class="lg:container lg:mx-auto">
       <h1 class="uppercase font-semibold text-main text-xl">
-        Nuevo Expediente
+        Actualizar Expediente
       </h1>
-      <p>Registra un nuevo expediente aquí.</p>
+      <p>Actualiza el expediente aquí.</p>
     </div>
   </div>
 
-  <div class="py-10 bg-white md:px-6">
+  <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
     <div id="botonera" class="flex lg:container lg:mx-auto border-b-2 border-main shadow-sm">
       <button id="btn_ficha_identificacion" class="py-2 px-4 rounded-t-lg border-gray-200 bg-background font-bold"
         type="button">Ficha de Identificación</button>
@@ -26,8 +26,6 @@
         type="button">Exploración Física</button>
       <button id="btn_examenes_complementarios" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white"
         type="button">Exámenes complementarios</button>
-        <button id="btn_consultas" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white"
-        type="button">Consultas</button>
     </div>
     <!-- ========================================
        Formularios
@@ -51,10 +49,6 @@
 
     <div id="form_examenes_complementarios" class="formulario" style="display: none;">
       {% include "expedientes/forms/examenes_complementarios.html" %}
-    </div>
-
-    <div id="form_consultas" class="formulario" style="display: none;">
-      {% include "expedientes/forms/consultas.html" %}
     </div>
 
   </div>

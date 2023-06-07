@@ -3,62 +3,71 @@
 <body>
     <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion' %}" method="post">
       
-      {% if msg_ficha_success %}
-      <script>
-        // Obtener el formulario
-        let formulario = document.getElementById("form_ficha_identificacion");
-      
-        // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
-        formulario.addEventListener("submit", function(event) {
-          event.preventDefault();
-      
-          // Mostrar una alerta SweetAlert2 con el mensaje de error
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '{{ msg_ficha_error }}',
-          });
-        });
-      </script>
-      {% endif %}
-
       {% if msg_ficha_error %}
         <script>
-          
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-          
-          Toast.fire({
-            icon: 'success',
-            title: 'Signed in successfully'
-          })
+          // Obtener el formulario
+          let formulario = document.getElementById("form_ficha_identificacion");
+        
+          // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
+          formulario.addEventListener("submit", function(event) {
+            event.preventDefault();
+        
+            // Mostrar una alerta SweetAlert2 con el mensaje de error
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: '{{ msg_ficha_error }}',
+            });
+          });
         </script>
       {% endif %}
 
-      <h1 class="text-xl font-bold text-main">Ficha de Identificación</h1>
+      {% if msg_ficha_success %}
+        <script>
+          // Obtener el formulario
+          let formulario = document.getElementById("form_ficha_identificacion");
+
+          // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
+          formulario.addEventListener("submit", function(event) {
+            event.preventDefault();
+        
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            
+            Toast.fire({
+              icon: 'success',
+              title: '{{ msg_ficha_success }}'
+            })
+
+            
+          });
+        </script>
+      {% endif %}
+
+      <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
         <div class="w-full flex gap-4">
           <div class="w-6/12">
-            <label for="name" class="block mb-2 text-sm font-semibold">Nombre(s)</label>
+            <label for="name" class="block mb-2 text-sm font-semibold uppercase">Nombre(s) <span class="text-red-500">*</span></label>
             <input id="name" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
           </div>
   
           <div class="w-3/12">
-            <label for="p_lastname" class="block mb-2 text-sm font-semibold">Apellido Paterno</label>
+            <label for="p_lastname" class="block mb-2 text-sm font-semibold uppercase">Apellido Paterno <span class="text-red-500">*</span></label>
             <input id="p_lastname" name="apellido_pat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido paterno">
           </div>
   
           <div class="w-3/12">
-            <label for="m_lastname" class="block mb-2 text-sm font-semibold">Apellido Materno</label>
+            <label for="m_lastname" class="block mb-2 text-sm font-semibold uppercase">Apellido Materno <span class="text-red-500">*</span></label>
             <input id="m_lastname" name="apellido_mat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido materno">
           </div>
           
@@ -68,7 +77,7 @@
         <div class="w-full flex gap-4">
           {% comment %} Genero {% endcomment %}
           <div class="w-4/12 md:w-4/12">
-            <label for="gender" class="block mb-2 text-sm font-semibold">Género</label>
+            <label for="gender" class="block mb-2 text-sm font-semibold uppercase">Género <span class="text-red-500">*</span></label>
             <ul id="gender" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
               <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                   <div class="flex items-center pl-3">
@@ -87,19 +96,19 @@
   
           {% comment %} Fecha de Nacimiento {% endcomment %}
           <div class="w-3/12">
-            <label for="fecha_nacimiento" class="block mb-2 text-sm font-semibold">Fecha de nacimiento</label>
+            <label for="fecha_nacimiento" class="block mb-2 text-sm font-semibold uppercase">Fecha de nacimiento <span class="text-red-500">*</span></label>
             <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="uppercase w-full border-none rounded-md bg-white shadow-sm" onchange="calcularEdad()">
           </div>
   
           {% comment %} Edad {% endcomment %}
           <div class="w-2/12 md:w-3/12">
-            <label for="edad" class="block mb-2 text-sm font-semibold">Edad</label>
+            <label for="edad" class="block mb-2 text-sm font-semibold uppercase">Edad</label>
             <input id="edad" name="edad" class="uppercase w-full border-none rounded-md bg-gray-100 shadow-sm" type="text" disabled>
           </div>
   
           {% comment %} Estado Civil {% endcomment %}
           <div class="w-3/12">
-            <label for="civil_status" class="block mb-2 text-sm font-semibold">Estado Civil</label>
+            <label for="civil_status" class="block mb-2 text-sm font-semibold uppercase">Estado Civil <span class="text-red-500">*</span></label>
             <select id="civil_status" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="">Selecciona uno</option>
               <option value="soltero">SOLTERO</option>
@@ -116,12 +125,12 @@
         <div class="w-full flex gap-4">
           {% comment %} Nacionalidad {% endcomment %}
           <div class="w-3/12">
-            <label for="nacionality" class="block mb-2 text-sm font-semibold">Nacionalidad</label>
+            <label for="nacionality" class="block mb-2 text-sm font-semibold uppercase">Nacionalidad</label>
             <input id="nacionality" name="nacionalidad" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano">
           </div>
           {% comment %} Grupo y RH {% endcomment %}
           <div class="w-3/12">
-            <label for="group_rh" class="block mb-2 text-sm font-semibold">Grupo y RH</label>
+            <label for="group_rh" class="block mb-2 text-sm font-semibold uppercase">Grupo y RH <span class="text-red-500">*</span></label>
             <select id="group_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="">SELECCIONA UNO</option>
               <option value="A+">A+</option>
@@ -137,7 +146,7 @@
           </div>
           {% comment %} Escolaridad {% endcomment %}
           <div class="w-3/12">
-            <label for="scholarship" class="block mb-2 text-sm font-semibold">Escolaridad</label>
+            <label for="scholarship" class="block mb-2 text-sm font-semibold uppercase">Escolaridad</label>
             <select id="scholarship" name="escolaridad" class="uppercase w-full border-none rounded-md bg-white shadow-sm">
               <option value="">Selecciona uno</option>
               <option value="ninguna">Ninguna</option>
@@ -156,7 +165,7 @@
           </div>
           {% comment %} Ocupacion {% endcomment %}
           <div class="w-3/12">
-            <label for="occupation" class="block mb-2 text-sm font-semibold">Ocupación</label>
+            <label for="occupation" class="block mb-2 text-sm font-semibold uppercase">Ocupación</label>
             <input id="occupation" name="ocupacion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador">
           </div>
   
@@ -166,17 +175,17 @@
         <div class="w-full flex gap-4">
           {% comment %} Direccion {% endcomment %}
           <div class="w-6/12">
-            <label for="address" class="block mb-2 text-sm font-semibold">Dirección</label>
+            <label for="address" class="block mb-2 text-sm font-semibold uppercase">Dirección</label>
             <input id="address" name="direccion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente">
           </div>
           {% comment %} Telefono {% endcomment %}
           <div class="w-3/12">
-            <label for="phone" class="block mb-2 text-sm font-semibold">Teléfono Personal</label>
+            <label for="phone" class="block mb-2 text-sm font-semibold uppercase">Teléfono Personal</label>
             <input id="phone" name="telefono_personal" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000">
           </div>
           {% comment %} Religion {% endcomment %}
           <div class="w-3/12">
-            <label for="religion" class="block mb-2 text-sm font-semibold">Religión</label>
+            <label for="religion" class="block mb-2 text-sm font-semibold uppercase">Religión</label>
             <input id="religion" name="religion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Católico">
           </div>
         </div>
@@ -185,25 +194,25 @@
         <div class="w-full flex gap-4">
           {% comment %} Curp {% endcomment %}
           <div class="w-3/12">
-            <label for="curp" class="block mb-2 text-sm font-semibold">Curp</label>
+            <label for="curp" class="block mb-2 text-sm font-semibold uppercase">Curp</label>
             <input id="curp" name="curp" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el CURP del paciente">
           </div>
 
           {% comment %} Empleador {% endcomment %}
           <div class="w-3/12">
-            <label for="empleador" class="block mb-2 text-sm font-semibold">Empleador</label>
+            <label for="empleador" class="block mb-2 text-sm font-semibold uppercase">Empleador</label>
             <input id="empleador" name="empleador" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el empleador del paciente">
           </div>
 
           {% comment %} Nombre Contacdo de Emergencia {% endcomment %}
           <div class="w-3/12">
-            <label for="nombre_contacto_emergencia" class="block mb-2 text-sm font-semibold">Contacto de emergencia (Nombre)</label>
+            <label for="nombre_contacto_emergencia" class="block mb-2 text-sm font-semibold uppercase truncate">Nombre (Contacto de emergencia)</label>
             <input id="nombre_contacto_emergencia" name="nombre_contacto_emergencia" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el nombre del contacto">
           </div>
 
           {% comment %} Numero Contacdo de Emergencia {% endcomment %}
           <div class="w-3/12">
-            <label for="telefono_contacto_emergencia" class="block mb-2 text-sm font-semibold">Contacto de emergencia (Teléfono)</label>
+            <label for="telefono_contacto_emergencia" class="block mb-2 text-sm font-semibold uppercase truncate">Teléfono (Contacto de emergencia)</label>
             <input id="telefono_contacto_emergencia" name="telefono_contacto_emergencia" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Escriba el teléfono del contacto">
           </div>
         
@@ -212,13 +221,13 @@
           
         {% comment %} Alergias {% endcomment %}
         <div class="w-full">
-          <label for="alergias" class="block mb-2 text-sm font-semibold">Alergias</label>
-          <textarea id="alergias" name="alergias" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba las alergias del paciente"></textarea>
+          <label for="alergias" class="block mb-2 text-sm font-semibold uppercase">Alergias</label>
+          <textarea id="alergias" name="alergias" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba las alergias correspondientes"></textarea>
         </div>
 
         {% comment %} Notas {% endcomment %}
         <div class="w-full">
-          <label for="notes_ficha" class="block mb-2 text-sm font-semibold">Notas</label>
+          <label for="notes_ficha" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
           <textarea id="notes_ficha" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
         </div>
   
@@ -227,7 +236,7 @@
         {% comment %} Botones de formulario {% endcomment %}
         <div class="flex justify-center gap-10 mt-20">
           <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
-          <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+          <button id="submit_ficha" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
         </div>
       </form>
 </body>

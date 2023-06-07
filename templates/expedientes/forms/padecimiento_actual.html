@@ -5,15 +5,16 @@
       id="form_padecimiento_actual"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
     >
-    <h1 class="text-xl font-bold text-main">Padecimientos Actuales</h1>
+    <h1 class="text-xl font-bold text-main uppercase">Padecimientos Actuales</h1>
       {% comment %} Padecimiento Actual {% endcomment %}
       <div class="w-full">
-        <label for="current_condition" class="block mb-2 text-sm font-semibold"
-          >Padecimiento Actual</label
+        <label for="current_condition" class="block mb-2 text-sm font-semibold uppercase"
+          >Padecimiento Actual <span class="text-red-500">*</span></label
         >
         <textarea
+          name="padecimiento_actual"
           id="current_condition"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+          class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
           placeholder="Escriba el padecimiento actual"
         ></textarea>
       </div>
@@ -22,95 +23,90 @@
          Interrogativo por aparatos y sistemas
       ======================================== -->
       <div class="w-full space-y-8">
-        <label class="block mb-4 text-sm font-semibold"
+        <label class="block mb-4 font-semibold uppercase"
           >Interrogativo por Aparatos y Sistemas</label
         >
         {% comment %} Piel y Tegumentos {% endcomment %}
         <div class="w-full">
-          <label for="skin" class="block mb-2 text-sm font-semibold"
-            >Piel y Tegumentos</label
+          <label for="skin" class="block mb-2 text-sm font-semibold uppercase"
+            >Piel y Tegumentos <span class="text-red-500">*</span></label
           >
           <textarea
+            name="piel_tegumentos"
             id="skin"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"
           ></textarea>
         </div>
 
-        {% comment %} Cabeza {% endcomment %}
+        {% comment %} Cabeza y Cuello {% endcomment %}
         <div class="w-full">
-          <label for="head" class="block mb-2 text-sm font-semibold"
-            >Cabeza</label
+          <label for="head_neck" class="block mb-2 text-sm font-semibold uppercase"
+            >Cabeza y Cuello <span class="text-red-500">*</span></label
           >
           <textarea
-            id="head"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm"
-            placeholder="Escriba los interrogativos correspondientes"
-          ></textarea>
-        </div>
-
-        {% comment %} Cuello {% endcomment %}
-        <div class="w-full">
-          <label for="neck" class="block mb-2 text-sm font-semibold"
-            >Cuello</label
-          >
-          <textarea
-            id="neck"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm"
+            name="cabeza_cuello"
+            id="head_neck"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"
           ></textarea>
         </div>
 
         {% comment %} Torax {% endcomment %}
         <div class="w-full">
-          <label for="thorax" class="block mb-2 text-sm font-semibold">Torax</label>
+          <label for="thorax" class="block mb-2 text-sm font-semibold uppercase">Torax <span class="text-red-500">*</span></label>
           <textarea
-          id="thorax"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
-          placeholder="Escriba los interrogativos correspondientes"></textarea>
+            name="torax"
+            id="thorax"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
+            placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>
 
         {% comment %} Abdomen {% endcomment %}
         <div class="w-full">
-          <label for="abdomen" class="block mb-2 text-sm font-semibold">Abdomen</label>
+          <label for="abdomen" class="block mb-2 text-sm font-semibold uppercase">Abdomen <span class="text-red-500">*</span></label>
           <textarea
-          id="abdomen"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
-          placeholder="Escriba los interrogativos correspondientes"></textarea>
+            name="abdomen"
+            id="abdomen"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
+            placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>
 
         {% comment %} Genitourinario {% endcomment %}
         <div class="w-full">
-          <label for="genitourinary" class="block mb-2 text-sm font-semibold">Genitourinario</label>
+          <label for="genitourinary" class="block mb-2 text-sm font-semibold uppercase">Genitourinario <span class="text-red-500">*</span></label>
           <textarea
-          id="genitourinary"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
-          placeholder="Escriba los interrogativos correspondientes"></textarea>
+            name="genitourinario"
+            id="genitourinary"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
+            placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>
 
         {% comment %} Musculo Esqueletico y Extremidades {% endcomment %}
         <div class="w-full">
-          <label for="skeletal_muscle_and_extremities" class="block mb-2 text-sm font-semibold">Músculo Esquelético y Extremidades</label>
+          <label for="skeletal_muscle_and_extremities" class="block mb-2 text-sm font-semibold uppercase">Músculo Esquelético y Extremidades <span class="text-red-500">*</span></label>
           <textarea
-          id="skeletal_muscle_and_extremities"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
-          placeholder="Escriba los interrogativos correspondientes"></textarea>
+            name="musculo_extremidades"
+            id="skeletal_muscle_and_extremities"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
+            placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>   
         
         {% comment %} Neurologico {% endcomment %}
         <div class="w-full">
-          <label for="neurological" class="block mb-2 text-sm font-semibold">Neurológico</label>
+          <label for="neurological" class="block mb-2 text-sm font-semibold uppercase">Neurológico <span class="text-red-500">*</span></label>
           <textarea
-          id="neurological"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm"
-          placeholder="Escriba los interrogativos correspondientes"></textarea>
+            name="neurologico"
+            id="neurological"
+            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
+            placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>
       </div>
 
         {% comment %} Notas {% endcomment %}
         <div class="w-full">
-          <label for="notes_padecimientos" class="block mb-2 text-sm font-semibold">Notas</label>
-          <textarea id="notes_padecimientos" class="resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+          <label for="notes_padecimientos" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
+          <textarea name="notas" id="notes_padecimientos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
         </div>
         
         {% comment %} Botones de formulario {% endcomment %}
