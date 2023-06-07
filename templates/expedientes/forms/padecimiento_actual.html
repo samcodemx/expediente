@@ -4,8 +4,31 @@
     <form
       id="form_padecimiento_actual"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+      action="{% url 'medical:guarda_padecimiento' %}"
+      method="post"
     >
+    
+        {% if error_msg_padecimiento %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ error_msg_padecimiento }}
+    </div>
+    {% endif %}
+
+    {% if success_msg_padecimiento %}
+    <div class="alert alert-success" style="color: green;">
+        {{ success_msg_padecimiento }}
+    </div>
+{% endif %}
+
+
+    {% if paciente %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+    </div>
+    {% endif %}
+    
     <h1 class="text-xl font-bold text-main uppercase">Padecimientos Actuales</h1>
+
       {% comment %} Padecimiento Actual {% endcomment %}
       <div class="w-full">
         <label for="current_condition" class="block mb-2 text-sm font-semibold uppercase"
@@ -16,6 +39,7 @@
           id="current_condition"
           class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
           placeholder="Escriba el padecimiento actual"
+          name="padecimiento_actual"
         ></textarea>
       </div>
 
@@ -36,6 +60,7 @@
             id="skin"
             class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"
+            name="piel_tegumentos"
           ></textarea>
         </div>
 
@@ -49,6 +74,7 @@
             id="head_neck"
             class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"
+            name="cabeza_cuello"
           ></textarea>
         </div>
 
@@ -109,6 +135,9 @@
           <textarea name="notas" id="notes_padecimientos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
         </div>
         
+        {% csrf_token %}
+        <!-- Campo oculto para almacenar el ID del paciente -->
+        <input type="hidden" name="paciente_id" value="{{ paciente.id }}">
         {% comment %} Botones de formulario {% endcomment %}
         <div class="flex justify-center gap-10 mt-20">
           <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>

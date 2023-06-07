@@ -1,0 +1,13 @@
+# Ignore Python bytecode files
+__pycache__/
+
+# Ignore compiled Python modules
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pyzw
+
+# Ignore virtual environment directory
+venv/

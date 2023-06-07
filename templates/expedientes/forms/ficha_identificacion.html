@@ -1,57 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
-    <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion' %}" method="post">
+    <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion'%}" method="post">
       
-      {% if msg_ficha_error %}
-        <script>
-          // Obtener el formulario
-          let formulario = document.getElementById("form_ficha_identificacion");
-        
-          // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
-          formulario.addEventListener("submit", function(event) {
-            event.preventDefault();
-        
-            // Mostrar una alerta SweetAlert2 con el mensaje de error
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: '{{ msg_ficha_error }}',
-            });
-          });
-        </script>
+      {% if error_msg_ficha %}
+      <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+        {{ error_msg_ficha }}
+      </div>
       {% endif %}
-
-      {% if msg_ficha_success %}
-        <script>
-          // Obtener el formulario
-          let formulario = document.getElementById("form_ficha_identificacion");
-
-          // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
-          formulario.addEventListener("submit", function(event) {
-            event.preventDefault();
-        
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-            })
-            
-            Toast.fire({
-              icon: 'success',
-              title: '{{ msg_ficha_success }}'
-            })
-
-            
-          });
-        </script>
-      {% endif %}
+  
+      {% if success_msg_ficha %}
+      <div class="alert alert-success" style="color: green;">
+          {{ success_msg_ficha }}
+      </div>
+  {% endif %}
+    
 
       <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
@@ -81,13 +44,13 @@
             <ul id="gender" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
               <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                   <div class="flex items-center pl-3">
-                      <input id="horizontal-list-radio-license" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+                      <input id="genero" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
                       <label for="horizontal-list-radio-license" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Masculino</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                   <div class="flex items-center pl-3">
-                      <input id="horizontal-list-radio-id" type="radio" value="F" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+                      <input id="genero" type="radio" value="F" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
                       <label for="horizontal-list-radio-id" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Femenino</label>
                   </div>
               </li>
@@ -111,11 +74,11 @@
             <label for="civil_status" class="block mb-2 text-sm font-semibold uppercase">Estado Civil <span class="text-red-500">*</span></label>
             <select id="civil_status" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="">Selecciona uno</option>
-              <option value="soltero">SOLTERO</option>
-              <option value="casado">CASADO</option>
-              <option value="union_libre">UNIÓN LIBRE</option>
-              <option value="divorciado">Divorciado</option>
-              <option value="viudo">Viudo</option>
+              <option value="SOLTERO">SOLTERO</option>
+              <option value="CASADO">CASADO</option>
+              <option value="UNION_LIBRE">UNIÓN LIBRE</option>
+              <option value="DIVORCIADO">DIVORCIADO</option>
+              <option value="VIUDO">VIUDO</option>
             </select>
           </div>
   
@@ -132,7 +95,7 @@
           <div class="w-3/12">
             <label for="group_rh" class="block mb-2 text-sm font-semibold uppercase">Grupo y RH <span class="text-red-500">*</span></label>
             <select id="group_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
-              <option value="">SELECCIONA UNO</option>
+              <option value="DESC">DESCONOCIDO</option>
               <option value="A+">A+</option>
               <option value="B+">B+</option>
               <option value="O+">O+</option>
@@ -141,26 +104,25 @@
               <option value="B-">B-</option>
               <option value="O-">O-</option>
               <option value="AB-">AB-</option>
-              <option value="DESC">DESCONOCIDO</option>
             </select>
           </div>
           {% comment %} Escolaridad {% endcomment %}
           <div class="w-3/12">
             <label for="scholarship" class="block mb-2 text-sm font-semibold uppercase">Escolaridad</label>
             <select id="scholarship" name="escolaridad" class="uppercase w-full border-none rounded-md bg-white shadow-sm">
-              <option value="">Selecciona uno</option>
-              <option value="ninguna">Ninguna</option>
-              <option value="primaria">Primaria</option>
-              <option value="primaria_t">Primaria Trunca</option>
-              <option value="secundaria">Secundaria</option>
-              <option value="secundaria_t">Secundaria Trunca</option>
-              <option value="preparatoria">Preparatoria</option>
-              <option value="preparatoria_t">Preparatoria Trunca</option>
-              <option value="tecnico">Carrera Técnica</option>
-              <option value="tecnico_t">Carrera Técnica Trunca</option>
-              <option value="licenciatura">Licenciatura</option>
-              <option value="licenciatura_t">Licenciatura Trunca</option>
-              <option value="superior">Superior</option>
+              <option value="">SELECCIONA UNO</option>
+              <option value="NINGUNA">NINGUNA</option>
+              <option value="PRIMARIA">PRIMARIA</option>
+              <option value="PRIMARIA_T">PRIMARIA TRUNCA</option>
+              <option value="SECUNDARIA">SECUNDARIA</option>
+              <option value="SECUNDARIA_T">SECUNDARIA TRUNCA</option>
+              <option value="PREPARATORIA">PREPARATORIA</option>
+              <option value="PREPARATORIA_T">PREPARATORIA TRUNCA</option>
+              <option value="TECNICO">CARRERA TÉCNICA</option>
+              <option value="TECNICO_T">CARRERA TÉCNICA TRUNCA</option>
+              <option value="LICENCIATURA">LICENCIATURA</option>
+              <option value="LICENCIATURA_T">LICENCIATURA TRUNCA</option>
+              <option value="SUPERIOR">SUPERIOR</option>              
             </select>
           </div>
           {% comment %} Ocupacion {% endcomment %}
@@ -221,7 +183,7 @@
           
         {% comment %} Alergias {% endcomment %}
         <div class="w-full">
-          <label for="alergias" class="block mb-2 text-sm font-semibold uppercase">Alergias</label>
+          <label for="alergias" class="block mb-2 text-sm font-semibold uppercase" >Alergias <span class="text-red-500">*</span></label>
           <textarea id="alergias" name="alergias" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba las alergias correspondientes"></textarea>
         </div>
 

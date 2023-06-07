@@ -70,15 +70,18 @@
             <!-- Empresa -->
             <div class="md:flex gap-2">
               <span class="font-bold">Empresa:</span>
-              <p>{{paciente.empleador}}</p>
+              {% if paciente.empleador %}
+                <p>{{paciente.empleador}}</p>
+              {% else %}
+                <p>NA</p>
+              {% endif %}
+              <p></p>
             </div>
             <!-- Doctor -->
             <div class="md:flex gap-2">
-              <span class="font-bold">Doctor:</span>
-              {% if paciente.historias_clinicas %}
-                {% for historia_clinica in paciente.historias_clinicas %}
-                  <p>{{ historia_clinica.medico }}</p>
-                {% endfor %}
+              <span class="font-bold">Medico:</span>
+              {% if paciente.antecedentes %}
+                  <p>{{ paciente.antecedentes.medico }}</p>
               {% else %}
                 <p>No se ha iniciado historia clínica</p>
               {% endif %}
