@@ -1,57 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
-    <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion' %}" method="post">
+    <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion'%}" method="post">
       
-      {% if msg_ficha_error %}
-        <script>
-          // Obtener el formulario
-          let formulario = document.getElementById("form_ficha_identificacion");
-        
-          // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
-          formulario.addEventListener("submit", function(event) {
-            event.preventDefault();
-        
-            // Mostrar una alerta SweetAlert2 con el mensaje de error
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: '{{ msg_ficha_error }}',
-            });
-          });
-        </script>
+      {% if error_msg_ficha %}
+      <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+        {{ error_msg_ficha }}
+      </div>
       {% endif %}
-
-      {% if msg_ficha_success %}
-        <script>
-          // Obtener el formulario
-          let formulario = document.getElementById("form_ficha_identificacion");
-
-          // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
-          formulario.addEventListener("submit", function(event) {
-            event.preventDefault();
-        
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-            })
-            
-            Toast.fire({
-              icon: 'success',
-              title: '{{ msg_ficha_success }}'
-            })
-
-            
-          });
-        </script>
-      {% endif %}
+  
+      {% if success_msg_ficha %}
+      <div class="alert alert-success" style="color: green;">
+          {{ success_msg_ficha }}
+      </div>
+  {% endif %}
+    
 
       <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
@@ -220,7 +183,7 @@
           
         {% comment %} Alergias {% endcomment %}
         <div class="w-full">
-          <label for="alergias" class="block mb-2 text-sm font-semibold uppercase">Alergias</label>
+          <label for="alergias" class="block mb-2 text-sm font-semibold uppercase" >Alergias <span class="text-red-500">*</span></label>
           <textarea id="alergias" name="alergias" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba las alergias correspondientes"></textarea>
         </div>
 
