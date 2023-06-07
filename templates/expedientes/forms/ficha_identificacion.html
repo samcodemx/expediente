@@ -5,13 +5,15 @@
       
       {% if error_msg_ficha %}
       <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-        {{ error_msg_ficha }}
+        {% comment %} {{ error_msg_ficha }} {% endcomment %}
+        <p>Rellenar todos los campos requeridos (*)</p>
       </div>
       {% endif %}
   
       {% if success_msg_ficha %}
-      <div class="alert alert-success" style="color: green;">
-          {{ success_msg_ficha }}
+      <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
+        {% comment %} {{ error_msg_ficha }} {% endcomment %}
+        <p>Datos enviados correctamente</p>
       </div>
   {% endif %}
     
@@ -19,6 +21,7 @@
       <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
         <div class="w-full flex gap-4">
+
           <div class="w-6/12">
             <label for="name" class="block mb-2 text-sm font-semibold uppercase">Nombre(s) <span class="text-red-500">*</span></label>
             <input id="name" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
