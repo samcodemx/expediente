@@ -108,7 +108,7 @@ class Antecedentes(models.Model):
     ahf = models.TextField()
     apnp = models.TextField()
     app = models.TextField()
-    ago = models.TextField()
+    ago = models.TextField(blank=True, null=True)
     notas = models.TextField(blank=True, null=True)
 
     def __str__(self):
