@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from .forms import LoginForm
-from .models import Paciente, HistoriaClinica, Antecedentes
+from .models import Paciente, Antecedentes, Medico
 from datetime import datetime, date
+from django.contrib import messages
 
 
 # Create your views here.
@@ -37,22 +38,48 @@ def logout_view(request):
 @login_required
 def home_view(request):
     pacientes = Paciente.objects.all()
+    
     for paciente in pacientes:
-        paciente.historias_clinicas = HistoriaClinica.objects.filter(paciente=paciente)
+        try:
+            paciente.antecedentes = Antecedentes.objects.get(paciente=paciente)
+        except Antecedentes.DoesNotExist:
+            paciente.antecedentes = None
+    
     return render(request, 'home.html', {'pacientes': pacientes})
 
 @login_required
 def createExp_view(request):
     return render(request, 'expedientes/create.html' )
 
+def validar_campos_requeridos(request, campos_requeridos):
+    for campo in campos_requeridos:
+        if campo not in request.POST or not request.POST[campo]:
+            msg = f"Falta el campo requerido: {campo}"
+            return msg
+    return None
+
+def validar_datos(datos):
+    try:
+        datos.full_clean()
+    except ValidationError as e:
+        error_messages = [f"{field}: {str(error).strip('[]')}" for field, error_list in e.error_dict.items() for error in error_list]
+        error_message = '\n'.join(error_messages)
+        return error_message
+    return None
+
 @login_required
 def guarda_ficha_identificacion_view(request):
     if request.method == 'POST':
+        campos_requeridos = ['nombre', 'apellido_pat', 'apellido_mat', 'fecha_nacimiento', 'genero', 'grupo_rh', 'alergias']
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'error_msg': error_msg})
+
         nombre = request.POST.get('nombre').upper()
         apellido_pat = request.POST.get('apellido_pat').upper()
         apellido_mat = request.POST.get('apellido_mat').upper()
         fecha_nacimiento = request.POST.get('fecha_nacimiento')
-        genero = request.POST.get('genero').upper()
+        genero = request.POST.get('genero')
         estado_civil = request.POST.get('estado_civil').upper()
         grupo_rh = request.POST.get('grupo_rh').upper()
         alergias = request.POST.get('alergias').upper()
@@ -87,64 +114,51 @@ def guarda_ficha_identificacion_view(request):
             telefono_personal=telefono_personal,
             nombre_contacto_emergencia=nombre_contacto_emergencia,
             telefono_contacto_emergencia=telefono_contacto_emergencia,
-            notas=notas
+            notas=notas,
+            fecha_alta=date.today(),
         )
-        try:
-            ficha.full_clean()  # Validación de campos del modelo
-        except ValidationError as e:
-            print(e)
-            msg_ficha_error= 'Favor de llenar todos los campos obligatorios (*)'
-            return render(request, 'expedientes/create.html', {'msg_ficha_error': msg_ficha_error})
+
+        error_msg = validar_datos(ficha)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'error_msg': error_msg})
 
         ficha.save()
-
-        historia_clinica = HistoriaClinica(
-            paciente=ficha,
-            medico=request.user.medico,
-            fecha=date.today(),
-        )
-
-        # Guardar el objeto HistoriaClinica en la base de datos
-        historia_clinica.save()
-
-        # Obtener el ID de la historia clínica
-        historia_clinica_id = historia_clinica.id
-
-        # Mensaje de éxito
-        msg_ficha_success = 'Datos guardados con éxito'
-
-        # Redireccionar a la vista "guarda_ficha_identificacion" con el ID de la historia clínica y el mensaje de éxito
-        return redirect('guarda_antecedentes', historia_clinica_id=historia_clinica_id, msg_ficha_success=msg_ficha_success)
-
-    return render(request, 'expedientes/create.html')  # Renderiza nuevamente el formulario en caso de una solicitud GET
+        # Obtener el ID del paciente
+        paciente_id = ficha.id
+        messages.success(request, 'Datos guardados con éxito')
+        return redirect('guarda_antecedentes', paciente_id=paciente_id)
+    
+    return render(request, 'expedientes/create.html')
 
 @login_required
-def guarda_antecedentes_view(request):
+def guarda_antecedentes_view(request, paciente_id):
     if request.method == 'POST':
+        campos_requeridos = ['ahf', 'apnp', 'app']
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'nombre_del_template.html', {'error_msg': error_msg})
+
         ahf = request.POST.get('ahf')
         apnp = request.POST.get('apnp')
         app = request.POST.get('app')
         ago = request.POST.get('ago')
-        notas = request.POST.get('notas')
-        historia_clinica_id = request.POST.get('historia_clinica_id')
 
-        # Obtener la instancia de HistoriaClinica y Medico
-        #historia_clinica = HistoriaClinica.objects.get(id=historia_clinica_id)
-        medico = request.user.medico
-
-        # Crear instancia de Antecedentes
         antecedentes = Antecedentes(
-            historia_clinica=historia_clinica_id,
-            medico=medico,
-            fecha=date.now(),
+            paciente_id=paciente_id,
+            medico=request.user.medico,
+            fecha=date.today(),
             ahf=ahf,
             apnp=apnp,
             app=app,
-            ago=ago,
-            notas=notas
+            ago=ago
         )
+
+        error_msg = validar_datos(antecedentes)
+        if error_message:
+            return render(request, 'expedientes/create.html', {'error_msg': error_msg})
+
         antecedentes.save()
 
-        return redirect('guarda_antecedentes', {'msg_ficha_success': 'Datos guardados con éxito'})
+        return redirect('home')
 
     return render(request, 'expedientes/create.html')

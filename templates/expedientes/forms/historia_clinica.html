@@ -4,13 +4,13 @@
     <form
       id="form_historia_clinica"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
-      action="{% url 'medical:guarda_antecedentes' %}"
+      action=""
       method="post"
     >
 
-    {% if msg %}
+    {% if error_msg %}
     <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-      {{ msg }}
+      {{ error_msg }}
     </div>
     {% endif %}
 

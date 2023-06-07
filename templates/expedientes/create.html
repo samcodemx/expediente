@@ -62,14 +62,17 @@
     let ahora = new Date();
 
     let edad = ahora.getFullYear() - fechaNacimiento.getFullYear();
+    let meses = ahora.getMonth() - fechaNacimiento.getMonth();
 
     // Verificar si aún no ha cumplido años
     if (ahora.getMonth() < fechaNacimiento.getMonth() ||
         (ahora.getMonth() == fechaNacimiento.getMonth() && ahora.getDate() < fechaNacimiento.getDate())) {
       edad--;
+      meses += 12;
     }
 
-    document.getElementById("edad").value = edad;
+    document.getElementById("edad").value = edad + " años y " + meses + " meses";
   }
 </script>
+
 {% endblock %}

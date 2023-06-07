@@ -1,49 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
-      
-      {% if msg_ficha_success %}
-      <script>
-        // Obtener el formulario
-        let formulario = document.getElementById("form_ficha_identificacion");
-      
-        // Agregar un controlador de eventos para prevenir la acción predeterminada del formulario
-        formulario.addEventListener("submit", function(event) {
-          event.preventDefault();
-      
-          // Mostrar una alerta SweetAlert2 con el mensaje de error
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '{{ msg_ficha_error }}',
-          });
-        });
-      </script>
-      {% endif %}
+      {% if error_msg %}
+        <h1>{{ error_msg }}</h1>
+        {% endif %}
 
-      {% if msg_ficha_error %}
-        <script>
-          
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-          
-          Toast.fire({
-            icon: 'success',
-            title: 'Signed in successfully'
-          })
-        </script>
-      {% endif %}
-
-  <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" method="post">
+        {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+  <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" method="POST" action="{% url 'medical:guarda_ficha_identificacion' %}">
       <h1 class="text-xl font-bold text-main">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
         <div class="w-full flex gap-4">
@@ -123,7 +92,7 @@
           <div class="w-3/12">
             <label for="group_rh" class="block mb-2 text-sm font-semibold">Grupo y RH</label>
             <select id="group_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
-              <option value="">SELECCIONA UNO</option>
+              <option value="DESC">DESCONOCIDO</option>
               <option value="A+">A+</option>
               <option value="B+">B+</option>
               <option value="O+">O+</option>
@@ -132,7 +101,6 @@
               <option value="B-">B-</option>
               <option value="O-">O-</option>
               <option value="AB-">AB-</option>
-              <option value="DESC">DESCONOCIDO</option>
             </select>
           </div>
           {% comment %} Escolaridad {% endcomment %}
