@@ -8,22 +8,9 @@
       method="post"
     >
 
-    {% if error_msg_antecedentes %}
+    {% if msg %}
     <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-      {{ error_msg_antecedentes }}
-    </div>
-    {% endif %}
-
-    {% if success_msg_antecedentes %}
-    <div class="alert alert-success" style="color: green;">
-        {{ success_msg_antecedentes }}
-    </div>
-{% endif %}
-
-
-    {% if paciente %}
-    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+      {{ msg }}
     </div>
     {% endif %}
 
@@ -90,8 +77,6 @@
 
         {% comment %} Botones de formulario {% endcomment %}
         {% csrf_token %}
-        <!-- Campo oculto para almacenar el ID del paciente -->
-        <input type="hidden" name="paciente_id" value="{{ paciente.id }}">
         <div class="flex justify-center gap-10 mt-20">
           <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
           <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>

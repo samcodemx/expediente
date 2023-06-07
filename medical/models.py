@@ -31,11 +31,11 @@ class Paciente(models.Model):
         ('F', 'Femenino'),
     ]
     ESTADO_CIVIL_CHOICES = [
-        ('SOLTERO', 'SOLTERO'),
-        ('CASADO', 'CASADO'),
-        ('UNION_LIBRE', 'UNION LIBRE'),
-        ('DIVORCIADO', 'DIVORCIADO'),
-        ('VIUDO', 'VIUDO'),
+        ('SOLTERO', 'Soltero'),
+        ('CASADO', 'Casado'),
+        ('UNION_LIBRE', 'Union libre'),
+        ('DIVORCIADO', 'Divorciado'),
+        ('VIUDO', 'Viudo'),
     ]
 
     GRUPO_RH_CHOICES = [
@@ -47,32 +47,32 @@ class Paciente(models.Model):
         ('B-', 'B-'),
         ('O-', 'O-'),
         ('AB-', 'AB-'),
-        ('DESC', 'DESCONOCIDO'),
+        ('DESC', 'Desconocido'),
     ]
 
     ESCOLARIDAD_CHOICES = [
-        ('NINGUNA', 'NINGUNA'),
-        ('PRIMARIA', 'PRIMARIA'),
-        ('PRIMARIA_T', 'PRIMARIA TRUNCA'),
-        ('SECUNDARIA', 'SECUNDARIA'),
-        ('SECUNDARIA_T', 'SECUNDARIA TRUNCA'),
-        ('PREPARATORIA', 'PREPARATORIA'),
-        ('PREPARATORIA_T', 'PREPARATORIA TRUNCA'),
-        ('TECNICO', 'CARRERA TECNICA'),
-        ('TECNICO_T', 'CARRERA TECNICA TRUNCA'),
-        ('LICENCIATURA', 'LICENCIATURA'),
-        ('LICENCIATURA_T', 'LICENCIATURA TRUNCA'),
-        ('SUPERIOR', 'SUPERIOR'),
-]
+        ('NINGUNA', 'Ninguna'),
+        ('PRIMARIA', 'Primaria'),
+        ('PRIMARIA_T', 'Primaria Trunca'),
+        ('SECUNDARIA', 'Secundaria'),
+        ('SECUNDARIA_T', 'Secundaria Trunca'),
+        ('PREPARATORIA', 'Preparatoria'),
+        ('PREPARATORIA_T', 'Preparatoria Trunca'),
+        ('TECNICO', 'Carrera Tecnica'),
+        ('TECNICO_T', 'Carrera Tecnica Trunca'),
+        ('LICENCIATURA', 'Licenciatura'),
+        ('LICENCIATURA_T', 'Licenciatura Trunca'),
+        ('SUPERIOR', 'Superior'),
+    ]
     
-    nombre = models.CharField(max_length=30)
-    apellido_pat = models.CharField(max_length=30)
-    apellido_mat = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=50)
+    apellido_pat = models.CharField(max_length=50)
+    apellido_mat = models.CharField(max_length=50)
     fecha_nacimiento = models.DateField()
     genero = models.CharField(max_length=10, choices=GENERO_CHOICES)
-    grupo_rh = models.CharField(max_length=4, choices=GRUPO_RH_CHOICES, default='DESC')
+    estado_civil = models.CharField(max_length=15, choices=ESTADO_CIVIL_CHOICES)
+    grupo_rh = models.CharField(max_length=4, choices=GRUPO_RH_CHOICES)
     alergias = models.CharField(max_length=30)
-    estado_civil = models.CharField(max_length=15, choices=ESTADO_CIVIL_CHOICES, blank=True, null=True)
     curp = models.CharField(max_length=18, blank=True, null=True)
     nacionalidad = models.CharField(max_length=20, blank=True, null=True)
     escolaridad = models.CharField(max_length=30, choices=ESCOLARIDAD_CHOICES, blank=True, null=True)
@@ -80,46 +80,45 @@ class Paciente(models.Model):
     direccion = models.CharField(max_length=200, blank=True, null=True)
     ocupacion = models.CharField(max_length=50, blank=True, null=True)
     empleador = models.CharField(max_length=100, blank=True, null=True)
-    telefono_personal = models.CharField(max_length=10, blank=True, null=True)
+    telefono_personal = models.CharField(max_length=50, blank=True, null=True)
     nombre_contacto_emergencia = models.CharField(max_length=100, blank=True, null=True)
-    telefono_contacto_emergencia = models.CharField(max_length=10, blank=True, null=True)
-    fecha_alta = models.DateField()
+    telefono_contacto_emergencia = models.CharField(max_length=20, blank=True, null=True)
     notas = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.nombre + ' ' + self.apellido_pat + ' ' + self.apellido_mat
 
-# class HistoriaClinica(models.Model):
-#     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-#     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
-#     fecha = models.DateField()
+class HistoriaClinica(models.Model):
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
+    fecha = models.DateField()
 
-#     def __str__(self):
-#         return str(self.paciente) + ' por ' + str(self.medico) + ' - ' + str(self.fecha)
+    def __str__(self):
+        return str(self.paciente) + ' por ' + str(self.medico) + ' - ' + str(self.fecha)
 
-#     class Meta:
-#             verbose_name = "Historia Clínica"
-#             verbose_name_plural = "1.Historias Clinicas"
+    class Meta:
+            verbose_name = "Historia Clínica"
+            verbose_name_plural = "1.Historias Clinicas"
 
 class Antecedentes(models.Model):
-    paciente = models.OneToOneField(Paciente, on_delete=models.CASCADE)
+    historia_clinica = models.ForeignKey(HistoriaClinica, on_delete=models.CASCADE)
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     fecha = models.DateField()
     ahf = models.TextField()
     apnp = models.TextField()
     app = models.TextField()
-    ago = models.TextField(blank=True, null=True)
+    ago = models.TextField()
     notas = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return "Antecedentes de " + str(self.paciente) + ' por ' + str(self.medico) + ' - ' + str(self.fecha)
+        return str(self.historia_clinica.paciente) + ' por ' + str(self.medico) + ' - ' + str(self.fecha)
     
     class Meta:
             verbose_name = "Antecedentes"
-            verbose_name_plural = "1.Antecedentes"
+            verbose_name_plural = "2.Antecedentes"
 
 class PadecimientoActual(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    historia_clinica = models.ForeignKey(HistoriaClinica, on_delete=models.CASCADE)
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     fecha = models.DateTimeField()
     padecimiento_actual = models.TextField()
@@ -133,14 +132,14 @@ class PadecimientoActual(models.Model):
     notas = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return "Padecimiento actual de " + str(self.paciente) + ' por ' + str(self.medico) + ' - ' + str(self.fecha)
+        return str(self.historia_clinica.paciente) + ' por ' + str(self.medico) + ' - ' + str(self.fecha)
 
     class Meta:
             verbose_name = "Padecimiento Actual"
-            verbose_name_plural = "2.Padecimientos Actuales"
+            verbose_name_plural = "3.Padecimientos Actuales"
 
 class ExploracionFisica(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    historia_clinica = models.ForeignKey(HistoriaClinica, on_delete=models.CASCADE)
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     fecha = models.DateTimeField()
     temperatura = models.DecimalField(max_digits=5, decimal_places=1)
@@ -163,11 +162,11 @@ class ExploracionFisica(models.Model):
     notas = models.TextField(blank=True, null=True)
 
     def __str__(self):
-       return "Exploracion de " + str(self.paciente)  + ' por ' + str(self.medico) + ' - ' + str(self.fecha)
+        return str(self.historia_clinica.paciente) + ' por ' + str(self.medico) + ' - ' + str(self.fecha)
 
     class Meta:
         verbose_name = "Exploracion Física"
-        verbose_name_plural = "3.Exploraciones Físicas"
+        verbose_name_plural = "4.Exploraciones Físicas"
 
 
 #Pendiente la implementacion de subida de archivos
@@ -194,4 +193,4 @@ class Consulta(models.Model):
 
     class Meta:
         verbose_name = "Consulta"
-        verbose_name_plural = "4.Consultas"
+        verbose_name_plural = "5.Consultas"
