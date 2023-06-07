@@ -1,9 +1,9 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <section class="lg:px-0">
- <!-- ========================================
+  <!-- ========================================
     AQUI VA EL NAVBAR
  ======================================== -->
- {% include "plantillas/navbar.html" %}
+  {% include "plantillas/navbar.html" %}
 
   <!-- Header -->
   <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
@@ -17,51 +17,28 @@
 
   <!-- Buscador y Boton para agregar un nuevo expediente -->
   <div class="py-10 md:px-6">
-    <div
-      class="lg:container lg:mx-auto flex justify-between gap-5 items-center"
-    >
+    <div class="lg:container lg:mx-auto flex justify-between gap-5 items-center">
       <!-- Barra de Busqueda -->
       <form class="w-full" method="post">
-        <label
-          for="default-search"
-          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-          >Search</label
-        >
+        <label for="default-search"
+          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">
-          <div
-            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-          >
-            <svg
-              aria-hidden="true"
-              class="w-5 h-5 text-gray-500 dark:text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              ></path>
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
-          <input
-            type="search"
-            id="default-search"
+          <input type="search" id="default-search"
             class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-main focus:border-main"
-            placeholder="Buscar expediente..."
-            required
-          />
+            placeholder="Buscar expediente..." required />
         </div>
       </form>
       <!-- Boton para agregar expediente nuevo -->
 
-        <a href="/create-file"><button
-          type="submit"
-          class="text-whitebg-main bg-main hover:bg-sky-800 transition-colors text-white font-medium rounded-lg text-sm px-8 py-4"
-        >
+      <a href="/create-file"><button type="submit"
+          class="text-whitebg-main bg-main hover:bg-sky-800 transition-colors text-white font-medium rounded-lg text-sm px-8 py-4">
           Nuevo
         </button></a>
     </div>
@@ -77,9 +54,7 @@
         <!-- Tarjeta -->
         {% if pacientes %}
         {% for paciente in pacientes %}
-        <div
-          class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm"
-        >
+        <div class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm">
           <!-- Datos del paciente -->
           <div>
             <!-- No. Expediente -->
@@ -95,15 +70,18 @@
             <!-- Empresa -->
             <div class="md:flex gap-2">
               <span class="font-bold">Empresa:</span>
-              <p>{{paciente.empleador}}</p>
+              {% if paciente.empleador %}
+                <p>{{paciente.empleador}}</p>
+              {% else %}
+                <p>NA</p>
+              {% endif %}
+              <p></p>
             </div>
             <!-- Doctor -->
             <div class="md:flex gap-2">
-              <span class="font-bold">Doctor:</span>
-              {% if paciente.historias_clinicas %}
-                {% for historia_clinica in paciente.historias_clinicas %}
-                  <p>{{ historia_clinica.medico }}</p>
-                {% endfor %}
+              <span class="font-bold">Medico:</span>
+              {% if paciente.antecedentes %}
+                  <p>{{ paciente.antecedentes.medico }}</p>
               {% else %}
                 <p>No se ha iniciado historia clínica</p>
               {% endif %}
@@ -111,29 +89,17 @@
           </div>
           <!-- Botones de la tarjeta -->
           <div class="flex gap-2">
-            <button
-              class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-blue-400"
-                ><i class="fas fa-file-alt"></i
-              ></span>
+            <button class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+              type="button">
+              <span class="group-hover:text-white text-blue-400"><i class="fas fa-file-alt"></i></span>
             </button>
-            <button
-              class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-yellow-300"
-                ><i class="fas fa-pen"></i
-              ></span>
+            <button class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+              type="button">
+              <span class="group-hover:text-white text-yellow-300"><i class="fas fa-pen"></i></span>
             </button>
-            <button
-              class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-              type="button"
-            >
-              <span class="group-hover:text-white text-red-400"
-                ><i class="fas fa-trash"></i
-              ></span>
+            <button class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
+              type="button">
+              <span class="group-hover:text-white text-red-400"><i class="fas fa-trash"></i></span>
             </button>
           </div>
         </div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+    <form id="form_consultas" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" method="post">
+        <h1 class="text-xl font-bold text-main uppercase">Consultas</h1>
+        {% csrf_token %}
+
+        <div class="w-full flex gap-4">
+            {% comment %} Fecha de consulta {% endcomment %}
+            <div class="w-3/12">
+                <label for="fecha_consulta" class="block mb-2 text-sm font-semibold uppercase">Fecha <span class="text-red-500">*</span></label>
+                <input id="fecha_consulta" name="" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="date">
+              </div>
+
+              {% comment %} Diagnostico de consulta {% endcomment %}
+              <div class="w-6/12">
+                <label for="fecha_consulta" class="block mb-2 text-sm font-semibold uppercase">Diagnóstico <span class="text-red-500">*</span></label>
+                <input id="fecha_consulta" name="" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe el diagnóstico de la consulta">
+              </div>
+
+              
+              {% comment %} Folio de consulta {% endcomment %}
+              <div class="w-3/12">
+                <label for="fecha_consulta" class="block mb-2 text-sm font-semibold uppercase">Folio <span class="text-red-500">*</span></label>
+                <input id="fecha_consulta" name="" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Escribe el folio de la consulta">
+              </div>
+        </div>
+
+        {% comment %} Notas {% endcomment %}
+        <div class="w-full">
+            <label for="notes_consulta" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
+            <textarea id="notes_consulta" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+            </div>
+
+        {% comment %} Botones de formulario {% endcomment %}
+        <div class="flex justify-center gap-10 mt-20">
+          <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+          <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+        </div>
+      </form>
+</body>
+</html>
