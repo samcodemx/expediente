@@ -212,6 +212,6 @@ def guarda_padecimiento_view(request):
 
         # Guardar el objeto PadecimientoActual en la base de datos
         padecimiento.save()
-        return render(request, 'expedientes/create.html', {'success_msg_padecimiento': 'Padecimiento actual guardado con éxito'})
+        return render(request, 'expedientes/create.html', {'paciente': paciente,'success_msg_padecimiento': 'Padecimiento actual guardado con éxito'})
     
     return render(request, 'expedientes/create.html')
