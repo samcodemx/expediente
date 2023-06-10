@@ -51,4 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+
+  /* ========================================
+  Formulario de ficha medica
+  ========================================= */
+  
+
 });
