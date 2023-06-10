@@ -96,14 +96,18 @@
         // Obtener los datos del formulario
         const formData = new FormData(this);
 
-        // Validar campos requeridos
+        /* ========================================
+        Campos OBLIGATORIOS para comprobar que 
+        todos tengan un valor
+        ========================================= */
         const ahf = formData.get("ahf");
         const apnp = formData.get("apnp");
         const app = formData.get("app");
         const ago = formData.get("ago");
 
+        // Comprobamos que existan todos los valores de los campos obligatorios
         if(ahf && apnp && app && ago){
-                      // Enviar los datos utilizando fetch
+        // Enviar los datos utilizando fetch
         fetch("antecedentes/", {
           method: "POST",
           body: formData
@@ -128,7 +132,10 @@
                 title: 'Datos enviados correctamente'
               })
 
-              // Limpiar TODOS los datos del formulario
+            /* ========================================
+            Limpiar TODOS los campos del formulario 
+            (obligatorios y opcionales)
+            ========================================= */
             document.getElementById("ahf").value = "";
             document.getElementById("apnp").value = "";
             document.getElementById("app").value = "";

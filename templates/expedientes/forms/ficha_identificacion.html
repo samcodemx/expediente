@@ -197,7 +197,10 @@
             // Obtener los datos del formulario
             const formData = new FormData(this);
 
-            // Validar campos requeridos
+            /* ========================================
+            Campos OBLIGATORIOS para comprobar que 
+            todos tengan un valor
+            ========================================= */
             const nombre = formData.get("nombre");
             const apellido_pat = formData.get("apellido_pat");
             const apellido_mat = formData.get("apellido_mat");
@@ -207,6 +210,7 @@
             const grupo_rh = formData.get("grupo_rh");
             const alergias = formData.get("alergias");
 
+            // Comprobamos que existan todos los valores de los campos obligatorios
             if(nombre && apellido_pat && apellido_mat && genero && fecha_nacimiento && estado_civil && grupo_rh && alergias){
                           // Enviar los datos utilizando fetch
             fetch("guardar-ficha/", {
@@ -233,7 +237,10 @@
                     title: 'Datos enviados correctamente'
                   })
 
-                  // Limpiar TODOS los datos del formulario
+                  /* ========================================
+                  Limpiar TODOS los campos del formulario 
+                  (obligatorios y opcionales)
+                  ========================================= */
                 document.getElementById("nombre").value = "";
                 document.getElementById("apellido_pat").value = "";
                 document.getElementById("apellido_mat").value = "";
