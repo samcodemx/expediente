@@ -152,6 +152,10 @@ def guarda_antecedentes_view(request):
             ago=ago
         )
 
+        if not paciente_id:
+            error_msg = "No se ha inicializado ningun paciente"
+            return render(request, 'expedientes/create.html', {'error_msg_antecedentes': error_msg})
+
         paciente = get_object_or_404(Paciente, id=paciente_id)
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
@@ -199,7 +203,9 @@ def guarda_padecimiento_view(request):
             neurologico=neurologico,
             notas=notas
         )
-
+        if not paciente_id:
+            error_msg = "No se ha inicializado ningun paciente"
+            return render(request, 'expedientes/create.html', {'error_msg_padecimiento': error_msg})
         paciente = get_object_or_404(Paciente, id=paciente_id)
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
@@ -213,5 +219,95 @@ def guarda_padecimiento_view(request):
         # Guardar el objeto PadecimientoActual en la base de datos
         padecimiento.save()
         return render(request, 'expedientes/create.html', {'paciente': paciente,'success_msg_padecimiento': 'Padecimiento actual guardado con éxito'})
+    
+    return render(request, 'expedientes/create.html')
+
+@login_required
+def guarda_exploracion_view(request):
+    if request.method == 'POST':
+        campos_requeridos = ['paciente_id','temperatura','presion_arterial','frecuencia_cardiaca','frecuencia_respiratoria','descripcion_exploracion']
+
+        paciente_id = request.POST.get('paciente_id')
+        peso = request.POST.get('peso')
+        talla = request.POST.get('talla')
+        temperatura = request.POST.get('temperatura')
+        presion_arterial = request.POST.get('presion_arterial')
+        frecuencia_cardiaca = request.POST.get('frecuencia_cardiaca')
+        frecuencia_respiratoria = request.POST.get('frecuencia_respiratoria')
+        saturacion_oxigeno = request.POST.get('saturacion_oxigeno')
+        descripcion_exploracion = request.POST.get('descripcion_exploracion').upper()
+        imc = request.POST.get('imc')
+        glucosa = request.POST.get('glucosa')
+        notas = request.POST.get('notas').upper()
+
+        examen_fisico = ExploracionFisica(
+            paciente_id=paciente_id,
+            medico=request.user.medico,
+            fecha=date.today(),
+            peso=peso,
+            talla=talla,
+            temperatura=temperatura,
+            presion_arterial=presion_arterial,
+            frecuencia_cardiaca=frecuencia_cardiaca,
+            frecuencia_respiratoria=frecuencia_respiratoria,
+            saturacion_oxigeno=saturacion_oxigeno,
+            descripcion_exploracion=descripcion_exploracion,
+            imc=imc,
+            glucosa=glucosa,
+            notas=notas
+        )
+        if not paciente_id:
+            error_msg = "No se ha inicializado ningun paciente"
+            return render(request, 'expedientes/create.html', {'error_msg_examen_fisico': error_msg})
+        paciente = get_object_or_404(Paciente, id=paciente_id)
+
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_examen_fisico': error_msg})
+
+        error_msg = validar_datos(examen_fisico)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_examen_fisico': error_msg})
+
+        # Guardar el objeto ExamenFisico en la base de datos
+        examen_fisico.save()
+        return render(request, 'expedientes/create.html', {'paciente': paciente,'success_msg_examen_fisico': 'Examen físico guardado con éxito'})
+    
+    return render(request, 'expedientes/create.html')
+
+@login_required
+def guarda_consulta_view(request):
+    if request.method == 'POST':
+        campos_requeridos = ['paciente_id','diagnostico','folio_receta']
+
+        paciente_id = request.POST.get('paciente_id')
+        diagnostico = request.POST.get('diagnostico').upper()
+        folio_receta = request.POST.get('folio_receta')
+        notas = request.POST.get('notas').upper()
+
+        consulta = Consulta(
+            paciente_id=paciente_id,
+            medico=request.user.medico,
+            fecha=datetime.now(),
+            diagnostico=diagnostico,
+            folio_receta=folio_receta,
+            notas=notas
+        )
+        if not paciente_id:
+            error_msg = "No se ha inicializado ningun paciente"
+            return render(request, 'expedientes/create.html', {'error_msg_consulta': error_msg})
+        paciente = get_object_or_404(Paciente, id=paciente_id)
+
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_consulta': error_msg})
+
+        error_msg = validar_datos(consulta)
+        if error_msg:
+            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_consulta': error_msg})
+
+        # Guardar el objeto Consulta en la base de datos
+        consulta.save()
+        return render(request, 'expedientes/create.html', {'paciente': paciente,'success_msg_consulta': 'Consulta guardada con éxito'})
     
     return render(request, 'expedientes/create.html')

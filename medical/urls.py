@@ -11,4 +11,7 @@ urlpatterns = [
     path('create-file/guardar-ficha/', views.guarda_ficha_identificacion_view, name='guarda_ficha_identificacion'),
     path('create-file/antecedentes/', views.guarda_antecedentes_view, name='guarda_antecedentes'),
     path('create-file/padecimiento/', views.guarda_padecimiento_view, name='guarda_padecimiento'),
+    path('create-file/exploracion/', views.guarda_exploracion_view, name='guarda_exploracion'),
+    #path('create-file/estudios/', views.guarda_estudios_view, name='guarda_estudios'),
+    path('create-file/consulta/', views.guarda_consulta_view, name='guarda_consulta'),
 ]

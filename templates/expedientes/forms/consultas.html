@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
-    <form id="formData_consultas" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" method="post">
-        <h1 class="text-xl font-bold text-main uppercase">Consultas</h1>
-        {% csrf_token %}
+    <form id="formData_consultas" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" method="post" action="{% url 'medical:guarda_consulta' %}">
+      {% if paciente %}
+      <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+        Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+      </div>
+      {% endif %}
+      
+      {% if success_msg_consulta %}
+      <div class="alert alert-success" style="color: green;">
+          {{ success_msg_consulta }}
+      </div>
+  {% endif %}
+
+  {%if error_msg_consulta %}
+  <div class="alert alert-success" style="color: red;">
+    {{ error_msg_consulta }}
+</div>
+{% endif %}
+      <h1 class="text-xl font-bold text-main uppercase">Consultas</h1>
 
         <div class="w-full flex gap-4">
-            {% comment %} Fecha de consulta {% endcomment %}
-            <div class="w-3/12">
-                <label for="fecha" class="block mb-2 text-sm font-semibold uppercase">Fecha <span class="text-red-500">*</span></label>
-                <input id="fecha" name="fecha" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="date">
-              </div>
-
               {% comment %} Diagnostico de consulta {% endcomment %}
               <div class="w-6/12">
                 <label for="diagnostico" class="block mb-2 text-sm font-semibold uppercase">Diagnóstico <span class="text-red-500">*</span></label>
@@ -32,7 +42,12 @@
             <textarea id="notas_consulta" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
             </div>
 
+
+            {% csrf_token %}
+      <!-- Campo oculto para almacenar el ID del paciente -->
+      <input type="hidden" name="paciente_id" value="{{ paciente.id }}">
         {% comment %} Botones de formulario {% endcomment %}
+        
         <div class="flex justify-center gap-10 mt-20">
           <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
           <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>

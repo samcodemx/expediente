@@ -14,6 +14,18 @@
       Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
     </div>
     {% endif %}
+
+    {% if success_msg_padecimiento %}
+    <div class="alert alert-success" style="color: green;">
+        {{ success_msg_padecimiento }}
+    </div>
+{% endif %}
+
+{%if error_msg_padecimiento %}
+<div class="alert alert-success" style="color: red;">
+  {{ error_msg_padecimiento }}
+</div>
+{% endif %}
     
     <h1 class="text-xl font-bold text-main uppercase">Padecimientos Actuales</h1>
 
@@ -133,7 +145,9 @@
         </div>
     </form>
 
-    <script>
+
+    
+    <!-- <script>
       document.getElementById("formData_padecimiento_actual").addEventListener("submit", function(event) {
         event.preventDefault(); // Evitar el comportamiento predeterminado del formulario
 
@@ -156,7 +170,7 @@
         // Comprobamos que existan todos los valores de los campos obligatorios
         if(padecimiento_actual && piel_tegumentos && cabeza_cuello && torax && abdomen && genitourinario && musculo_extremidades && neurologico){
         // Enviar los datos utilizando fetch
-        fetch("padecimiento/", {
+        fetch("../padecimiento/", {
           method: "POST",
           body: formData
       })
@@ -224,6 +238,6 @@
           )
         }
     });
-    </script>
+    </script> -->
   </body>
 </html>

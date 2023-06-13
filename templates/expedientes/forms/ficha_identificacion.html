@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
-    <form id="formData_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion'%}" method="post">
+    <form id="formData_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion' %}" method="post">
     
+      {% if success_msg_ficha %}
+      <div class="alert alert-success" style="color: green;">
+          {{ success_msg_ficha }}
+      </div>
+  {% endif %}
+
+  {%if error_msg_ficha %}
+  <div class="alert alert-success" style="color: red;">
+    {{ error_msg_ficha }}
+</div>
+{% endif %}
+
       <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
         <div class="w-full flex gap-4">
@@ -59,7 +71,7 @@
   
           {% comment %} Estado Civil {% endcomment %}
           <div class="w-3/12">
-            <label for="estado_civil" class="block mb-2 text-sm font-semibold uppercase">Estado Civil <span class="text-red-500">*</span></label>
+            <label for="estado_civil" class="block mb-2 text-sm font-semibold uppercase">Estado Civil</label>
             <select id="estado_civil" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="">Selecciona uno</option>
               <option value="SOLTERO">SOLTERO</option>
@@ -191,6 +203,27 @@
       </form>
 
       <script>
+        function calcularEdad() {
+          let fechaNacimiento = new Date(document.getElementById("fecha_nacimiento").value);
+          let ahora = new Date();
+      
+          let edad = ahora.getFullYear() - fechaNacimiento.getFullYear();
+          let meses = ahora.getMonth() - fechaNacimiento.getMonth();
+      
+          // Verificar si aún no ha cumplido años
+          if (ahora.getMonth() < fechaNacimiento.getMonth() ||
+              (ahora.getMonth() == fechaNacimiento.getMonth() && ahora.getDate() < fechaNacimiento.getDate())) {
+            edad--;
+            meses += 12;
+          }
+      
+          document.getElementById("edad").value = edad + " años y " + meses + " meses";
+        }
+
+        
+      </script>
+
+      <!-- <script>
         document.getElementById("formData_ficha_identificacion").addEventListener("submit", function(event) {
             event.preventDefault(); // Evitar el comportamiento predeterminado del formulario
 
@@ -206,12 +239,11 @@
             const apellido_mat = formData.get("apellido_mat");
             const genero = formData.get("genero");
             const fecha_nacimiento = formData.get("fecha_nacimiento");
-            const estado_civil = formData.get("estado_civil");
             const grupo_rh = formData.get("grupo_rh");
             const alergias = formData.get("alergias");
 
             // Comprobamos que existan todos los valores de los campos obligatorios
-            if(nombre && apellido_pat && apellido_mat && genero && fecha_nacimiento && estado_civil && grupo_rh && alergias){
+            if(nombre && apellido_pat && apellido_mat && genero && fecha_nacimiento && grupo_rh && alergias){
                           // Enviar los datos utilizando fetch
             fetch("guardar-ficha/", {
               method: "POST",
@@ -291,6 +323,6 @@
               )
             }
         });
-    </script>
+    </script> -->
 </body>
 </html>

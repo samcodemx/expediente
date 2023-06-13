@@ -19,11 +19,9 @@
         {{ success_msg_antecedentes }}
     </div>
 {% endif %}
-
-
-    {% if paciente %}
-    <div class="w-full bg-red-200 border-red-500  rounded-lg p-3 text-center">
-      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+{% if error_msg_antecedentes %}
+    <div class="alert alert-danger" style="color: red;">
+        {{ error_msg_antecedentes }}
     </div>
     {% endif %}
 
@@ -102,7 +100,9 @@
         </div>
     </form>
 
-    <script>
+    
+
+    <!-- <script>
       document.getElementById("formData_antecedentes").addEventListener("submit", function(event) {
         event.preventDefault(); // Evitar el comportamiento predeterminado del formulario
 
@@ -184,6 +184,6 @@
           )
         }
     });
-    </script>
+    </script> -->
   </body>
 </html>

@@ -4,7 +4,27 @@
     <form
       id="formData_exploracion_fisica"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+      method="post"
+      action="{% url 'medical:guarda_exploracion' %}"
     >
+    {% if paciente %}
+    <div class="w-full bg-red-200 border-red-500  rounded-lg p-3 text-center">
+      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+    </div>
+    {% endif %}
+
+          {% if success_msg_examen_fisico %}
+      <div class="alert alert-success" style="color: green;">
+          {{ success_msg_examen_fisico }}
+      </div>
+  {% endif %}
+
+  {%if error_msg_examen_fisico %}
+  <div class="alert alert-success" style="color: red;">
+    {{ error_msg_examen_fisico }}
+</div>
+{% endif %}
+
       <h1 class="text-xl font-bold text-main uppercase">Exploración Física</h1>
 
       <div class="w-full gap-10 grid lg:grid-cols-2 ">
@@ -203,7 +223,9 @@
         </div>
       </div>
 
-
+      {% csrf_token %}
+      <!-- Campo oculto para almacenar el ID del paciente -->
+      <input type="hidden" name="paciente_id" value="{{ paciente.id }}">
       {% comment %} Botones de formulario {% endcomment %}
       <div class="flex justify-center gap-10 mt-20">
         <a
@@ -220,4 +242,35 @@
       </div>
     </form>
   </body>
+  <script>
+    // Obtener referencias a los elementos de entrada de altura, peso e IMC
+    const tallaInput = document.getElementById('talla');
+    const pesoInput = document.getElementById('peso');
+    const imcInput = document.getElementById('imc');
+
+    // Agregar eventos de escucha para calcular el IMC cuando se cambian los valores de altura y peso
+    tallaInput.addEventListener('input', calcularIMC);
+    pesoInput.addEventListener('input', calcularIMC);
+
+    // Función para calcular el IMC
+    function calcularIMC() {
+      const talla = parseFloat(tallaInput.value);
+      const peso = parseFloat(pesoInput.value);
+
+      if (isNaN(talla) || isNaN(peso)) {
+        imcInput.value = ''; // Limpiar el campo IMC si los valores no son numéricos
+      } else {
+        const imc = peso / ((talla / 100) ** 2); // Fórmula del IMC
+        imcInput.value = imc.toFixed(2); // Mostrar el IMC con dos decimales
+      }
+    }
+
+    // Función para actualizar el campo oculto de IMC antes de enviar el formulario
+    function actualizarIMC() {
+      const imc = imcInput.value;
+      document.getElementById('imc').value = imc;
+    }
+
+  
+  </script>
 </html>
