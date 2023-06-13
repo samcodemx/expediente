@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
-    <form id="form_consultas" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" method="post">
+    <form id="formData_consultas" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" method="post">
         <h1 class="text-xl font-bold text-main uppercase">Consultas</h1>
         {% csrf_token %}
 
         <div class="w-full flex gap-4">
             {% comment %} Fecha de consulta {% endcomment %}
             <div class="w-3/12">
-                <label for="fecha_consulta" class="block mb-2 text-sm font-semibold uppercase">Fecha <span class="text-red-500">*</span></label>
-                <input id="fecha_consulta" name="" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="date">
+                <label for="fecha" class="block mb-2 text-sm font-semibold uppercase">Fecha <span class="text-red-500">*</span></label>
+                <input id="fecha" name="fecha" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="date">
               </div>
 
               {% comment %} Diagnostico de consulta {% endcomment %}
               <div class="w-6/12">
-                <label for="fecha_consulta" class="block mb-2 text-sm font-semibold uppercase">Diagnóstico <span class="text-red-500">*</span></label>
-                <input id="fecha_consulta" name="" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe el diagnóstico de la consulta">
+                <label for="diagnostico" class="block mb-2 text-sm font-semibold uppercase">Diagnóstico <span class="text-red-500">*</span></label>
+                <input id="diagnostico" name="diagnostico" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe el diagnóstico de la consulta">
               </div>
 
               
               {% comment %} Folio de consulta {% endcomment %}
               <div class="w-3/12">
-                <label for="fecha_consulta" class="block mb-2 text-sm font-semibold uppercase">Folio <span class="text-red-500">*</span></label>
-                <input id="fecha_consulta" name="" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Escribe el folio de la consulta">
+                <label for="folio_receta" class="block mb-2 text-sm font-semibold uppercase">Folio <span class="text-red-500">*</span></label>
+                <input id="folio_receta" name="folio_receta" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Escribe el folio de la consulta">
               </div>
         </div>
 
         {% comment %} Notas {% endcomment %}
         <div class="w-full">
-            <label for="notes_consulta" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
-            <textarea id="notes_consulta" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+            <label for="notas_consulta" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
+            <textarea id="notas_consulta" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
             </div>
 
         {% comment %} Botones de formulario {% endcomment %}
