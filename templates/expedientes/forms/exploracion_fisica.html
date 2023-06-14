@@ -5,6 +5,30 @@
       id="formData_exploracion_fisica"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
     >
+    <!-- ========================================
+       Mostrar alerta de Historia Clinica
+    ======================================== -->
+    {% if paciente %}
+    <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
+      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+    </div>
+    {% endif %}
+
+    <!-- ========================================
+       Alertas de error/success
+    ======================================== -->
+        {% if error_msg_exploracion %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ error_msg_padecimiento }}
+    </div>
+    {% endif %}
+
+    {% if success_msg_exploracion %}
+    <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
+        {{ success_msg_padecimiento }}
+    </div>
+{% endif %}
+
       <h1 class="text-xl font-bold text-main uppercase">Exploración Física</h1>
 
       <div class="w-full gap-10 grid lg:grid-cols-2 ">

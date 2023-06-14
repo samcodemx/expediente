@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<section class="lg:px-0 min-h-screen">
+  <!-- ========================================
+    AQUI VA EL NAVBAR
+ ======================================== -->
+  {% include "plantillas/navbar.html" %}
+
+  <!-- Header -->
+  <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
+    <div class="lg:container lg:mx-auto">
+      <h1 class="uppercase font-semibold text-main text-xl">
+        Nuevo Expediente
+      </h1>
+      <p>Registra un nuevo expediente aquí.</p>
+    </div>
+  </div>
+
+  <div class="py-10 bg-white md:px-6">
+    <!-- ========================================
+       Barra de navegacion para los formularios
+    ======================================== -->
+    {% include "plantillas/navbarFormulariosUpdate.html" %}
+
+    <!-- ========================================
+       Formularios
+    ======================================== -->
+
+    <div id="form_padecimiento_actual" class="formulario">
+        {% include "expedientes/forms/padecimiento_actual.html" %}
+      </div>
+
+  </div>
+
+</section>
+
+{% endblock %}
