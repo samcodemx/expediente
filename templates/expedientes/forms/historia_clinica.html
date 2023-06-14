@@ -8,8 +8,21 @@
       method="post"
     >
 
+    {% if error_msg_antecedentes %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ error_msg_antecedentes }}
+    </div>
+    {% endif %}
+
+    {% if success_msg_antecedentes %}
+    <div class="alert alert-success" style="color: green;">
+        {{ success_msg_antecedentes }}
+    </div>
+{% endif %}
+
+
     {% if paciente %}
-    <div class="w-full bg-red-200 border-red-500  rounded-lg p-3 text-center">
+    <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
       Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
     </div>
     {% endif %}
@@ -89,88 +102,5 @@
         </div>
     </form>
 
-    <script>
-      document.getElementById("formData_antecedentes").addEventListener("submit", function(event) {
-        event.preventDefault(); // Evitar el comportamiento predeterminado del formulario
-
-        // Obtener los datos del formulario
-        const formData = new FormData(this);
-
-        /* ========================================
-        Campos OBLIGATORIOS para comprobar que 
-        todos tengan un valor
-        ========================================= */
-        const ahf = formData.get("ahf");
-        const apnp = formData.get("apnp");
-        const app = formData.get("app");
-        const ago = formData.get("ago");
-
-        // Comprobamos que existan todos los valores de los campos obligatorios
-        if(ahf && apnp && app && ago){
-        // Enviar los datos utilizando fetch
-        fetch("antecedentes/", {
-          method: "POST",
-          body: formData
-      })
-      .then(response => {
-          if (response.ok) {
-              // La respuesta del servidor fue exitosa
-              const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-              
-              Toast.fire({
-                icon: 'success',
-                title: 'Datos enviados correctamente'
-              })
-
-            /* ========================================
-            Limpiar TODOS los campos del formulario 
-            (obligatorios y opcionales)
-            ========================================= */
-            document.getElementById("ahf").value = "";
-            document.getElementById("apnp").value = "";
-            document.getElementById("app").value = "";
-            document.getElementById("ago").checked = false;
-
-
-          } else {
-            console.log(formData);
-              // La respuesta del servidor no fue exitosa
-              Swal.fire(
-                '¡Error al enviar!',
-                'Error al enviar los datos',
-                'error'
-              )
-          }
-      })
-      .catch(error => {
-          // Ocurrió un error en la solicitud
-          // Puedes manejar el error de acuerdo a tus necesidades
-          console.log(error);
-          Swal.fire(
-            '¡Error al enviar!',
-            `Error en la solicitud, ${error}`,
-            'error'
-          )
-      });
-
-        }else{
-          Swal.fire(
-            '¡Error al enviar!',
-            'Rellena todos los campos obligatorios (*)',
-            'error'
-          )
-        }
-    });
-    </script>
   </body>
 </html>

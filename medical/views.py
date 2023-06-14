@@ -215,3 +215,6 @@ def guarda_padecimiento_view(request):
         return render(request, 'expedientes/create.html', {'paciente': paciente,'success_msg_padecimiento': 'Padecimiento actual guardado con éxito'})
     
     return render(request, 'expedientes/create.html')
+
+def viewExp_view(request):
+    return render(request, 'expedientes/view.html' )

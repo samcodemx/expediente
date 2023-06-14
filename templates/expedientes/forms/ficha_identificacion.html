@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <body>
-    <form id="formData_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion'%}" method="post">
+    <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion'%}" method="post">
+      
+      {% if error_msg_ficha %}
+      <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+        {{ error_msg_ficha }}
+      </div>
+      {% endif %}
+  
+      {% if success_msg_ficha %}
+      <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
+          {{ success_msg_ficha }}
+      </div>
+  {% endif %}
     
+
       <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
         <div class="w-full flex gap-4">
@@ -32,13 +45,13 @@
             <ul id="genero" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
               <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                   <div class="flex items-center pl-3">
-                      <input id="genero_m" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+                      <input id="genero" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
                       <label for="horizontal-list-radio-license" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Masculino</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                   <div class="flex items-center pl-3">
-                      <input id="genero_f" type="radio" value="F" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+                      <input id="genero" type="radio" value="F" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
                       <label for="horizontal-list-radio-id" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Femenino</label>
                   </div>
               </li>
@@ -81,8 +94,8 @@
           </div>
           {% comment %} Grupo y RH {% endcomment %}
           <div class="w-3/12">
-            <label for="grupo_rh" class="block mb-2 text-sm font-semibold uppercase">Grupo y RH <span class="text-red-500">*</span></label>
-            <select id="grupo_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
+            <label for="group_rh" class="block mb-2 text-sm font-semibold uppercase">Grupo y RH <span class="text-red-500">*</span></label>
+            <select id="group_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="DESC">DESCONOCIDO</option>
               <option value="A+">A+</option>
               <option value="B+">B+</option>
@@ -96,8 +109,8 @@
           </div>
           {% comment %} Escolaridad {% endcomment %}
           <div class="w-3/12">
-            <label for="escolaridad" class="block mb-2 text-sm font-semibold uppercase">Escolaridad</label>
-            <select id="escolaridad" name="escolaridad" class="uppercase w-full border-none rounded-md bg-white shadow-sm">
+            <label for="scholarship" class="block mb-2 text-sm font-semibold uppercase">Escolaridad</label>
+            <select id="scholarship" name="escolaridad" class="uppercase w-full border-none rounded-md bg-white shadow-sm">
               <option value="">SELECCIONA UNO</option>
               <option value="NINGUNA">NINGUNA</option>
               <option value="PRIMARIA">PRIMARIA</option>
@@ -190,107 +203,5 @@
         </div>
       </form>
 
-      <script>
-        document.getElementById("formData_ficha_identificacion").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evitar el comportamiento predeterminado del formulario
-
-            // Obtener los datos del formulario
-            const formData = new FormData(this);
-
-            /* ========================================
-            Campos OBLIGATORIOS para comprobar que 
-            todos tengan un valor
-            ========================================= */
-            const nombre = formData.get("nombre");
-            const apellido_pat = formData.get("apellido_pat");
-            const apellido_mat = formData.get("apellido_mat");
-            const genero = formData.get("genero");
-            const fecha_nacimiento = formData.get("fecha_nacimiento");
-            const estado_civil = formData.get("estado_civil");
-            const grupo_rh = formData.get("grupo_rh");
-            const alergias = formData.get("alergias");
-
-            // Comprobamos que existan todos los valores de los campos obligatorios
-            if(nombre && apellido_pat && apellido_mat && genero && fecha_nacimiento && estado_civil && grupo_rh && alergias){
-                          // Enviar los datos utilizando fetch
-            fetch("guardar-ficha/", {
-              method: "POST",
-              body: formData
-          })
-          .then(response => {
-              if (response.ok) {
-                  // La respuesta del servidor fue exitosa
-                  const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                  })
-                  
-                  Toast.fire({
-                    icon: 'success',
-                    title: 'Datos enviados correctamente'
-                  })
-
-                  /* ========================================
-                  Limpiar TODOS los campos del formulario 
-                  (obligatorios y opcionales)
-                  ========================================= */
-                document.getElementById("nombre").value = "";
-                document.getElementById("apellido_pat").value = "";
-                document.getElementById("apellido_mat").value = "";
-                document.getElementById("genero_m").checked = false;
-                document.getElementById("genero_f").checked = false;
-                document.getElementById("fecha_nacimiento").value = "";
-                document.getElementById("edad").value = "";
-                document.getElementById("estado_civil").value = "";
-                document.getElementById("nacionalidad").value = "";
-                document.getElementById("grupo_rh").value = "";
-                document.getElementById("escolaridad").value = "";
-                document.getElementById("ocupacion").value = "";
-                document.getElementById("direccion").value = "";
-                document.getElementById("telefono_personal").value = "";
-                document.getElementById("religion").value = "";
-                document.getElementById("curp").value = "";
-                document.getElementById("empleador").value = "";
-                document.getElementById("nombre_contacto_emergencia").value = "";
-                document.getElementById("telefono_contacto_emergencia").value = "";
-                document.getElementById("alergias").value = "";
-                document.getElementById("notas_ficha").value = "";
-
-              } else {
-                  // La respuesta del servidor no fue exitosa
-                  Swal.fire(
-                    '¡Error al enviar!',
-                    'Error al enviar los datos',
-                    'error'
-                  )
-              }
-          })
-          .catch(error => {
-              // Ocurrió un error en la solicitud
-              // Puedes manejar el error de acuerdo a tus necesidades
-              console.log(error);
-              Swal.fire(
-                '¡Error al enviar!',
-                `Error en la solicitud, ${error}`,
-                'error'
-              )
-          });
-
-            }else{
-              Swal.fire(
-                '¡Error al enviar!',
-                'Rellena todos los campos obligatorios (*)',
-                'error'
-              )
-            }
-        });
-    </script>
 </body>
 </html>

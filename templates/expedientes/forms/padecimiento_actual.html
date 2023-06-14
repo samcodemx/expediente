@@ -7,10 +7,22 @@
       action="{% url 'medical:guarda_padecimiento' %}"
       method="post"
     >
+    
+        {% if error_msg_padecimiento %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ error_msg_padecimiento }}
+    </div>
+    {% endif %}
+
+    {% if success_msg_padecimiento %}
+    <div class="alert alert-success" style="color: green;">
+        {{ success_msg_padecimiento }}
+    </div>
+{% endif %}
 
 
     {% if paciente %}
-    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+    <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
       Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
     </div>
     {% endif %}
@@ -133,97 +145,5 @@
         </div>
     </form>
 
-    <script>
-      document.getElementById("formData_padecimiento_actual").addEventListener("submit", function(event) {
-        event.preventDefault(); // Evitar el comportamiento predeterminado del formulario
-
-        // Obtener los datos del formulario
-        const formData = new FormData(this);
-
-        /* ========================================
-        Campos OBLIGATORIOS para comprobar que 
-        todos tengan un valor
-        ========================================= */
-        const padecimiento_actual = formData.get("padecimiento_actual");
-        const piel_tegumentos = formData.get("piel_tegumentos");
-        const cabeza_cuello = formData.get("cabeza_cuello");
-        const torax = formData.get("torax");
-        const abdomen = formData.get("abdomen");
-        const genitourinario = formData.get("genitourinario");
-        const musculo_extremidades = formData.get("musculo_extremidades");
-        const neurologico = formData.get("neurologico");
-
-        // Comprobamos que existan todos los valores de los campos obligatorios
-        if(padecimiento_actual && piel_tegumentos && cabeza_cuello && torax && abdomen && genitourinario && musculo_extremidades && neurologico){
-        // Enviar los datos utilizando fetch
-        fetch("padecimiento/", {
-          method: "POST",
-          body: formData
-      })
-      .then(response => {
-          if (response.ok) {
-              // La respuesta del servidor fue exitosa
-              const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-              
-              Toast.fire({
-                icon: 'success',
-                title: 'Datos enviados correctamente'
-              })
-
-            /* ========================================
-            Limpiar TODOS los campos del formulario 
-            (obligatorios y opcionales)
-            ========================================= */
-            document.getElementById("padecimiento_actual").value = "";
-            document.getElementById("piel_tegumentos").value = "";
-            document.getElementById("cabeza_cuello").value = "";
-            document.getElementById("torax").value = "";
-            document.getElementById("abdomen").value = "";
-            document.getElementById("genitourinario").value = "";
-            document.getElementById("musculo_extremidades").value = "";
-            document.getElementById("neurologico").value = "";
-            document.getElementById("notas_padecimientos").value = "";
-
-
-          } else {
-            console.log(formData);
-              // La respuesta del servidor no fue exitosa
-              Swal.fire(
-                '¡Error al enviar!',
-                'Error al enviar los datos',
-                'error'
-              )
-          }
-      })
-      .catch(error => {
-          // Ocurrió un error en la solicitud
-          // Puedes manejar el error de acuerdo a tus necesidades
-          console.log(error);
-          Swal.fire(
-            '¡Error al enviar!',
-            `Error en la solicitud, ${error}`,
-            'error'
-          )
-      });
-
-        }else{
-          Swal.fire(
-            '¡Error al enviar!',
-            'Rellena todos los campos obligatorios (*)',
-            'error'
-          )
-        }
-    });
-    </script>
   </body>
 </html>
