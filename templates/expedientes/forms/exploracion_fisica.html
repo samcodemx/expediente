@@ -2,9 +2,33 @@
 <html lang="es">
   <body>
     <form
-      id="form_exploracion_fisica"
+      id="formData_exploracion_fisica"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
     >
+    <!-- ========================================
+       Mostrar alerta de Historia Clinica
+    ======================================== -->
+    {% if paciente %}
+    <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
+      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+    </div>
+    {% endif %}
+
+    <!-- ========================================
+       Alertas de error/success
+    ======================================== -->
+        {% if error_msg_exploracion %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ error_msg_padecimiento }}
+    </div>
+    {% endif %}
+
+    {% if success_msg_exploracion %}
+    <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
+        {{ success_msg_padecimiento }}
+    </div>
+{% endif %}
+
       <h1 class="text-xl font-bold text-main uppercase">Exploración Física</h1>
 
       <div class="w-full gap-10 grid lg:grid-cols-2 ">
@@ -18,13 +42,13 @@
           {% comment %} Frecuencia Cardiaca {% endcomment %}
           <div>
             <label
-              for="cardiac_frecuency"
+              for="frecuencia_cardiaca"
               class="block mb-2 text-sm font-semibold uppercase"
               >FC <span class="text-red-500">*</span></label
             >
             <div class="w-full relative bg-white rounded-lg">
               <input
-                id="cardiac_frecuency"
+                id="frecuencia_cardiaca"
                 name="frecuencia_cardiaca"
                 class="w-full border-none rounded-md bg-white shadow-sm appearance-none"
                 type="number"
@@ -36,13 +60,13 @@
           {% comment %} Frecuencia Respiratoria {% endcomment %}
           <div>
             <label
-              for="respiratory_frecuency"
+              for="frecuencia_respiratoria"
               class="block mb-2 text-sm font-semibold uppercase"
               >FR <span class="text-red-500">*</span></label
             >
             <div class="w-full relative bg-white rounded-lg">
               <input
-                id="respiratory_frecuency"
+                id="frecuencia_respiratoria"
                 name="frecuencia_respiratoria"
                 class="w-full border-none rounded-md bg-white shadow-sm"
                 type="number"
@@ -53,12 +77,12 @@
 
           {% comment %} Oxigenacion {% endcomment %}
           <div>
-            <label for="oxygenation" class="block mb-2 text-sm font-semibold uppercase"
+            <label for="saturacion_oxigeno" class="block mb-2 text-sm font-semibold uppercase"
               >SpO2 <span class="text-red-500">*</span></label
             >
             <div class="w-full relative bg-white rounded-lg">
               <input
-                id="oxygenation"
+                id="saturacion_oxigeno"
                 name="saturacion_oxigeno"
                 class="w-full border-none rounded-md bg-white shadow-sm"
                 type="number"
@@ -72,12 +96,12 @@
         <div class="grid grid-cols-3 gap-4">
           {% comment %} Temperatura {% endcomment %}
           <div>
-            <label for="temperature" class="block mb-2 text-sm font-semibold uppercase"
+            <label for="temperatura" class="block mb-2 text-sm font-semibold uppercase"
               >Temp <span class="text-red-500">*</span></label
             >
             <div class="w-full relative bg-white rounded-lg">
               <input
-                id="temperature"
+                id="temperatura"
                 name="temperatura"
                 class="w-full border-none rounded-md bg-white shadow-sm"
                 type="number"
@@ -89,13 +113,13 @@
           {% comment %} Presion Arterial {% endcomment %}
           <div>
             <label
-              for="arterial_pressure"
+              for="presion_arterial"
               class="block mb-2 text-sm font-semibold uppercase"
               >TA <span class="text-red-500">*</span></label
             >
             <div class="w-full relative bg-white rounded-lg">
               <input
-                id="arterial_pressure"
+                id="presion_arterial"
                 name="presion_arterial"
                 class="w-full border-none rounded-md bg-white shadow-sm"
                 type="text"
@@ -107,13 +131,13 @@
           {% comment %} Glucosa Capilar {% endcomment %}
           <div>
             <label
-              for="capillary_glucose"
+              for="glucosa"
               class="block mb-2 text-sm font-semibold uppercase truncate"
               >Guclosa Capilar <span class="text-red-500">*</span></label
             >
             <div class="w-full relative bg-white rounded-lg">
               <input
-                id="capillary_glucose"
+                id="glucosa"
                 name="glucosa"
                 class="w-full border-none rounded-md bg-white shadow-sm"
                 type="number"
@@ -127,13 +151,13 @@
         <div class="grid grid-cols-3 gap-4">
           {% comment %} Talla {% endcomment %}
           <div>
-            <label for="size" class="block mb-2 text-sm font-semibold uppercase"
+            <label for="talla" class="block mb-2 text-sm font-semibold uppercase"
               >cm <span class="text-red-500">*</span></label
             >
 
             <div class="w-full relative bg-white rounded-lg">
               <input
-                id="size"
+                id="talla"
                 name="talla"
                 class="w-full border-none rounded-md bg-white shadow-sm"
                 type="number"
@@ -144,12 +168,12 @@
 
           {% comment %} Peso {% endcomment %}
           <div>
-            <label for="weight" class="block mb-2 text-sm font-semibold uppercase"
+            <label for="peso" class="block mb-2 text-sm font-semibold uppercase"
               >kg <span class="text-red-500">*</span></label
             >
             <div class="w-full relative bg-white rounded-lg">
               <input
-                id="weight"
+                id="peso"
                 name="peso"
                 class="w-full border-none rounded-md bg-white shadow-sm"
                 type="number"
@@ -183,12 +207,12 @@
           {% comment %} Hallazgoz {% endcomment %}
           <div>
             <label
-              for="hallazgos"
+              for="descripcion_exploracion"
               class="block mb-2 text-sm font-semibold uppercase"
               >Hallazgos <span class="text-red-500">*</span></label
             >
             <textarea
-              id="hallazgos"
+              id="descripcion_exploracion"
               name="descripcion_exploracion"
               class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
               placeholder="Escriba los hallazgos correspondientes"

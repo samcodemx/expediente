@@ -2,7 +2,7 @@
 <html lang="es">
   <body>
     <form
-      id="form_historia_clinica"
+      id="formData_antecedentes"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
       action="{% url 'medical:guarda_antecedentes' %}"
       method="post"
@@ -15,14 +15,14 @@
     {% endif %}
 
     {% if success_msg_antecedentes %}
-    <div class="alert alert-success" style="color: green;">
+    <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
         {{ success_msg_antecedentes }}
     </div>
 {% endif %}
 
 
     {% if paciente %}
-    <div class="w-full bg-red-200 border-red-500  rounded-lg p-3 text-center">
+    <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
       Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
     </div>
     {% endif %}
@@ -31,13 +31,13 @@
       {% comment %} Antecedentes Heredofamiliares {% endcomment %}
       <div class="w-full">
         <label
-          for="hereditary_family_history"
+          for="ahf"
           class="block mb-2 text-sm font-semibold uppercase"
           >Antecedentes Heredofamiliares <span class="text-red-500">*</span></label
         >
         <textarea
           name="ahf"
-          id="hereditary_family_history"
+          id="ahf"
           class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
           name="ahf"
@@ -47,13 +47,13 @@
       {% comment %} Antecedentes Personales No Patologicos {% endcomment %}
       <div class="w-full">
         <label
-          for="non_pathological_history"
+          for="apnp"
           class="block mb-2 text-sm font-semibold uppercase"
           >Antecedentes Personales No Patológicos <span class="text-red-500">*</span></label
         >
         <textarea
           name="apnp"
-          id="non_pathological_history"
+          id="apnp"
           class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
           name="apnp"
@@ -63,13 +63,13 @@
       {% comment %} Antecedentes Personales Patologicos {% endcomment %}
       <div class="w-full">
         <label
-          for="pathological_history"
+          for="app"
           class="block mb-2 text-sm font-semibold uppercase"
           >Antecedentes Personales Patológicos <span class="text-red-500">*</span></label
         >
         <textarea
           name="app"
-          id="pathological_history"
+          id="app"
           class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
           name="app"
@@ -78,12 +78,12 @@
 
       {% comment %} Antecedentes Gineco Obstetricos {% endcomment %}
       <div class="w-full">
-        <label for="obstetric_history" class="block mb-2 text-sm font-semibold uppercase"
+        <label for="ago" class="block mb-2 text-sm font-semibold uppercase"
           >Antecedentes Gineco-Obstétricos <span class="text-red-500">*</span></label
         >
         <textarea
           name="ago"
-          id="obstetric_history"
+          id="ago"
           class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
           placeholder="Escriba los antecedentes correspondientes"
           name="ago"
@@ -101,5 +101,6 @@
           <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
         </div>
     </form>
+
   </body>
 </html>

@@ -215,3 +215,30 @@ def guarda_padecimiento_view(request):
         return render(request, 'expedientes/create.html', {'paciente': paciente,'success_msg_padecimiento': 'Padecimiento actual guardado con éxito'})
     
     return render(request, 'expedientes/create.html')
+
+def viewExp_view(request):
+    return render(request, 'expedientes/view.html' )
+
+# Enlaces de los formularios (create)
+def createFicha_view(request):
+    return render(request, 'expedientes/create_ficha.html')
+def createAntecedentes_view(request):
+    return render(request, 'expedientes/create_antecedentes.html')
+def createPadecimientos_view(request):
+    return render(request, 'expedientes/create_padecimientos.html')
+def createExploracion_view(request):
+    return render(request, 'expedientes/create_exploracion.html')
+def createConsultas_view(request):
+    return render(request, 'expedientes/create_consultas.html')
+
+# Enlaces de los formularios (update)
+def updateFicha_view(request):
+    return render(request, 'expedientes/update_ficha.html')
+def updateAntecedentes_view(request):
+    return render(request, 'expedientes/update_antecedentes.html')
+def updatePadecimientos_view(request):
+    return render(request, 'expedientes/update_padecimientos.html')
+def updateExploracion_view(request):
+    return render(request, 'expedientes/update_exploracion.html')
+def updateConsultas_view(request):
+    return render(request, 'expedientes/update_consultas.html')

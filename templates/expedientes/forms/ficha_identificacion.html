@@ -10,7 +10,7 @@
       {% endif %}
   
       {% if success_msg_ficha %}
-      <div class="alert alert-success" style="color: green;">
+      <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
           {{ success_msg_ficha }}
       </div>
   {% endif %}
@@ -19,19 +19,20 @@
       <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
         <div class="w-full flex gap-4">
+
           <div class="w-6/12">
-            <label for="name" class="block mb-2 text-sm font-semibold uppercase">Nombre(s) <span class="text-red-500">*</span></label>
-            <input id="name" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
+            <label for="nombre" class="block mb-2 text-sm font-semibold uppercase">Nombre(s) <span class="text-red-500">*</span></label>
+            <input id="nombre" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
           </div>
   
           <div class="w-3/12">
-            <label for="p_lastname" class="block mb-2 text-sm font-semibold uppercase">Apellido Paterno <span class="text-red-500">*</span></label>
-            <input id="p_lastname" name="apellido_pat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido paterno">
+            <label for="apellido_pat" class="block mb-2 text-sm font-semibold uppercase">Apellido Paterno <span class="text-red-500">*</span></label>
+            <input id="apellido_pat" name="apellido_pat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido paterno">
           </div>
   
           <div class="w-3/12">
-            <label for="m_lastname" class="block mb-2 text-sm font-semibold uppercase">Apellido Materno <span class="text-red-500">*</span></label>
-            <input id="m_lastname" name="apellido_mat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido materno">
+            <label for="apellido_mat" class="block mb-2 text-sm font-semibold uppercase">Apellido Materno <span class="text-red-500">*</span></label>
+            <input id="apellido_mat" name="apellido_mat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido materno">
           </div>
           
         </div>
@@ -40,8 +41,8 @@
         <div class="w-full flex gap-4">
           {% comment %} Genero {% endcomment %}
           <div class="w-4/12 md:w-4/12">
-            <label for="gender" class="block mb-2 text-sm font-semibold uppercase">Género <span class="text-red-500">*</span></label>
-            <ul id="gender" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
+            <label for="genero" class="block mb-2 text-sm font-semibold uppercase">Género <span class="text-red-500">*</span></label>
+            <ul id="genero" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
               <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                   <div class="flex items-center pl-3">
                       <input id="genero" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
@@ -71,8 +72,8 @@
   
           {% comment %} Estado Civil {% endcomment %}
           <div class="w-3/12">
-            <label for="civil_status" class="block mb-2 text-sm font-semibold uppercase">Estado Civil <span class="text-red-500">*</span></label>
-            <select id="civil_status" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
+            <label for="estado_civil" class="block mb-2 text-sm font-semibold uppercase">Estado Civil <span class="text-red-500">*</span></label>
+            <select id="estado_civil" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="">Selecciona uno</option>
               <option value="SOLTERO">SOLTERO</option>
               <option value="CASADO">CASADO</option>
@@ -88,8 +89,8 @@
         <div class="w-full flex gap-4">
           {% comment %} Nacionalidad {% endcomment %}
           <div class="w-3/12">
-            <label for="nacionality" class="block mb-2 text-sm font-semibold uppercase">Nacionalidad</label>
-            <input id="nacionality" name="nacionalidad" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano">
+            <label for="nacionalidad" class="block mb-2 text-sm font-semibold uppercase">Nacionalidad</label>
+            <input id="nacionalidad" name="nacionalidad" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano">
           </div>
           {% comment %} Grupo y RH {% endcomment %}
           <div class="w-3/12">
@@ -127,8 +128,8 @@
           </div>
           {% comment %} Ocupacion {% endcomment %}
           <div class="w-3/12">
-            <label for="occupation" class="block mb-2 text-sm font-semibold uppercase">Ocupación</label>
-            <input id="occupation" name="ocupacion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador">
+            <label for="ocupacion" class="block mb-2 text-sm font-semibold uppercase">Ocupación</label>
+            <input id="ocupacion" name="ocupacion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador">
           </div>
   
         </div>
@@ -137,13 +138,13 @@
         <div class="w-full flex gap-4">
           {% comment %} Direccion {% endcomment %}
           <div class="w-6/12">
-            <label for="address" class="block mb-2 text-sm font-semibold uppercase">Dirección</label>
-            <input id="address" name="direccion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente">
+            <label for="direccion" class="block mb-2 text-sm font-semibold uppercase">Dirección</label>
+            <input id="direccion" name="direccion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente">
           </div>
           {% comment %} Telefono {% endcomment %}
           <div class="w-3/12">
-            <label for="phone" class="block mb-2 text-sm font-semibold uppercase">Teléfono Personal</label>
-            <input id="phone" name="telefono_personal" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000">
+            <label for="telefono_personal" class="block mb-2 text-sm font-semibold uppercase">Teléfono Personal</label>
+            <input id="telefono_personal" name="telefono_personal" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000">
           </div>
           {% comment %} Religion {% endcomment %}
           <div class="w-3/12">
@@ -189,8 +190,8 @@
 
         {% comment %} Notas {% endcomment %}
         <div class="w-full">
-          <label for="notes_ficha" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
-          <textarea id="notes_ficha" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+          <label for="notas_ficha" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
+          <textarea id="notas_ficha" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
         </div>
   
         {% csrf_token %}
@@ -201,5 +202,6 @@
           <button id="submit_ficha" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
         </div>
       </form>
+
 </body>
 </html>

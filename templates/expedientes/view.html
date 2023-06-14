@@ -1,0 +1,163 @@
+{% extends "base.html" %} {% load static %} 
+{% block content %}
+
+{% comment %} Navbar {% endcomment %}
+{% include "plantillas/navbar.html" %}
+<section class="lg:px-0 min-h-screen">
+  
+    <!-- Header -->
+    <div class="py-10 border-b-2 border-gray-200 bg-white  md:px-6">
+      <div class="lg:container lg:mx-auto">
+        <h2 class="uppercase font-semibold text-main text-xl">
+          Expediente Médico
+        </h2>
+        <p>Consulta los datos médicos del cliente.</p>
+      </div>
+    </div>
+  
+    <!-- ========================================
+       Expediente
+    ======================================== -->
+    <div class="py-10 bg-background md:px-6 space-y-8">
+        <!-- ========================================
+           Ficha Medica
+        ======================================== -->
+        <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+          <div class="space-y-2">
+              <h2 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h2>
+                {% comment %} Nombre {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Nombre completo: </span>Juan Carlos Hernández López.</p>
+                {% comment %} Genero {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Género: </span>Masculino</p>
+                {% comment %} Fecha de nacimiento {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Fecha de nacimiento: </span>01/03/1986</p>
+                {% comment %} Estado Civil {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Estado civil: </span>Casado</p>
+                {% comment %} Nacionalidad {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Nacionalidad: </span>Mexicano</p>
+                {% comment %} Grupo y RH {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Grupo y RH: </span>A+</p>
+                {% comment %} Escolaridad {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>Licenciatura</p>
+                {% comment %} Ocupacion {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Ocupación: </span>Abogado</p>
+                {% comment %} Direccion {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Direccion: </span>Calle Falsa #123, Colonia Imaginaria
+                  Ciudad Ficticia, Estado Inexistente
+                  Código Postal: 12345</p>
+                {% comment %} Telefono Personal  {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Teléfono personal: </span>4420000000</p>
+                {% comment %} Telefono Personal  {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Religión: </span>Testigo de Gehová</p>
+                {% comment %} CURP  {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">CURP: </span>HECL910617HMZXXX01</p>
+                {% comment %} Empleador  {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Empleador: </span>Bufete Legal García y Asociados</p>
+                {% comment %} Nombre Emergencia  {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Nombre (Contacto de emergencia): </span>Santiago Martínez López</p>
+                {% comment %} Nombre Emergencia  {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Teléfono (Contacto de emergencia): </span>4421309578</p>
+                {% comment %} Alergias  {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Alergias: </span>Paracetamol, Penicilina, Mejoralitos</p>
+                {% comment %} Notas  {% endcomment %}
+                <p class="uppercase"><span class="font-bold text-lg">Notas: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia nisl sed elit tempor morbi.</p>
+            </div>
+        </div>
+
+        <!-- ========================================
+           Antecedentes
+        ======================================== -->
+        <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Antecedentes</h2>
+              {% comment %} Antecedentes Heredofamiliares {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Antecedentes heredofamiliares: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              {% comment %} Antecedentes Personales No Patologicos {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales no patológicos: </span>Nunc eget iaculis orci. Ut nec lectus nec leo finibus faucibus sed sed turpis.</p>
+              {% comment %} Antecedentes Personales Patologicos {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales patológicos: </span>Cras ultricies ultrices sapien, sit amet dignissim dui venenatis eu.</p>
+              {% comment %} Antecedentes Gineco Obstetricos {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Antecedentes gineco-obstétricos: </span>Cras ultricies ultrices sapien, sit amet dignissim dui venenatis euEtiam leo justo, aliquam quis ex eget, condimentum euismod mauris. </p>
+          </div>
+        </div>
+
+        <!-- ========================================
+           Padecimientos Actuales
+        ======================================== -->
+        <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimientos Actuales</h2>
+              {% comment %} Padecimiento Actual {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Padecimiento actual: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Interrogativo por aparatos y sistemas</h2>
+              {% comment %} Piel y Tegumentos {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Piel y tegumentos: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              {% comment %} Cabeza y Cuello {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Cabeza y cuello: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              {% comment %} Torax {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Torax: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              {% comment %} Abdomen {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Abdomen: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              {% comment %} Genitourinario {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Genitourinario: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              {% comment %} Músculo esquelético y extremidades {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Músculo esquelético y extremidades: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              {% comment %} Neurológico {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Neurológico: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              {% comment %} Notas {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Notas: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+
+        <!-- ========================================
+           Exploracion Fisica
+        ======================================== -->
+        <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+          <h2 class="text-xl font-bold text-main uppercase mb-2">Exploración Física</h2>
+          <div class="space-y-2">
+              {% comment %} FC {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">FC: </span>00</p>
+              {% comment %} FR {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">FR: </span>00</p>
+              {% comment %} SPO2 {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">SPO2: </span>00</p>
+              {% comment %} TEMP {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">TEMP: </span>00</p>
+              {% comment %} TA {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">TA: </span>00</p>
+              {% comment %} Glucosa capilar {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Glucosa capilar: </span>00</p>
+              {% comment %} CM {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">CM: </span>00</p>
+              {% comment %} KG {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">KG: </span>00</p>
+              {% comment %} IMC {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">IMC: </span>00</p>
+          </div>
+        </div>
+
+        <!-- ========================================
+           Consultas
+        ======================================== -->
+        <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+          <h2 class="text-xl font-bold text-main uppercase mb-2">Consultas</h2>
+          <div class="space-y-2">
+              {% comment %} Fecha {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Fecha: </span>13/06/2022</p>
+              {% comment %} Diagnóstico {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Diagnóstico: </span>13/06/2022</p>
+              {% comment %} Folio {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Folio: </span>13/06/2022</p>
+              {% comment %} Notas {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Notas: </span>13/06/2022</p>
+          </div>
+        </div>
+
+    </div>
+
+  
+  
+  </section>
+{% endblock %}

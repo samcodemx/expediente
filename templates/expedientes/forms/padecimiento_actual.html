@@ -2,12 +2,24 @@
 <html lang="es">
   <body>
     <form
-      id="form_padecimiento_actual"
+      id="formData_padecimiento_actual"
       class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
       action="{% url 'medical:guarda_padecimiento' %}"
       method="post"
     >
-    
+
+    <!-- ========================================
+       Mostrar alerta de Historia Clinica
+    ======================================== -->
+    {% if paciente %}
+    <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
+      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+    </div>
+    {% endif %}
+
+    <!-- ========================================
+       Alertas de error/success
+    ======================================== -->
         {% if error_msg_padecimiento %}
     <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
       {{ error_msg_padecimiento }}
@@ -15,28 +27,21 @@
     {% endif %}
 
     {% if success_msg_padecimiento %}
-    <div class="alert alert-success" style="color: green;">
+    <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
         {{ success_msg_padecimiento }}
     </div>
 {% endif %}
-
-
-    {% if paciente %}
-    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
-    </div>
-    {% endif %}
     
     <h1 class="text-xl font-bold text-main uppercase">Padecimientos Actuales</h1>
 
       {% comment %} Padecimiento Actual {% endcomment %}
       <div class="w-full">
-        <label for="current_condition" class="block mb-2 text-sm font-semibold uppercase"
+        <label for="padecimiento_actual" class="block mb-2 text-sm font-semibold uppercase"
           >Padecimiento Actual <span class="text-red-500">*</span></label
         >
         <textarea
           name="padecimiento_actual"
-          id="current_condition"
+          id="padecimiento_actual"
           class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
           placeholder="Escriba el padecimiento actual"
           name="padecimiento_actual"
@@ -52,12 +57,12 @@
         >
         {% comment %} Piel y Tegumentos {% endcomment %}
         <div class="w-full">
-          <label for="skin" class="block mb-2 text-sm font-semibold uppercase"
+          <label for="piel_tegumentos" class="block mb-2 text-sm font-semibold uppercase"
             >Piel y Tegumentos <span class="text-red-500">*</span></label
           >
           <textarea
             name="piel_tegumentos"
-            id="skin"
+            id="piel_tegumentos"
             class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"
             name="piel_tegumentos"
@@ -66,12 +71,12 @@
 
         {% comment %} Cabeza y Cuello {% endcomment %}
         <div class="w-full">
-          <label for="head_neck" class="block mb-2 text-sm font-semibold uppercase"
+          <label for="cabeza_cuello" class="block mb-2 text-sm font-semibold uppercase"
             >Cabeza y Cuello <span class="text-red-500">*</span></label
           >
           <textarea
             name="cabeza_cuello"
-            id="head_neck"
+            id="cabeza_cuello"
             class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"
             name="cabeza_cuello"
@@ -80,10 +85,10 @@
 
         {% comment %} Torax {% endcomment %}
         <div class="w-full">
-          <label for="thorax" class="block mb-2 text-sm font-semibold uppercase">Torax <span class="text-red-500">*</span></label>
+          <label for="torax" class="block mb-2 text-sm font-semibold uppercase">Torax <span class="text-red-500">*</span></label>
           <textarea
             name="torax"
-            id="thorax"
+            id="torax"
             class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>
@@ -100,30 +105,30 @@
 
         {% comment %} Genitourinario {% endcomment %}
         <div class="w-full">
-          <label for="genitourinary" class="block mb-2 text-sm font-semibold uppercase">Genitourinario <span class="text-red-500">*</span></label>
+          <label for="genitourinario" class="block mb-2 text-sm font-semibold uppercase">Genitourinario <span class="text-red-500">*</span></label>
           <textarea
             name="genitourinario"
-            id="genitourinary"
+            id="genitourinario"
             class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>
 
         {% comment %} Musculo Esqueletico y Extremidades {% endcomment %}
         <div class="w-full">
-          <label for="skeletal_muscle_and_extremities" class="block mb-2 text-sm font-semibold uppercase">Músculo Esquelético y Extremidades <span class="text-red-500">*</span></label>
+          <label for="musculo_extremidades" class="block mb-2 text-sm font-semibold uppercase">Músculo Esquelético y Extremidades <span class="text-red-500">*</span></label>
           <textarea
             name="musculo_extremidades"
-            id="skeletal_muscle_and_extremities"
+            id="musculo_extremidades"
             class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>   
         
         {% comment %} Neurologico {% endcomment %}
         <div class="w-full">
-          <label for="neurological" class="block mb-2 text-sm font-semibold uppercase">Neurológico <span class="text-red-500">*</span></label>
+          <label for="neurologico" class="block mb-2 text-sm font-semibold uppercase">Neurológico <span class="text-red-500">*</span></label>
           <textarea
             name="neurologico"
-            id="neurological"
+            id="neurologico"
             class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
             placeholder="Escriba los interrogativos correspondientes"></textarea>
         </div>
@@ -131,8 +136,8 @@
 
         {% comment %} Notas {% endcomment %}
         <div class="w-full">
-          <label for="notes_padecimientos" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
-          <textarea name="notas" id="notes_padecimientos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+          <label for="notas_padecimientos" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
+          <textarea name="notas" id="notas_padecimientos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
         </div>
         
         {% csrf_token %}
@@ -144,5 +149,6 @@
           <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
         </div>
     </form>
+
   </body>
 </html>
