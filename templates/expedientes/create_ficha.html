@@ -26,11 +26,32 @@
     ======================================== -->
 
     <div id="form_ficha_identificacion">
+      <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion'%}" method="post">
       {% include "expedientes/forms/ficha_identificacion.html" %}
+      </form>
     </div>
 
   </div>
 
 </section>
+
+<script>
+  function calcularEdad() {
+    let fechaNacimiento = new Date(document.getElementById("fecha_nacimiento").value);
+    let ahora = new Date();
+
+    let edad = ahora.getFullYear() - fechaNacimiento.getFullYear();
+    let meses = ahora.getMonth() - fechaNacimiento.getMonth();
+
+    // Verificar si aún no ha cumplido años
+    if (ahora.getMonth() < fechaNacimiento.getMonth() ||
+        (ahora.getMonth() == fechaNacimiento.getMonth() && ahora.getDate() < fechaNacimiento.getDate())) {
+      edad--;
+      meses += 12;
+    }
+
+    document.getElementById("edad").value = edad + " años y " + meses + " meses";
+  }
+</script>
 
 {% endblock %}

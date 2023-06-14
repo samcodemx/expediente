@@ -89,12 +89,12 @@
           </div>
           <!-- Botones de la tarjeta -->
           <div class="flex gap-2">
-            <a href="view/" class="border-2 flex items-center justify-center border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+            <a href="view/{{paciente.id}}" class="border-2 flex items-center justify-center border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
               type="button">
               <span class="group-hover:text-white text-blue-400"><i class="fas fa-file-alt"></i></span>
             </a>
             
-            <a class="border-2 flex items-center justify-center border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+            <a href="update-file/{{paciente.id}}/ficha/" class="border-2 flex items-center justify-center border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
               type="button">
               <span class="group-hover:text-white text-yellow-300"><i class="fas fa-pen"></i></span>
             </a>

@@ -19,141 +19,253 @@
        Expediente
     ======================================== -->
     <div class="py-10 bg-background md:px-6 space-y-8">
-        <!-- ========================================
-           Ficha Medica
-        ======================================== -->
-        <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+      <!-- ========================================
+         Ficha Medica
+      ======================================== -->
+      <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <div class="space-y-2">
               <h2 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h2>
-                {% comment %} Nombre {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Nombre completo: </span>Juan Carlos Hernández López.</p>
-                {% comment %} Genero {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Género: </span>Masculino</p>
-                {% comment %} Fecha de nacimiento {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Fecha de nacimiento: </span>01/03/1986</p>
-                {% comment %} Estado Civil {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Estado civil: </span>Casado</p>
-                {% comment %} Nacionalidad {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Nacionalidad: </span>Mexicano</p>
-                {% comment %} Grupo y RH {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Grupo y RH: </span>A+</p>
-                {% comment %} Escolaridad {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>Licenciatura</p>
-                {% comment %} Ocupacion {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Ocupación: </span>Abogado</p>
-                {% comment %} Direccion {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Direccion: </span>Calle Falsa #123, Colonia Imaginaria
-                  Ciudad Ficticia, Estado Inexistente
-                  Código Postal: 12345</p>
-                {% comment %} Telefono Personal  {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Teléfono personal: </span>4420000000</p>
-                {% comment %} Telefono Personal  {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Religión: </span>Testigo de Gehová</p>
-                {% comment %} CURP  {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">CURP: </span>HECL910617HMZXXX01</p>
-                {% comment %} Empleador  {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Empleador: </span>Bufete Legal García y Asociados</p>
-                {% comment %} Nombre Emergencia  {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Nombre (Contacto de emergencia): </span>Santiago Martínez López</p>
-                {% comment %} Nombre Emergencia  {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Teléfono (Contacto de emergencia): </span>4421309578</p>
-                {% comment %} Alergias  {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Alergias: </span>Paracetamol, Penicilina, Mejoralitos</p>
-                {% comment %} Notas  {% endcomment %}
-                <p class="uppercase"><span class="font-bold text-lg">Notas: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia nisl sed elit tempor morbi.</p>
-            </div>
-        </div>
+  
+              {% comment %} Nombre {% endcomment %}
+              {% if paciente.nombre %}
+                  <p class="uppercase"><span class="font-bold text-lg">Nombre completo: </span>{{paciente.nombre}} {{paciente.apellido_pat}} {{paciente.apellido_mat}}</p>
+              {% endif %}
+  
+              {% comment %} Género {% endcomment %}
+              {% if paciente.genero == 'M' %}
+                  <p class="uppercase"><span class="font-bold text-lg">Género: </span>MASCULINO</p>
+              {% elif paciente.genero == 'F' %}
+              <p class="uppercase"><span class="font-bold text-lg">Género: </span>FEMENINO</p>
+              {% endif %}
+  
+              {% comment %} Fecha de nacimiento {% endcomment %}
+              {% if paciente.fecha_nacimiento %}
+                  <p class="uppercase"><span class="font-bold text-lg">Fecha de nacimiento: </span>{{paciente.fecha_nacimiento}}</p>
+              {% endif %}
+  
+              {% comment %} Estado civil {% endcomment %}
+              {% if paciente.estado_civil %}
+                  <p class="uppercase"><span class="font-bold text-lg">Estado civil: </span>{{paciente.estado_civil}}</p>
+              {% endif %}
+  
+              {% comment %} Nacionalidad {% endcomment %}
+              {% if paciente.nacionalidad %}
+                  <p class="uppercase"><span class="font-bold text-lg">Nacionalidad: </span>{{paciente.nacionalidad}}</p>
+              {% endif %}
+  
+              {% comment %} Grupo y RH {% endcomment %}
+              {% if paciente.grupo_rh == 'DESC' %}
+                  <p class="uppercase"><span class="font-bold text-lg">Grupo y RH: </span>DESCONOCIDO</p>
+              {% elif paciente.grupo_rh %}
+              <p class="uppercase"><span class="font-bold text-lg">Grupo y RH: </span>{{paciente.grupo_rh}}</p>    
+              {% endif %}
+  
+              {% comment %} Escolaridad {% endcomment %}
+              {% if paciente.escolaridad %}
+                  {% if paciente.escolaridad == 'NINGUNA' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>NINGUNA</p>
+                  {% elif paciente.escolaridad == 'PRIMARIA' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>PRIMARIA</p>
+                  {% elif paciente.escolaridad == 'PRIMARIA_T' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>PRIMARIA TRUNCA</p>
+                  {% elif paciente.escolaridad == 'SECUNDARIA' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>SECUNDARIA</p>
+                  {% elif paciente.escolaridad == 'SECUNDARIA_T' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>SECUNDARIA TRUNCA</p>
+                  {% elif paciente.escolaridad == 'PREPARATORIA' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>PREPARATORIA</p>
+                  {% elif paciente.escolaridad == 'PREPARATORIA_T' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>PREPARATORIA TRUNCA</p>
+                  {% elif paciente.escolaridad == 'TECNICO' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>CARRERA TECNICA</p>
+                  {% elif paciente.escolaridad == 'TECNICO_T' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>CARRERA TECNICA TRUNCA</p>
+                  {% elif paciente.escolaridad == 'LICENCIATURA' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>LICENCIATURA</p>
+                  {% elif paciente.escolaridad == 'LICENCIATURA_T' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>LICENCIATURA TRUNCA</p>
+                  {% elif paciente.escolaridad == 'SUPERIOR' %}
+                      <p class="uppercase"><span class="font-bold text-lg">Escolaridad: </span>SUPERIOR</p>
+                  {% endif %}
+              {% endif %}
+          
+  
+              {% comment %} Ocupación {% endcomment %}
+              {% if paciente.ocupacion %}
+                  <p class="uppercase"><span class="font-bold text-lg">Ocupación: </span>{{paciente.ocupacion}}</p>
+              {% endif %}
+  
+              {% comment %} Dirección {% endcomment %}
+              {% if paciente.direccion %}
+                  <p class="uppercase"><span class="font-bold text-lg">Dirección: </span>{{paciente.direccion}}</p>
+              {% endif %}
+  
+              {% comment %} Teléfono personal {% endcomment %}
+              {% if paciente.telefono_personal %}
+                  <p class="uppercase"><span class="font-bold text-lg">Teléfono personal: </span>{{paciente.telefono_personal}}</p>
+              {% endif %}
+  
+              {% comment %} Religión {% endcomment %}
+              {% if paciente.religion %}
+                  <p class="uppercase"><span class="font-bold text-lg">Religión: </span>{{paciente.religion}}</p>
+              {% endif %}
+  
+              {% comment %} CURP {% endcomment %}
+              {% if paciente.curp %}
+                  <p class="uppercase"><span class="font-bold text-lg">CURP: </span>{{paciente.curp}}</p>
+              {% endif %}
+  
+              {% comment %} Empleador {% endcomment %}
+              {% if paciente.empleador %}
+                  <p class="uppercase"><span class="font-bold text-lg">Empleador: </span>{{paciente.empleador}}</p>
+              {% endif %}
+  
+              {% comment %} Nombre (Contacto de emergencia) {% endcomment %}
+              {% if paciente.nombre_emergencia %}
+                  <p class="uppercase"><span class="font-bold text-lg">Nombre (Contacto de emergencia): </span>{{paciente.nombre_emergencia}}</p>
+              {% endif %}
+  
+              {% comment %} Teléfono (Contacto de emergencia) {% endcomment %}
+              {% if paciente.telefono_emergencia %}
+                  <p class="uppercase"><span class="font-bold text-lg">Teléfono (Contacto de emergencia): </span>{{paciente.telefono_emergencia}}</p>
+              {% endif %}
+  
+              {% comment %} Alergias {% endcomment %}
+              {% if paciente.alergias %}
+                  <p class="uppercase"><span class="font-bold text-lg">Alergias: </span>{{paciente.alergias}}</p>
+              {% endif %}
+  
+              {% comment %} Notas {% endcomment %}
+              {% if paciente.notas %}
+                  <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{paciente.notas}}</p>
+              {% endif %}
+          </div>
+      </div>
+
+  
+        
 
         <!-- ========================================
-           Antecedentes
+          Antecedentes
         ======================================== -->
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <div class="space-y-2">
             <h2 class="text-xl font-bold text-main uppercase mb-2">Antecedentes</h2>
               {% comment %} Antecedentes Heredofamiliares {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Antecedentes heredofamiliares: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              {% comment %} Antecedentes Personales No Patologicos {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales no patológicos: </span>Nunc eget iaculis orci. Ut nec lectus nec leo finibus faucibus sed sed turpis.</p>
-              {% comment %} Antecedentes Personales Patologicos {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales patológicos: </span>Cras ultricies ultrices sapien, sit amet dignissim dui venenatis eu.</p>
-              {% comment %} Antecedentes Gineco Obstetricos {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Antecedentes gineco-obstétricos: </span>Cras ultricies ultrices sapien, sit amet dignissim dui venenatis euEtiam leo justo, aliquam quis ex eget, condimentum euismod mauris. </p>
+              {% if paciente.antecedentes %}
+                <p class="uppercase"><span class="font-bold text-lg">Antecedentes heredofamiliares: </span>{{ paciente.antecedentes.ahf }}</p>
+                <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales no patológicos: </span>{{ paciente.antecedentes.apnp }}</p>
+                <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales patológicos: </span>{{ paciente.antecedentes.app }}</p>
+                <p class="uppercase"><span class="font-bold text-lg">Antecedentes gineco-obstétricos: </span>{{ paciente.antecedentes.ago }}</p>
+              {% else %}
+                <p class="uppercase">Sin datos</p>
+              {% endif %}
           </div>
         </div>
 
         <!-- ========================================
            Padecimientos Actuales
         ======================================== -->
+        {% if padecimiento %}
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <div class="space-y-2">
             <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimientos Actuales</h2>
-              {% comment %} Padecimiento Actual {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Padecimiento actual: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            {% comment %} Padecimiento Actual {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Padecimiento actual: </span>{{ padecimiento.padecimiento_actual }}</p>
           </div>
           <div class="space-y-2">
             <h2 class="text-xl font-bold text-main uppercase mb-2">Interrogativo por aparatos y sistemas</h2>
-              {% comment %} Piel y Tegumentos {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Piel y tegumentos: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              {% comment %} Cabeza y Cuello {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Cabeza y cuello: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              {% comment %} Torax {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Torax: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              {% comment %} Abdomen {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Abdomen: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              {% comment %} Genitourinario {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Genitourinario: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              {% comment %} Músculo esquelético y extremidades {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Músculo esquelético y extremidades: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              {% comment %} Neurológico {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Neurológico: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              {% comment %} Notas {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Notas: </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            {% comment %} Piel y Tegumentos {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Piel y tegumentos: </span>{{ padecimiento.piel_tegumentos }}</p>
+            {% comment %} Cabeza y Cuello {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Cabeza y cuello: </span>{{ padecimiento.cabeza_cuello }}</p>
+            {% comment %} Torax {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Torax: </span>{{ padecimiento.torax }}</p>
+            {% comment %} Abdomen {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Abdomen: </span>{{ padecimiento.abdomen }}</p>
+            {% comment %} Genitourinario {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Genitourinario: </span>{{ padecimiento.genitourinario }}</p>
+            {% comment %} Músculo esquelético y extremidades {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Músculo esquelético y extremidades: </span>{{ padecimiento.musculo_extremidades }}</p>
+            {% comment %} Neurológico {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Neurológico: </span>{{ padecimiento.neurologico }}</p>
+            {% comment %} Notas {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ padecimiento.notas }}</p>
           </div>
         </div>
+      {% else %}
+        <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+          <div class="space-y-2">
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimientos Actuales</h2>
+            <p class="uppercase">Sin datos</p>
+          </div>
+        </div>
+      {% endif %}
+      
 
         <!-- ========================================
            Exploracion Fisica
         ======================================== -->
+        {% if exploracion %}
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <h2 class="text-xl font-bold text-main uppercase mb-2">Exploración Física</h2>
           <div class="space-y-2">
-              {% comment %} FC {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">FC: </span>00</p>
-              {% comment %} FR {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">FR: </span>00</p>
-              {% comment %} SPO2 {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">SPO2: </span>00</p>
-              {% comment %} TEMP {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">TEMP: </span>00</p>
-              {% comment %} TA {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">TA: </span>00</p>
-              {% comment %} Glucosa capilar {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Glucosa capilar: </span>00</p>
-              {% comment %} CM {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">CM: </span>00</p>
-              {% comment %} KG {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">KG: </span>00</p>
-              {% comment %} IMC {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">IMC: </span>00</p>
+            <p class="uppercase"><span class="font-bold text-lg">Descripción: </span>{{ exploracion.descripcion_exploracion }}</p>
+            {% comment %} FC {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">FC: </span>{{ exploracion.frecuencia_cardiaca }} lpm</p>
+            {% comment %} FR {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">FR: </span>{{ exploracion.frecuencia_respiratoria }} rpm</p>
+            {% comment %} SPO2 {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">SPO2: </span>{{ exploracion.saturacion_oxigeno }}%</p>
+            {% comment %} TEMP {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">TEMP: </span>{{ exploracion.temperatura }} °C</p>
+            {% comment %} TA {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">TA: </span>{{ exploracion.presion_arterial }} mmHg</p>
+            {% comment %} Glucosa capilar {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Glucosa capilar: </span>{{ exploracion.glucosa }} mg/dL</p>
+            {% comment %} CM {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Talla: </span>{{ exploracion.talla }} cm</p>
+            {% comment %} KG {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">Peso: </span>{{ exploracion.peso }} kg</p>
+            {% comment %} IMC {% endcomment %}
+            <p class="uppercase"><span class="font-bold text-lg">IMC: </span>{{ exploracion.imc }}</p>
           </div>
         </div>
+      {% else %}
+        <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+          <h2 class="text-xl font-bold text-main uppercase mb-2">Exploración Física</h2>
+          <p class="uppercase">Sin datos</p>
+        </div>
+      {% endif %}
+      
 
         <!-- ========================================
            Consultas
         ======================================== -->
+        {% if consultas %}
+        {% for consulta in consultas %}
+          <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Consultas</h2>
+            <div class="space-y-2">
+              {% comment %} Fecha {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Fecha: </span>{{ consulta.fecha }}</p>
+              {% comment %} Diagnóstico {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Diagnóstico: </span>{{ consulta.diagnostico }}</p>
+              {% comment %} Folio {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Folio: </span>{{ consulta.folio }}</p>
+              {% comment %} Notas {% endcomment %}
+              <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ consulta.notas }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <h2 class="text-xl font-bold text-main uppercase mb-2">Consultas</h2>
-          <div class="space-y-2">
-              {% comment %} Fecha {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Fecha: </span>13/06/2022</p>
-              {% comment %} Diagnóstico {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Diagnóstico: </span>13/06/2022</p>
-              {% comment %} Folio {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Folio: </span>13/06/2022</p>
-              {% comment %} Notas {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Notas: </span>13/06/2022</p>
-          </div>
+          <p class="uppercase">Sin consultas</p>
         </div>
+      {% endif %}
+      
+
 
     </div>
 

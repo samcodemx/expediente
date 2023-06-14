@@ -117,19 +117,18 @@ def guarda_ficha_identificacion_view(request):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/create.html', {'error_msg_ficha': error_msg})
+            return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg})
 
         error_msg = validar_datos(ficha)
         if error_msg:
-            return render(request, 'expedientes/create.html', {'error_msg_ficha': error_msg})
+            return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg})
 
         ficha.save()
         # Obtener el ID del paciente
         paciente = ficha
-        #messages.success(request, 'Datos guardados con éxito')
-        return render(request, 'expedientes/create.html', {'paciente': paciente, 'success_msg_ficha': 'Paciente guardado con éxito'})
+        return render(request, 'expedientes/create_ficha.html', {'paciente': paciente, 'success_msg_ficha': 'Paciente guardado con éxito'})
     
-    return render(request, 'expedientes/create.html')
+    return render(request, 'expedientes/create_ficha.html')
 
 @login_required
 def guarda_antecedentes_view(request):
@@ -216,8 +215,26 @@ def guarda_padecimiento_view(request):
     
     return render(request, 'expedientes/create.html')
 
-def viewExp_view(request):
-    return render(request, 'expedientes/view.html' )
+def ver_expediente_view(request, id_paciente):
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+    antecedentes = Antecedentes.objects.filter(paciente=paciente)
+    padecimiento = PadecimientoActual.objects.filter(paciente=paciente).last()
+    exploracion = ExploracionFisica.objects.filter(paciente=paciente).last()
+    consultas = Consulta.objects.filter(paciente=paciente)
+    
+    context = {
+        'paciente': paciente,
+        'antecedentes': antecedentes,
+        'padecimiento': padecimiento,
+        'exploracion': exploracion,
+        'consultas': consultas,
+    }
+    print(paciente.escolaridad)
+    return render(request, 'expedientes/view.html', context)
+
+
+
+
 
 # Enlaces de los formularios (create)
 def createFicha_view(request):
@@ -232,13 +249,76 @@ def createConsultas_view(request):
     return render(request, 'expedientes/create_consultas.html')
 
 # Enlaces de los formularios (update)
-def updateFicha_view(request):
-    return render(request, 'expedientes/update_ficha.html')
-def updateAntecedentes_view(request):
+@login_required
+def update_ficha_identificacion_view(request, id_paciente):
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+    
+    if request.method == 'POST':
+        campos_requeridos = ['nombre', 'apellido_pat', 'apellido_mat', 'fecha_nacimiento', 'genero', 'grupo_rh', 'alergias']
+
+        nombre = request.POST.get('nombre').upper()
+        apellido_pat = request.POST.get('apellido_pat').upper()
+        apellido_mat = request.POST.get('apellido_mat').upper()
+        fecha_nacimiento = request.POST.get('fecha_nacimiento')
+        genero = request.POST.get('genero')
+        estado_civil = request.POST.get('estado_civil').upper()
+        grupo_rh = request.POST.get('grupo_rh').upper()
+        alergias = request.POST.get('alergias').upper()
+        curp = request.POST.get('curp').upper()
+        nacionalidad = request.POST.get('nacionalidad').upper()
+        escolaridad = request.POST.get('escolaridad').upper()
+        religion = request.POST.get('religion').upper()
+        direccion = request.POST.get('direccion').upper()
+        ocupacion = request.POST.get('ocupacion').upper()
+        empleador = request.POST.get('empleador').upper()
+        telefono_personal = ''.join(filter(str.isdigit, request.POST.get('telefono_personal')))
+        nombre_contacto_emergencia = request.POST.get('nombre_contacto_emergencia').upper()
+        telefono_contacto_emergencia = ''.join(filter(str.isdigit, request.POST.get('telefono_contacto_emergencia')))
+        notas = request.POST.get('notas').upper()
+
+        # Actualizar los campos del paciente existente
+        paciente.nombre = nombre
+        paciente.apellido_pat = apellido_pat
+        paciente.apellido_mat = apellido_mat
+        paciente.fecha_nacimiento = fecha_nacimiento
+        paciente.genero = genero
+        paciente.estado_civil = estado_civil
+        paciente.grupo_rh = grupo_rh
+        paciente.alergias = alergias
+        paciente.curp = curp
+        paciente.nacionalidad = nacionalidad
+        paciente.escolaridad = escolaridad
+        paciente.religion = religion
+        paciente.direccion = direccion
+        paciente.ocupacion = ocupacion
+        paciente.empleador = empleador
+        paciente.telefono_personal = telefono_personal
+        paciente.nombre_contacto_emergencia = nombre_contacto_emergencia
+        paciente.telefono_contacto_emergencia = telefono_contacto_emergencia
+        paciente.notas = notas
+
+        print(paciente)
+
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/update_ficha.html', {'error_msg_ficha': error_msg})
+
+        error_msg = validar_datos(paciente)
+        if error_msg:
+            return render(request, 'expedientes/update_ficha.html', {'error_msg_ficha': error_msg})
+
+        paciente.save()
+        return render(request, 'expedientes/update_ficha.html', {'paciente': paciente, 'success_msg_ficha': 'Datos actualizados con éxito'})
+    print(paciente)
+    return render(request, 'expedientes/update_ficha.html', {'paciente': paciente})
+
+
+
+def updateAntecedentes_view(request,id_paciente):
     return render(request, 'expedientes/update_antecedentes.html')
-def updatePadecimientos_view(request):
+def updatePadecimientos_view(request,id_paciente):
     return render(request, 'expedientes/update_padecimientos.html')
-def updateExploracion_view(request):
+def updateExploracion_view(request,id_paciente):
     return render(request, 'expedientes/update_exploracion.html')
-def updateConsultas_view(request):
+def updateConsultas_view(request,id_paciente):
     return render(request, 'expedientes/update_consultas.html')

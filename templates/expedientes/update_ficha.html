@@ -9,9 +9,9 @@
   <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
     <div class="lg:container lg:mx-auto">
       <h1 class="uppercase font-semibold text-main text-xl">
-        Nuevo Expediente
+        Editar Expediente
       </h1>
-      <p>Registra un nuevo expediente aquí.</p>
+      <p>Modifica los campos necesarios a continuacion.</p>
     </div>
   </div>
 
@@ -26,11 +26,35 @@
     ======================================== -->
 
     <div id="form_ficha_identificacion">
+      <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:update_ficha_identificacion' paciente.id %}" method="post">
       {% include "expedientes/forms/ficha_identificacion.html" %}
+      </form>
     </div>
 
   </div>
 
 </section>
+
+<script>
+  function calcularEdad() {
+    var fechaNacimiento = document.getElementById("fecha_nacimiento").value;
+    var fechaActual = new Date();
+    var nacimiento = new Date(fechaNacimiento);
+    var edad = fechaActual.getFullYear() - nacimiento.getFullYear();
+    var meses = fechaActual.getMonth() - nacimiento.getMonth();
+  
+    if (meses < 0 || (meses === 0 && fechaActual.getDate() < nacimiento.getDate())) {
+      edad--;
+      meses += 12;
+    }
+  
+    var edadCompleta = edad + " años y " + meses + " meses";
+    document.getElementById("edad").value = edadCompleta;
+  }
+  
+  window.onload = function() {
+    calcularEdad();
+  };
+</script>
 
 {% endblock %}
