@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
 <body>
@@ -15,52 +16,71 @@
 </div>
 {% endif %}
 
+=======
+
+      
+      {% if error_msg_ficha %}
+      <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+        {{ error_msg_ficha }}
+      </div>
+      {% endif %}  
+
+>>>>>>> samuelosky
       <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
         <div class="w-full flex gap-4">
 
           <div class="w-6/12">
             <label for="nombre" class="block mb-2 text-sm font-semibold uppercase">Nombre(s) <span class="text-red-500">*</span></label>
-            <input id="nombre" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
+            <input value="{{ paciente.nombre }}" id="nombre" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
           </div>
   
           <div class="w-3/12">
             <label for="apellido_pat" class="block mb-2 text-sm font-semibold uppercase">Apellido Paterno <span class="text-red-500">*</span></label>
-            <input id="apellido_pat" name="apellido_pat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido paterno">
+            <input value="{{ paciente.apellido_pat }}" id="apellido_pat" name="apellido_pat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido paterno">
           </div>
   
           <div class="w-3/12">
             <label for="apellido_mat" class="block mb-2 text-sm font-semibold uppercase">Apellido Materno <span class="text-red-500">*</span></label>
-            <input id="apellido_mat" name="apellido_mat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido materno">
+            <input value="{{ paciente.apellido_mat }}" id="apellido_mat" name="apellido_mat" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Apellido materno">
           </div>
           
         </div>
   
         {% comment %} Contenedor de Genero, Fecha de nacimiento, Edad y Estado Civil {% endcomment %}
         <div class="w-full flex gap-4">
-          {% comment %} Genero {% endcomment %}
+          {% comment %} Género {% endcomment %}
           <div class="w-4/12 md:w-4/12">
             <label for="genero" class="block mb-2 text-sm font-semibold uppercase">Género <span class="text-red-500">*</span></label>
             <ul id="genero" class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
               <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                   <div class="flex items-center pl-3">
+<<<<<<< HEAD
                       <input id="genero_m" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
+=======
+                      <input id="genero" type="radio" value="M" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30" {% if paciente.genero == "M" %}checked{% endif %}>
+>>>>>>> samuelosky
                       <label for="horizontal-list-radio-license" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Masculino</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                   <div class="flex items-center pl-3">
+<<<<<<< HEAD
                       <input id="genero_f" type="radio" value="F" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30">
                       <label for="horizontal-list-radio-id" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Femenino</label>
+=======
+                      <input id="genero" type="radio" value="F" name="genero" class="w-4 h-4 bg-gray-100 border-gray-30" {% if paciente.genero == "F" %}checked{% endif %}>
+                      <label for="horizontal-list-radio-license" class="uppercase w-full py-2.5 ml-2 font-medium text-gray-900 dark:text-gray-300">Femenino</label>
+>>>>>>> samuelosky
                   </div>
               </li>
-          </ul>
+            </ul>
           </div>
   
           {% comment %} Fecha de Nacimiento {% endcomment %}
           <div class="w-3/12">
             <label for="fecha_nacimiento" class="block mb-2 text-sm font-semibold uppercase">Fecha de nacimiento <span class="text-red-500">*</span></label>
-            <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="uppercase w-full border-none rounded-md bg-white shadow-sm" onchange="calcularEdad()">
+            <input value="{{ paciente.fecha_nacimiento | date:'Y-m-d' }}" id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="uppercase w-full border-none rounded-md bg-white shadow-sm" onload="calcularEdad()" onchange="calcularEdad()">
           </div>
   
           {% comment %} Edad {% endcomment %}
@@ -74,14 +94,13 @@
             <label for="estado_civil" class="block mb-2 text-sm font-semibold uppercase">Estado Civil</label>
             <select id="estado_civil" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="">Selecciona uno</option>
-              <option value="SOLTERO">SOLTERO</option>
-              <option value="CASADO">CASADO</option>
-              <option value="UNION_LIBRE">UNIÓN LIBRE</option>
-              <option value="DIVORCIADO">DIVORCIADO</option>
-              <option value="VIUDO">VIUDO</option>
+              <option value="SOLTERO" {% if paciente.estado_civil == 'SOLTERO' %} selected {% endif %}>SOLTERO</option>
+              <option value="CASADO" {% if paciente.estado_civil == 'CASADO' %} selected {% endif %}>CASADO</option>
+              <option value="UNION_LIBRE" {% if paciente.estado_civil == 'UNION_LIBRE' %} selected {% endif %}>UNIÓN LIBRE</option>
+              <option value="DIVORCIADO" {% if paciente.estado_civil == 'DIVORCIADO' %} selected {% endif %}>DIVORCIADO</option>
+              <option value="VIUDO" {% if paciente.estado_civil == 'VIUDO' %} selected {% endif %}>VIUDO</option>
             </select>
-          </div>
-  
+          </div>          
         </div>
   
         {% comment %} Nacionalidad, Grupo y RH, Escolaridad y Ocupacion {% endcomment %}
@@ -89,10 +108,12 @@
           {% comment %} Nacionalidad {% endcomment %}
           <div class="w-3/12">
             <label for="nacionalidad" class="block mb-2 text-sm font-semibold uppercase">Nacionalidad</label>
-            <input id="nacionalidad" name="nacionalidad" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano">
+            <input id="nacionalidad" name="nacionalidad" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Mexicano" value="{{ paciente.nacionalidad }}">
           </div>
+          
           {% comment %} Grupo y RH {% endcomment %}
           <div class="w-3/12">
+<<<<<<< HEAD
             <label for="grupo_rh" class="block mb-2 text-sm font-semibold uppercase">Grupo y RH <span class="text-red-500">*</span></label>
             <select id="grupo_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="DESC">DESCONOCIDO</option>
@@ -131,6 +152,47 @@
             <input id="ocupacion" name="ocupacion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador">
           </div>
   
+=======
+            <label for="group_rh" class="block mb-2 text-sm font-semibold uppercase">Grupo y RH <span class="text-red-500">*</span></label>
+            <select id="group_rh" name="grupo_rh" class="w-full border-none rounded-md bg-white shadow-sm">
+              <option value="DESC" {% if paciente.grupo_rh == 'DESC' %} selected {% endif %}>DESCONOCIDO</option>
+              <option value="A+" {% if paciente.grupo_rh == 'A+' %} selected {% endif %}>A+</option>
+              <option value="B+" {% if paciente.grupo_rh == 'B+' %} selected {% endif %}>B+</option>
+              <option value="O+" {% if paciente.grupo_rh == 'O+' %} selected {% endif %}>O+</option>
+              <option value="AB+" {% if paciente.grupo_rh == 'AB+' %} selected {% endif %}>AB+</option>
+              <option value="A-" {% if paciente.grupo_rh == 'A-' %} selected {% endif %}>A-</option>
+              <option value="B-" {% if paciente.grupo_rh == 'B-' %} selected {% endif %}>B-</option>
+              <option value="O-" {% if paciente.grupo_rh == 'O-' %} selected {% endif %}>O-</option>
+              <option value="AB-" {% if paciente.grupo_rh == 'AB-' %} selected {% endif %}>AB-</option>
+            </select>
+          </div>
+
+        {% comment %} Escolaridad {% endcomment %}
+        <div class="w-3/12">
+          <label for="scholarship" class="block mb-2 text-sm font-semibold uppercase">Escolaridad</label>
+          <select id="scholarship" name="escolaridad" class="uppercase w-full border-none rounded-md bg-white shadow-sm">
+            <option value="">SELECCIONA UNO</option>
+            <option value="NINGUNA" {% if paciente.escolaridad == 'NINGUNA' %} selected {% endif %}>NINGUNA</option>
+            <option value="PRIMARIA" {% if paciente.escolaridad == 'PRIMARIA' %} selected {% endif %}>PRIMARIA</option>
+            <option value="PRIMARIA_T" {% if paciente.escolaridad == 'PRIMARIA_T' %} selected {% endif %}>PRIMARIA TRUNCA</option>
+            <option value="SECUNDARIA" {% if paciente.escolaridad == 'SECUNDARIA' %} selected {% endif %}>SECUNDARIA</option>
+            <option value="SECUNDARIA_T" {% if paciente.escolaridad == 'SECUNDARIA_T' %} selected {% endif %}>SECUNDARIA TRUNCA</option>
+            <option value="PREPARATORIA" {% if paciente.escolaridad == 'PREPARATORIA' %} selected {% endif %}>PREPARATORIA</option>
+            <option value="PREPARATORIA_T" {% if paciente.escolaridad == 'PREPARATORIA_T' %} selected {% endif %}>PREPARATORIA TRUNCA</option>
+            <option value="TECNICO" {% if paciente.escolaridad == 'TECNICO' %} selected {% endif %}>CARRERA TÉCNICA</option>
+            <option value="TECNICO_T" {% if paciente.escolaridad == 'TECNICO_T' %} selected {% endif %}>CARRERA TÉCNICA TRUNCA</option>
+            <option value="LICENCIATURA" {% if paciente.escolaridad == 'LICENCIATURA' %} selected {% endif %}>LICENCIATURA</option>
+            <option value="LICENCIATURA_T" {% if paciente.escolaridad == 'LICENCIATURA_T' %} selected {% endif %}>LICENCIATURA TRUNCA</option>
+            <option value="SUPERIOR" {% if paciente.escolaridad == 'SUPERIOR' %} selected {% endif %}>SUPERIOR</option>
+          </select>
+        </div>
+
+        {% comment %} Ocupacion {% endcomment %}
+        <div class="w-3/12">
+          <label for="ocupacion" class="block mb-2 text-sm font-semibold uppercase">Ocupación</label>
+          <input id="ocupacion" name="ocupacion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Contador" value="{{ paciente.ocupacion }}">
+        </div>
+>>>>>>> samuelosky
         </div>
   
         {% comment %} Direccion, Telefono y Religion {% endcomment %}
@@ -138,17 +200,17 @@
           {% comment %} Direccion {% endcomment %}
           <div class="w-6/12">
             <label for="direccion" class="block mb-2 text-sm font-semibold uppercase">Dirección</label>
-            <input id="direccion" name="direccion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente">
+            <input id="direccion" name="direccion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escribe la dirección del cliente" value="{{ paciente.direccion }}">
           </div>
           {% comment %} Telefono {% endcomment %}
           <div class="w-3/12">
             <label for="telefono_personal" class="block mb-2 text-sm font-semibold uppercase">Teléfono Personal</label>
-            <input id="telefono_personal" name="telefono_personal" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000">
+            <input id="telefono_personal" name="telefono_personal" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Ej. 4420000000" value="{{ paciente.telefono_personal }}">
           </div>
           {% comment %} Religion {% endcomment %}
           <div class="w-3/12">
             <label for="religion" class="block mb-2 text-sm font-semibold uppercase">Religión</label>
-            <input id="religion" name="religion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Católico">
+            <input id="religion" name="religion" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Ej. Católico" value="{{ paciente.religion }}">
           </div>
         </div>
 
@@ -157,49 +219,50 @@
           {% comment %} Curp {% endcomment %}
           <div class="w-3/12">
             <label for="curp" class="block mb-2 text-sm font-semibold uppercase">Curp</label>
-            <input id="curp" name="curp" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el CURP del paciente">
+            <input id="curp" name="curp" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el CURP del paciente" value="{{ paciente.curp }}">
           </div>
 
           {% comment %} Empleador {% endcomment %}
           <div class="w-3/12">
             <label for="empleador" class="block mb-2 text-sm font-semibold uppercase">Empleador</label>
-            <input id="empleador" name="empleador" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el empleador del paciente">
+            <input id="empleador" name="empleador" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el empleador del paciente" value="{{ paciente.empleador }}">
           </div>
 
           {% comment %} Nombre Contacdo de Emergencia {% endcomment %}
           <div class="w-3/12">
             <label for="nombre_contacto_emergencia" class="block mb-2 text-sm font-semibold uppercase truncate">Nombre (Contacto de emergencia)</label>
-            <input id="nombre_contacto_emergencia" name="nombre_contacto_emergencia" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el nombre del contacto">
+            <input id="nombre_contacto_emergencia" name="nombre_contacto_emergencia" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Escriba el nombre del contacto" value="{{ paciente.nombre_contacto_emergencia }}">
           </div>
 
           {% comment %} Numero Contacdo de Emergencia {% endcomment %}
           <div class="w-3/12">
             <label for="telefono_contacto_emergencia" class="block mb-2 text-sm font-semibold uppercase truncate">Teléfono (Contacto de emergencia)</label>
-            <input id="telefono_contacto_emergencia" name="telefono_contacto_emergencia" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Escriba el teléfono del contacto">
+            <input id="telefono_contacto_emergencia" name="telefono_contacto_emergencia" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="number" placeholder="Escriba el teléfono del contacto" value="{{ paciente.telefono_contacto_emergencia }}">
           </div>
-        
+
         </div>
-  
-          
+
+
         {% comment %} Alergias {% endcomment %}
         <div class="w-full">
-          <label for="alergias" class="block mb-2 text-sm font-semibold uppercase" >Alergias <span class="text-red-500">*</span></label>
-          <textarea id="alergias" name="alergias" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba las alergias correspondientes"></textarea>
+          <label for="alergias" class="block mb-2 text-sm font-semibold uppercase">Alergias <span class="text-red-500">*</span></label>
+          <textarea id="alergias" name="alergias" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba las alergias correspondientes">{{ paciente.alergias }}</textarea>
         </div>
 
         {% comment %} Notas {% endcomment %}
         <div class="w-full">
           <label for="notas_ficha" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
-          <textarea id="notas_ficha" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
+          <textarea id="notas_ficha" name="notas" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Agregue notas extra en caso de ser necesarias">{{ paciente.notas }}</textarea>
         </div>
-  
+
         {% csrf_token %}
 
         {% comment %} Botones de formulario {% endcomment %}
         <div class="flex justify-center gap-10 mt-20">
           <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
-          <button id="submit_ficha" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+          <button onclick="mostrarAlerta()" id="submit_ficha" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
         </div>
+<<<<<<< HEAD
       </form>
 
       <script>
@@ -326,3 +389,5 @@
     </script> -->
 </body>
 </html>
+=======
+>>>>>>> samuelosky
