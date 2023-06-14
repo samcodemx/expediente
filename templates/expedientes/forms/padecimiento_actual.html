@@ -8,43 +8,24 @@
       method="post"
     >
 
-<<<<<<< HEAD
 
     {% if paciente %}
-=======
-    <!-- ========================================
-       Mostrar alerta de Historia Clinica
-    ======================================== -->
-    {% if paciente %}
-    <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
-      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
-    </div>
-    {% endif %}
-
-    <!-- ========================================
-       Alertas de error/success
-    ======================================== -->
-        {% if error_msg_padecimiento %}
->>>>>>> samuelosky
     <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
       Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
     </div>
     {% endif %}
 
     {% if success_msg_padecimiento %}
-    <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
+    <div class="alert alert-success" style="color: green;">
         {{ success_msg_padecimiento }}
     </div>
 {% endif %}
-<<<<<<< HEAD
 
 {%if error_msg_padecimiento %}
 <div class="alert alert-success" style="color: red;">
   {{ error_msg_padecimiento }}
 </div>
 {% endif %}
-=======
->>>>>>> samuelosky
     
     <h1 class="text-xl font-bold text-main uppercase">Padecimientos Actuales</h1>
 
@@ -164,7 +145,6 @@
         </div>
     </form>
 
-<<<<<<< HEAD
 
     
     <!-- <script>
@@ -259,7 +239,5 @@
         }
     });
     </script> -->
-=======
->>>>>>> samuelosky
   </body>
 </html>
