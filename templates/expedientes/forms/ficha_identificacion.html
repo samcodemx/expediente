@@ -4,14 +4,7 @@
       <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
         {{ error_msg_ficha }}
       </div>
-      {% endif %}
-  
-      {% if success_msg_ficha %}
-      <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
-          {{ success_msg_ficha }}
-      </div>
-  {% endif %}
-    
+      {% endif %}  
 
       <h1 class="text-xl font-bold text-main uppercase">Ficha de Identificación</h1>
         {% comment %} Contenedor de Nombre, Apellido Paterno y Apellido Materno {% endcomment %}
@@ -69,7 +62,7 @@
   
           {% comment %} Estado Civil {% endcomment %}
           <div class="w-3/12">
-            <label for="estado_civil" class="block mb-2 text-sm font-semibold uppercase">Estado Civil <span class="text-red-500">*</span></label>
+            <label for="estado_civil" class="block mb-2 text-sm font-semibold uppercase">Estado Civil</label>
             <select id="estado_civil" name="estado_civil" class="w-full border-none rounded-md bg-white shadow-sm">
               <option value="">Selecciona uno</option>
               <option value="SOLTERO" {% if paciente.estado_civil == 'SOLTERO' %} selected {% endif %}>SOLTERO</option>
@@ -197,5 +190,5 @@
         {% comment %} Botones de formulario {% endcomment %}
         <div class="flex justify-center gap-10 mt-20">
           <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
-          <button id="submit_ficha" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+          <button onclick="mostrarAlerta()" id="submit_ficha" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
         </div>

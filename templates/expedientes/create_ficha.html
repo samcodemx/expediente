@@ -52,6 +52,18 @@
 
     document.getElementById("edad").value = edad + " años y " + meses + " meses";
   }
+
+
+    function mostrarAlerta() {
+      Swal.fire({
+        title: 'Guardado',
+        text: 'Paciente creado correctamente',
+        icon: 'success',
+        timer: 1500,
+        timerProgressBar: true,
+        showConfirmButton: false
+      })
+    }
 </script>
 
 {% endblock %}

@@ -7,6 +7,7 @@ from .forms import LoginForm
 from .models import Paciente, Antecedentes, Medico, PadecimientoActual, ExploracionFisica, Consulta
 from datetime import datetime, date
 from django.contrib import messages
+import time
 
 
 # Create your views here.
@@ -124,9 +125,9 @@ def guarda_ficha_identificacion_view(request):
             return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg})
 
         ficha.save()
-        # Obtener el ID del paciente
         paciente = ficha
-        return render(request, 'expedientes/create_ficha.html', {'paciente': paciente, 'success_msg_ficha': 'Paciente guardado con éxito'})
+        time.sleep(2)
+        return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente})
     
     return render(request, 'expedientes/create_ficha.html')
 
@@ -155,18 +156,17 @@ def guarda_antecedentes_view(request):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_antecedentes': error_msg})
+            return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente,'error_msg_antecedentes': error_msg})
 
         error_msg = validar_datos(antecedentes)
         if error_msg:
-            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_antecedentes': error_msg})
+            return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente,'error_msg_antecedentes': error_msg})
 
         antecedentes.save()
-        #messages.success(request, 'Datos guardados con éxito')
-        return render(request, 'expedientes/create.html', {'paciente': paciente, 'success_msg_antecedentes': 'Antecedentes guardados con éxito'})
-        #return render(request, 'expedientes/create.html', {'success_msg_antecedentes': 'Antecedentes guardados con éxito'})
+        time.sleep(2)
+        return render(request, 'expedientes/create_padecimientos.html', {'paciente': paciente})
 
-    return render(request, 'expedientes/create.html')
+    return render(request, 'expedientes/create_antecedentes.html')
 
 @login_required
 def guarda_padecimiento_view(request):
@@ -297,7 +297,7 @@ def update_ficha_identificacion_view(request, id_paciente):
         paciente.telefono_contacto_emergencia = telefono_contacto_emergencia
         paciente.notas = notas
 
-        print(paciente)
+        #print(paciente)
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
@@ -308,14 +308,47 @@ def update_ficha_identificacion_view(request, id_paciente):
             return render(request, 'expedientes/update_ficha.html', {'error_msg_ficha': error_msg})
 
         paciente.save()
-        return render(request, 'expedientes/update_ficha.html', {'paciente': paciente, 'success_msg_ficha': 'Datos actualizados con éxito'})
-    print(paciente)
+        time.sleep(2)
+        return render(request, 'expedientes/update_ficha.html', {'paciente': paciente})
+    #print(paciente)
     return render(request, 'expedientes/update_ficha.html', {'paciente': paciente})
 
 
 
-def updateAntecedentes_view(request,id_paciente):
-    return render(request, 'expedientes/update_antecedentes.html')
+def update_antecedentes_view(request, id_paciente):
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+
+    if request.method == 'POST':
+        campos_requeridos = ['ahf', 'apnp', 'app']
+
+        ahf = request.POST.get('ahf').upper()
+        apnp = request.POST.get('apnp').upper()
+        app = request.POST.get('app').upper()
+        ago = request.POST.get('ago').upper()
+
+        # Actualizar los campos de antecedentes existentes
+        antecedentes, created = Antecedentes.objects.get_or_create(paciente=paciente)
+        antecedentes.ahf = ahf
+        antecedentes.apnp = apnp
+        antecedentes.app = app
+        antecedentes.ago = ago
+        antecedentes.fecha = date.today()
+
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/update_antecedentes.html', {'error_msg_antecedentes': error_msg, 'paciente': paciente})
+
+        error_msg = validar_datos(paciente)
+        if error_msg:
+            return render(request, 'expedientes/update_antecedentes.html', {'error_msg_antecedentes': error_msg, 'paciente': paciente})
+
+        antecedentes.save()
+        time.sleep(2)
+        return render(request, 'expedientes/update_antecedentes.html', {'paciente': paciente})
+
+    return render(request, 'expedientes/update_antecedentes.html', {'paciente': paciente})
+
+
 def updatePadecimientos_view(request,id_paciente):
     return render(request, 'expedientes/update_padecimientos.html')
 def updateExploracion_view(request,id_paciente):
