@@ -26,8 +26,9 @@
     ======================================== -->
 
     <div id="form_ficha_identificacion">
-      <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg" action="{% url 'medical:guarda_ficha_identificacion'%}" method="post">
-      {% include "expedientes/forms/ficha_identificacion.html" %}
+      <form id="form_ficha_identificacion" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+        action="{% url 'medical:guarda_ficha_identificacion'%}" method="post">
+        {% include "expedientes/forms/ficha_identificacion.html" %}
       </form>
     </div>
 
@@ -45,7 +46,7 @@
 
     // Verificar si aún no ha cumplido años
     if (ahora.getMonth() < fechaNacimiento.getMonth() ||
-        (ahora.getMonth() == fechaNacimiento.getMonth() && ahora.getDate() < fechaNacimiento.getDate())) {
+      (ahora.getMonth() == fechaNacimiento.getMonth() && ahora.getDate() < fechaNacimiento.getDate())) {
       edad--;
       meses += 12;
     }
@@ -54,16 +55,16 @@
   }
 
 
-    function mostrarAlerta() {
-      Swal.fire({
-        title: 'Guardado',
-        text: 'Paciente creado correctamente',
-        icon: 'success',
-        timer: 1500,
-        timerProgressBar: true,
-        showConfirmButton: false
-      })
-    }
+  function mostrarAlerta() {
+    Swal.fire({
+      title: 'Guardado',
+      text: 'Paciente creado correctamente',
+      icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
+      showConfirmButton: false
+    })
+  }
 </script>
 
 {% endblock %}

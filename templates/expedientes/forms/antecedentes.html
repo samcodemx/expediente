@@ -1,20 +1,13 @@
 
-    {% if error_msg_antecedentes %}
-    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-      {{ error_msg_antecedentes }}
-    </div>
-    {% endif %}
-
-    {% if success_msg_antecedentes %}
-    <div class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center">
-        {{ success_msg_antecedentes }}
-    </div>
-    {% endif %}
-
-
     {% if paciente %}
     <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
       Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+    </div>
+    {% endif %}
+
+    {% if error_msg_antecedentes %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ error_msg_antecedentes }}
     </div>
     {% endif %}
 

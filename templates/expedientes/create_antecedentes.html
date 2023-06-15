@@ -27,7 +27,7 @@
 
     <div id="form_historia_clinica">
       <form id="formData_antecedentes" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
-        action="{% url 'medical:guarda_antecedentes' %}" method="post">
+        action="{% url 'medical:guarda_antecedentes' paciente.id%}" method="post">
         {% include "expedientes/forms/antecedentes.html" %}
       </form>
     </div>
@@ -40,7 +40,7 @@
   function mostrarAlerta() {
     Swal.fire({
       title: 'Guardado',
-      text: 'Paciente creado correctamente',
+      text: 'Antecedentes guardados correctamente',
       icon: 'success',
       timer: 1500,
       timerProgressBar: true,

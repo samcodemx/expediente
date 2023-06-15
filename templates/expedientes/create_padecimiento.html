@@ -24,13 +24,28 @@
     <!-- ========================================
        Formularios
     ======================================== -->
-
-    <div id="form_padecimiento_actual" class="formulario">
+    <form id="formData_padecimiento_actual" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+      action="{% url 'medical:guarda_padecimiento' %}" method="post">
+      <div id="form_padecimiento_actual" class="formulario">
         {% include "expedientes/forms/padecimiento_actual.html" %}
       </div>
+    </form>
 
   </div>
 
 </section>
+
+<script>
+  function mostrarAlerta() {
+    Swal.fire({
+      title: 'Guardado',
+      text: 'Padecimiento actual guardado correctamente',
+      icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
+      showConfirmButton: false
+    })
+  }
+</script>
 
 {% endblock %}

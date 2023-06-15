@@ -6,7 +6,6 @@ from django.core.exceptions import ValidationError
 from .forms import LoginForm
 from .models import Paciente, Antecedentes, Medico, PadecimientoActual, ExploracionFisica, Consulta
 from datetime import datetime, date
-from django.contrib import messages
 import time
 
 
@@ -42,9 +41,9 @@ def home_view(request):
     
     for paciente in pacientes:
         try:
-            paciente.antecedentes = Antecedentes.objects.get(paciente=paciente)
+            paciente.antecedentes = Antecedentes.objects.get(paciente=paciente) # type: ignore
         except Antecedentes.DoesNotExist:
-            paciente.antecedentes = None
+            paciente.antecedentes = None # type: ignore
     
     return render(request, 'home.html', {'pacientes': pacientes})
 
@@ -127,16 +126,17 @@ def guarda_ficha_identificacion_view(request):
         ficha.save()
         paciente = ficha
         time.sleep(2)
-        return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente})
+        return redirect('guarda_antecedentes', paciente_id=paciente.id)
     
     return render(request, 'expedientes/create_ficha.html')
 
 @login_required
-def guarda_antecedentes_view(request):
-    if request.method == 'POST':
-        campos_requeridos = ['paciente_id','ahf', 'apnp', 'app']
+def guarda_antecedentes_view(request, paciente_id):
+    paciente = get_object_or_404(Paciente, id=paciente_id)
 
-        paciente_id = request.POST.get('paciente_id')
+    if request.method == 'POST':
+        campos_requeridos = ['ahf', 'apnp', 'app']
+
         ahf = request.POST.get('ahf').upper()
         apnp = request.POST.get('apnp').upper()
         app = request.POST.get('app').upper()
@@ -152,8 +152,6 @@ def guarda_antecedentes_view(request):
             ago=ago
         )
 
-        paciente = get_object_or_404(Paciente, id=paciente_id)
-
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
             return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente,'error_msg_antecedentes': error_msg})
@@ -164,10 +162,12 @@ def guarda_antecedentes_view(request):
 
         antecedentes.save()
         time.sleep(2)
-        return render(request, 'expedientes/create_padecimientos.html', {'paciente': paciente})
+        # Redireccionar a la vista 'guarda_padecimiento' y pasar el ID del paciente como parámetro
+        return redirect('guarda_padecimiento', paciente_id=paciente_id)
 
-    return render(request, 'expedientes/create_antecedentes.html')
+    return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente})
 
+    
 @login_required
 def guarda_padecimiento_view(request):
     if request.method == 'POST':
@@ -203,18 +203,20 @@ def guarda_padecimiento_view(request):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_padecimiento': error_msg})
+            return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente,'error_msg_padecimiento': error_msg})
 
         error_msg = validar_datos(padecimiento)
         if error_msg:
-            return render(request, 'expedientes/create.html', {'paciente': paciente,'error_msg_padecimiento': error_msg})
+            return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente,'error_msg_padecimiento': error_msg})
 
         # Guardar el objeto PadecimientoActual en la base de datos
         padecimiento.save()
-        return render(request, 'expedientes/create.html', {'paciente': paciente,'success_msg_padecimiento': 'Padecimiento actual guardado con éxito'})
+        time.sleep(2)
+        return render(request, 'expedientes/create_exploracion.html', {'paciente': paciente,})
     
-    return render(request, 'expedientes/create.html')
+    return render(request, 'expedientes/create_padecimiento.html')
 
+@login_required
 def ver_expediente_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
     antecedentes = Antecedentes.objects.filter(paciente=paciente)
@@ -236,11 +238,6 @@ def ver_expediente_view(request, id_paciente):
 
 
 
-# Enlaces de los formularios (create)
-def createFicha_view(request):
-    return render(request, 'expedientes/create_ficha.html')
-def createAntecedentes_view(request):
-    return render(request, 'expedientes/create_antecedentes.html')
 def createPadecimientos_view(request):
     return render(request, 'expedientes/create_padecimientos.html')
 def createExploracion_view(request):
@@ -338,7 +335,7 @@ def update_antecedentes_view(request, id_paciente):
         if error_msg:
             return render(request, 'expedientes/update_antecedentes.html', {'error_msg_antecedentes': error_msg, 'paciente': paciente})
 
-        error_msg = validar_datos(paciente)
+        error_msg = validar_datos(antecedentes)
         if error_msg:
             return render(request, 'expedientes/update_antecedentes.html', {'error_msg_antecedentes': error_msg, 'paciente': paciente})
 
@@ -349,8 +346,58 @@ def update_antecedentes_view(request, id_paciente):
     return render(request, 'expedientes/update_antecedentes.html', {'paciente': paciente})
 
 
-def updatePadecimientos_view(request,id_paciente):
-    return render(request, 'expedientes/update_padecimientos.html')
+def update_padecimiento_view(request, id_paciente):
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+
+    if request.method == 'POST':
+        campos_requeridos = ['padecimiento_actual', 'piel_tegumentos', 'cabeza_cuello', 'torax', 'abdomen', 'genitourinario', 'musculo_extremidades', 'neurologico']
+
+        padecimiento_actual = request.POST.get('padecimiento_actual')
+        piel_tegumentos = request.POST.get('piel_tegumentos')
+        cabeza_cuello = request.POST.get('cabeza_cuello')
+        torax = request.POST.get('torax')
+        abdomen = request.POST.get('abdomen')
+        genitourinario = request.POST.get('genitourinario')
+        musculo_extremidades = request.POST.get('musculo_extremidades')
+        neurologico = request.POST.get('neurologico')
+        notas = request.POST.get('notas')
+
+        # Obtener el último registro de PadecimientoActual asociado al paciente
+        padecimiento = PadecimientoActual.objects.filter(paciente=paciente).latest()
+        padecimiento.paciente = paciente
+        padecimiento.medico = request.user.medico  # Asigna el médico actualmente logueado
+        padecimiento.fecha = datetime.now()
+        padecimiento.padecimiento_actual = padecimiento_actual
+        padecimiento.piel_tegumentos = piel_tegumentos
+        padecimiento.cabeza_cuello = cabeza_cuello
+        padecimiento.torax = torax
+        padecimiento.abdomen = abdomen
+        padecimiento.genitourinario = genitourinario
+        padecimiento.musculo_extremidades = musculo_extremidades
+        padecimiento.neurologico = neurologico
+        padecimiento.notas = notas
+
+        print(padecimiento)
+
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/update_padecimiento.html', {'error_msg_padecimiento': error_msg, 'paciente': paciente})
+
+        error_msg = validar_datos(padecimiento)
+        if error_msg:
+            return render(request, 'expedientes/update_padecimiento.html', {'error_msg_padecimiento': error_msg, 'paciente': paciente})
+
+        padecimiento.save()
+        time.sleep(2)
+        return render(request, 'expedientes/update_padecimiento.html', {'paciente': paciente})
+
+    return render(request, 'expedientes/update_padecimiento.html', {'paciente': paciente})
+
+
+
+
+
+
 def updateExploracion_view(request,id_paciente):
     return render(request, 'expedientes/update_exploracion.html')
 def updateConsultas_view(request,id_paciente):
