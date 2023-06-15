@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
@@ -7,6 +8,7 @@ from .forms import LoginForm
 from .models import Paciente, Antecedentes, Medico, PadecimientoActual, ExploracionFisica, Consulta
 from datetime import datetime, date
 import time
+from django.template import loader
 
 
 # Create your views here.
@@ -352,18 +354,18 @@ def update_padecimiento_view(request, id_paciente):
     if request.method == 'POST':
         campos_requeridos = ['padecimiento_actual', 'piel_tegumentos', 'cabeza_cuello', 'torax', 'abdomen', 'genitourinario', 'musculo_extremidades', 'neurologico']
 
-        padecimiento_actual = request.POST.get('padecimiento_actual')
-        piel_tegumentos = request.POST.get('piel_tegumentos')
-        cabeza_cuello = request.POST.get('cabeza_cuello')
-        torax = request.POST.get('torax')
-        abdomen = request.POST.get('abdomen')
-        genitourinario = request.POST.get('genitourinario')
-        musculo_extremidades = request.POST.get('musculo_extremidades')
-        neurologico = request.POST.get('neurologico')
+        padecimiento_actual = request.POST.get('padecimiento_actual').upper()
+        piel_tegumentos = request.POST.get('piel_tegumentos').upper()
+        cabeza_cuello = request.POST.get('cabeza_cuello').upper()
+        torax = request.POST.get('torax').upper()
+        abdomen = request.POST.get('abdomen').upper()
+        genitourinario = request.POST.get('genitourinario').upper()
+        musculo_extremidades = request.POST.get('musculo_extremidades').upper()
+        neurologico = request.POST.get('neurologico').upper()
         notas = request.POST.get('notas')
 
         # Obtener el último registro de PadecimientoActual asociado al paciente
-        padecimiento = PadecimientoActual.objects.filter(paciente=paciente).latest()
+        padecimiento = PadecimientoActual.objects.filter(paciente=paciente).latest('fecha')
         padecimiento.paciente = paciente
         padecimiento.medico = request.user.medico  # Asigna el médico actualmente logueado
         padecimiento.fecha = datetime.now()
@@ -389,10 +391,14 @@ def update_padecimiento_view(request, id_paciente):
 
         padecimiento.save()
         time.sleep(2)
-        return render(request, 'expedientes/update_padecimiento.html', {'paciente': paciente})
+        return render(request, 'expedientes/update_padecimiento.html', {'paciente': paciente, 'padecimiento': padecimiento})
 
-    return render(request, 'expedientes/update_padecimiento.html', {'paciente': paciente})
+    # Obtener el último registro de PadecimientoActual asociado al paciente
+    padecimiento = PadecimientoActual.objects.filter(paciente=paciente).order_by('-fecha').first()
 
+    template = loader.get_template('expedientes/update_padecimiento.html')
+    context = {'paciente': paciente, 'padecimiento': padecimiento}
+    return HttpResponse(template.render(context, request))
 
 
 
