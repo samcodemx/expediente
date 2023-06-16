@@ -18,10 +18,10 @@ urlpatterns = [
 
     # Rutas nuevas para los formularios (create)
     path('create-file/ficha/', views.guarda_ficha_identificacion_view, name='guarda_ficha_identificacion'),
-    path('create-file/antecedentes', views.guarda_antecedentes_view, name='guarda_antecedentes'),
-    path('create-file/padecimiento', views.guarda_padecimiento_view, name='guarda_padecimiento'),
-    path('create-file/exploracion', views.createExploracion_view, name='crear_exploracion'),
-    path('create-file/consultas', views.createConsultas_view, name='crear_consultas'),
+    path('create-file/antecedentes/', views.guarda_antecedentes_view, name='guarda_antecedentes'),
+    path('create-file/padecimiento/', views.guarda_padecimiento_view, name='guarda_padecimiento'),
+    path('create-file/exploracion/', views.createExploracion_view, name='crear_exploracion'),
+    path('create-file/consultas/', views.createConsultas_view, name='crear_consultas'),
 
     # Rutas nuevas para los formularios (update)
     path('update-file/<int:id_paciente>/ficha/', views.update_ficha_identificacion_view, name='update_ficha_identificacion'),

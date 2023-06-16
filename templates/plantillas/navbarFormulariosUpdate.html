@@ -3,11 +3,11 @@
 <html lang="es">
   <body>
     <div id="botonera" class="flex lg:container lg:mx-auto border-b-2 border-main shadow-sm">
-        <a id="fichaLink" href="/update-file/{{paciente.id}}/ficha" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Ficha de Identificación</a>
-        <a id="antecedentesLink" href="/update-file/{{paciente.id}}/antecedentes" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Antecedentes</a>
-        <a id="padecimientosLink" href="/update-file/{{paciente.id}}/padecimiento" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Padecimiento Actual</a>
-        <a id="exploracionLink" href="/update-file/{{paciente.id}}/exploracion" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Exploración Física</a>
-        <a id="consultasLink" href="/update-file/{{paciente.id}}/consultas" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Consultas</a>
+        <a id="fichaLink" href="/update-file/{{paciente.id}}/ficha/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Ficha de Identificación</a>
+        <a id="antecedentesLink" href="/update-file/{{paciente.id}}/antecedentes/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Antecedentes</a>
+        <a id="padecimientosLink" href="/update-file/{{paciente.id}}/padecimiento/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Padecimiento Actual</a>
+        <a id="exploracionLink" href="/update-file/{{paciente.id}}/exploracion/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Exploración Física</a>
+        <a id="consultasLink" href="/update-file/{{paciente.id}}/consultas/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Consultas</a>
       </div>
 
       <script>
@@ -22,23 +22,23 @@
           let consultasLink = document.getElementById('consultasLink');
   
           // Verificar la URL actual y aplicar los estilos correspondientes
-          if (currentURL.includes("/update-file/ficha")) {
+          if (currentURL.includes("/update-file/{{paciente.id}}/ficha/")) {
               fichaLink.classList.add("bg-background");
               fichaLink.classList.add("font-bold");
               fichaLink.classList.remove("bg-white");
-          } else if (currentURL.includes("/update-file/antecedentes")) {
+          } else if (currentURL.includes("/update-file/{{paciente.id}}/antecedentes/")) {
             antecedentesLink.classList.add("bg-background");
             antecedentesLink.classList.add("font-bold");
             antecedentesLink.classList.remove("bg-white");
-          } else if (currentURL.includes("/update-file/padecimientos")) {
+          } else if (currentURL.includes("/update-file/{{paciente.id}}/padecimiento/")) {
             padecimientosLink.classList.add("bg-background");
             padecimientosLink.classList.add("font-bold");
             padecimientosLink.classList.remove("bg-white");
-          } else if (currentURL.includes("/update-file/exploracion")) {
+          } else if (currentURL.includes("/update-file/{{paciente.id}}/exploracion/")) {
             exploracionLink.classList.add("bg-background");
             exploracionLink.classList.add("font-bold");
             exploracionLink.classList.remove("bg-white");
-          } else if (currentURL.includes("/update-file/consultas")) {
+          } else if (currentURL.includes("/update-file/{{paciente.id}}/consultas/")) {
             consultasLink.classList.add("bg-background");
             consultasLink.classList.add("font-bold");
             consultasLink.classList.remove("bg-white");
