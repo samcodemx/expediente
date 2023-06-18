@@ -1,0 +1,49 @@
+
+    {% if paciente %}
+    <div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
+      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+    </div>
+    {% endif %}
+
+    {% if error_msg_antecedentes %}
+    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+      {{ error_msg_antecedentes }}
+    </div>
+    {% endif %}
+
+    <h1 class="text-xl font-bold text-main uppercase">Antecedentes</h1>
+    {% comment %} Antecedentes Heredofamiliares {% endcomment %}
+    <div class="w-full">
+      <label for="ahf" class="block mb-2 text-sm font-semibold uppercase">Antecedentes Heredofamiliares <span class="text-red-500">*</span></label>
+      <textarea name="ahf" id="ahf" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="ahf">{{ paciente.antecedentes.ahf|default_if_none:'' }}</textarea>
+    </div>
+    
+    {% comment %} Antecedentes Personales No Patologicos {% endcomment %}
+    <div class="w-full">
+      <label for="apnp" class="block mb-2 text-sm font-semibold uppercase">Antecedentes Personales No Patológicos <span class="text-red-500">*</span></label>
+      <textarea name="apnp" id="apnp" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="apnp">{{ paciente.antecedentes.apnp|default_if_none:'' }}</textarea>
+    </div>
+    
+    {% comment %} Antecedentes Personales Patologicos {% endcomment %}
+    <div class="w-full">
+      <label for="app" class="block mb-2 text-sm font-semibold uppercase">Antecedentes Personales Patológicos <span class="text-red-500">*</span></label>
+      <textarea name="app" id="app" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="app">{{ paciente.antecedentes.app|default_if_none:'' }}</textarea>
+    </div>
+    
+    {% comment %} Antecedentes Gineco Obstetricos {% endcomment %}
+    <div class="w-full">
+      <label for="ago" class="block mb-2 text-sm font-semibold uppercase">Antecedentes Gineco-Obstétricos</label>
+      <textarea name="ago" id="ago" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="ago">{{ paciente.antecedentes.ago|default_if_none:'' }}</textarea>
+    </div>
+    
+    <input type="hidden" name="historia_clinica_id" value="{{ historia_clinica_id }}">
+    
+    {% comment %} Botones de formulario {% endcomment %}
+    {% csrf_token %}
+    <!-- Campo oculto para almacenar el ID del paciente -->
+    <input type="hidden" name="paciente_id" value="{{ paciente_id }}">
+    <div class="flex justify-center gap-10 mt-20">
+      <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+      <button onclick="mostrarAlerta()" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+    </div>
+    
