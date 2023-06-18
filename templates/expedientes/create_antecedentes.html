@@ -24,13 +24,18 @@
     <!-- ========================================
        Formularios
     ======================================== -->
-
+    {% if paciente %}
     <div id="form_historia_clinica">
       <form id="formData_antecedentes" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
-        action="{% url 'medical:guarda_antecedentes'%}" method="post">
+        action="{% url 'medical:guarda_antecedentes' id_paciente=paciente.id %}" method="post">
         {% include "expedientes/forms/antecedentes.html" %}
       </form>
     </div>
+    {% else %}
+    <div id="no_paciente" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg text-center">
+      <p>No se ha comenzado ningun registro</p>
+    </div>
+    {% endif %}
 
   </div>
 

@@ -9,6 +9,7 @@ from .models import Paciente, Antecedentes, Medico, PadecimientoActual, Explorac
 from datetime import datetime, date
 import time
 from django.template import loader
+from django.urls import reverse
 
 
 # Create your views here.
@@ -69,6 +70,16 @@ def validar_datos(datos):
         return error_message
     return None
 
+
+def renderiza_antecedentes_view(request):
+    if request.method == 'GET':
+        return render(request, 'expedientes/create_antecedentes.html')
+
+def renderiza_padecimiento_view(request):
+    if request.method == 'GET':
+        return render(request, 'expedientes/create_padecimiento.html')
+
+
 @login_required
 def guarda_ficha_identificacion_view(request):
     if request.method == 'POST':
@@ -126,24 +137,26 @@ def guarda_ficha_identificacion_view(request):
             return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg})
 
         paciente.save()
+        paciente_id = paciente.id
+        print(paciente.id)
         time.sleep(2)
-        return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente})
-    
+        return redirect(reverse('medical:guarda_antecedentes', args=[paciente_id]))
+
+        
     return render(request, 'expedientes/create_ficha.html')
 
 @login_required
-def guarda_antecedentes_view(request):
+def guarda_antecedentes_view(request, id_paciente):
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+
     if request.method == 'POST':
-        campos_requeridos = ['paciente_id', 'ahf', 'apnp', 'app']
+        campos_requeridos = ['ahf', 'apnp', 'app']
 
         ahf = request.POST.get('ahf').upper()
         apnp = request.POST.get('apnp').upper()
         app = request.POST.get('app').upper()
         ago = request.POST.get('ago').upper()
         paciente_id = request.POST.get('paciente_id')
-
-        # Obtener el paciente desde la base de datos
-        paciente = get_object_or_404(Paciente, id=paciente_id)
 
         antecedentes = Antecedentes(
             paciente=paciente,
@@ -164,18 +177,19 @@ def guarda_antecedentes_view(request):
             return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente, 'error_msg_antecedentes': error_msg})
 
         antecedentes.save()
-
-        # Redireccionar a la vista 'guarda_padecimiento' y pasar el ID del paciente como parámetro
+        time.sleep(2)
         return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente})
 
-    return render(request, 'expedientes/create_antecedentes.html')
+    print('get')
+    return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente})
 
 
-    
 @login_required
-def guarda_padecimiento_view(request):
+def guarda_padecimiento_view(request, id_paciente):
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+
     if request.method == 'POST':
-        campos_requeridos = ['paciente_id','padecimiento_actual','piel_tegumentos','cabeza_cuello','torax','abdomen','genitourinario','musculo_extremidades','neurologico',]
+        campos_requeridos = ['padecimiento_actual','piel_tegumentos','cabeza_cuello','torax','abdomen','genitourinario','musculo_extremidades','neurologico',]
 
         paciente_id = request.POST.get('paciente_id')
         padecimiento_actual = request.POST.get('padecimiento_actual').upper()
@@ -189,7 +203,7 @@ def guarda_padecimiento_view(request):
         notas = request.POST.get('notas').upper()
 
         padecimiento = PadecimientoActual(
-            paciente_id=paciente_id,
+            paciente=paciente,
             medico=request.user.medico,
             fecha=datetime.now(),
             padecimiento_actual=padecimiento_actual,
@@ -202,8 +216,6 @@ def guarda_padecimiento_view(request):
             neurologico=neurologico,
             notas=notas
         )
-
-        paciente = get_object_or_404(Paciente, id=paciente_id)
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
@@ -218,7 +230,7 @@ def guarda_padecimiento_view(request):
         time.sleep(2)
         return render(request, 'expedientes/create_exploracion.html', {'paciente': paciente,})
     
-    return render(request, 'expedientes/create_padecimiento.html')
+    return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente,})
 
 @login_required
 def ver_expediente_view(request, id_paciente):

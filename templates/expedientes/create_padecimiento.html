@@ -24,13 +24,18 @@
     <!-- ========================================
        Formularios
     ======================================== -->
+    {% if paciente %}
     <form id="formData_padecimiento_actual" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
-      action="{% url 'medical:guarda_padecimiento' %}" method="post">
+      action="{% url 'medical:guarda_padecimiento' id_paciente=paciente.id %}" method="post">
       <div id="form_padecimiento_actual" class="formulario">
         {% include "expedientes/forms/padecimiento_actual.html" %}
       </div>
     </form>
-
+    {% else %}
+    <div id="no_paciente" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg text-center">
+      <p>No se ha comenzado ningun registro</p>
+    </div>
+    {% endif %}
   </div>
 
 </section>

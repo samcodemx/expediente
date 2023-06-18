@@ -41,7 +41,7 @@
     {% comment %} Botones de formulario {% endcomment %}
     {% csrf_token %}
     <!-- Campo oculto para almacenar el ID del paciente -->
-    <input type="hidden" name="paciente_id" value="{{ paciente.id }}">
+    <input type="hidden" name="paciente_id" value="{{ paciente_id }}">
     <div class="flex justify-center gap-10 mt-20">
       <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
       <button onclick="mostrarAlerta()" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>

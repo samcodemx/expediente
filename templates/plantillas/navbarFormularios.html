@@ -2,13 +2,24 @@
 <!DOCTYPE html>
 <html lang="es">
   <body>
+    {% if paciente %}
+    
     <div id="botonera" class="flex lg:container lg:mx-auto border-b-2 border-main shadow-sm">
+        <a id="fichaLink" href="/create-file/ficha/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Ficha de Identificación</a>
+        <a id="antecedentesLink" href="/create-file/antecedentes/{{ paciente.id }}/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Antecedentes</a>
+        <a id="padecimientosLink" href="/create-file/padecimiento/{{ paciente.id }}/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Padecimiento Actual</a>
+        <a id="exploracionLink" href="/create-file/exploracion/{{ paciente.id }}/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Exploración Física</a>
+        <a id="consultasLink" href="/create-file/consultas/{{ paciente.id }}/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Consultas</a>
+      </div>
+    {% else %}
+      <div id="botonera" class="flex lg:container lg:mx-auto border-b-2 border-main shadow-sm">
         <a id="fichaLink" href="/create-file/ficha/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Ficha de Identificación</a>
         <a id="antecedentesLink" href="/create-file/antecedentes/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white" type="button">Antecedentes</a>
         <a id="padecimientosLink" href="/create-file/padecimiento/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Padecimiento Actual</a>
         <a id="exploracionLink" href="/create-file/exploracion/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Exploración Física</a>
         <a id="consultasLink" href="/create-file/consultas/" class="py-2 px-4 rounded-t-lg border-gray-200 bg-white">Consultas</a>
       </div>
+    {% endif %}
 
       <script>
           // Obtener la URL actual
@@ -26,7 +37,7 @@
               fichaLink.classList.add("bg-background");
               fichaLink.classList.add("font-bold");
               fichaLink.classList.remove("bg-white");
-          } else if (currentURL.includes("/create-file/antecedentes/")) {
+          } else if (currentURL.includes("create-file/antecedentes/")) {
             antecedentesLink.classList.add("bg-background");
             antecedentesLink.classList.add("font-bold");
             antecedentesLink.classList.remove("bg-white");
