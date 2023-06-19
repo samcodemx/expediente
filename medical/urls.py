@@ -10,7 +10,9 @@ urlpatterns = [
     path("create-file/", views.createExp_view, name="create"),
     #path('create-file/guardar-ficha/', views.guarda_ficha_identificacion_view, name='guarda_ficha_identificacion'),
     path('create-file/antecedentes/', views.renderiza_antecedentes_view, name='render_antecedentes'),
-    path('create-file/padecimiento/', views.renderiza_padecimiento_view, name='guarda_padecimiento'),
+    path('create-file/padecimiento/', views.renderiza_padecimiento_view, name='render_padecimiento'),
+    path('create-file/exploracion/', views.renderiza_exploracion_view, name='render_exploracion'),
+    path('create-file/consultas/', views.renderiza_consulta_view, name='render_consultas'),
 
 
     # Ruta para ver el expediente
@@ -20,14 +22,14 @@ urlpatterns = [
     path('create-file/ficha/', views.guarda_ficha_identificacion_view, name='guarda_ficha_identificacion'),
     path('create-file/antecedentes/<int:id_paciente>/', views.guarda_antecedentes_view, name='guarda_antecedentes'),
     path('create-file/padecimiento/<int:id_paciente>/', views.guarda_padecimiento_view, name='guarda_padecimiento'),
-    path('create-file/exploracion/<int:id_paciente>/', views.createExploracion_view, name='crear_exploracion'),
-    path('create-file/consultas/<int:id_paciente>/', views.createConsultas_view, name='crear_consultas'),
+    path('create-file/exploracion/<int:id_paciente>/', views.guarda_exploracion_view, name='guarda_exploracion'),
+    path('create-file/consultas/<int:id_paciente>/', views.guarda_consulta_view, name='guarda_consultas'),
 
     # Rutas nuevas para los formularios (update)
     path('update-file/<int:id_paciente>/ficha/', views.update_ficha_identificacion_view, name='update_ficha_identificacion'),
     path('update-file/<int:id_paciente>/antecedentes/', views.update_antecedentes_view, name='update_antecedentes'),
     path('update-file/<int:id_paciente>/padecimiento/', views.update_padecimiento_view, name='update_padecimiento'),
-    path('update-file/<int:id_paciente>/exploracion/', views.updateExploracion_view, name='actualizar_exploracion'),
+    path('update-file/<int:id_paciente>/exploracion/', views.update_exploracion_view, name='update_exploracion'),
     path('update-file/<int:id_paciente>/consultas/', views.updateConsultas_view, name='actualizar_consultas'),
 
 

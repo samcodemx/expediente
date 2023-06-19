@@ -26,11 +26,29 @@
     ======================================== -->
 
     <div id="form_exploracion_fisica" class="formulario">
+      <form
+      id="formData_exploracion_fisica"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+      action="{% url 'medical:update_exploracion' paciente.id %}"
+      method="post"
+    >
         {% include "expedientes/forms/exploracion_fisica.html" %}
-      </div>
-
+    </form>
   </div>
 
 </section>
+
+<script>
+  function mostrarAlerta() {
+    Swal.fire({
+      title: 'Guardado',
+      text: 'Paciente actualizado correctamente',
+      icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
+      showConfirmButton: false
+    })
+  }
+</script>
 
 {% endblock %}

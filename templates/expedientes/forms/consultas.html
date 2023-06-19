@@ -1,39 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-  <body>
-    <form
-      id="formData_consultas"
-      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
-      method="post"
-    >
+
       <!-- ========================================
        Mostrar alerta de Historia Clinica
     ======================================== -->
       {% if paciente %}
-      <div
-        class="w-full bg-blue-200 border-blue-500 text-blue-500 rounded-lg p-3 text-center"
-      >
-        Historia clinica del paciente: {{ paciente.nombre }} {{
-        paciente.apellido_pat }} {{ paciente.apellido_mat }}
+      <div class="w-full bg-blue-200 border-blue-500 text-blue-500 rounded-lg p-3 text-center">
+        Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
       </div>
       {% endif %}
 
       <!-- ========================================
        Alertas de error/success
     ======================================== -->
-      {% if error_msg_exploracion %}
+      {% if error_msg_consulta %}
       <div
-        class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center"
-      >
-        {{ error_msg_padecimiento }}
-      </div>
-      {% endif %} {% if success_msg_exploracion %}
-      <div
-        class="w-full bg-green-200 border-green-500 text-green-500 rounded-lg p-3 text-center"
-      >
-        {{ success_msg_padecimiento }}
+        class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+        {{ error_msg_consulta }}
       </div>
       {% endif %}
+
       <h1 class="text-xl font-bold text-main uppercase">Consultas</h1>
       {% csrf_token %}
 
@@ -109,10 +93,8 @@
         <button
           type="submit"
           class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold"
-        >
+          onclick="mostrarAlerta()"
+          >
           Enviar Datos
         </button>
       </div>
-    </form>
-  </body>
-</html>
