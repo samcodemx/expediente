@@ -26,12 +26,12 @@
     {% comment %} Frecuencia cardiaca, frecuencia respiratoria y Oxigeno
     {% endcomment %}
     <div class="grid grid-cols-3 gap-4">
-      {% comment %} Frecuencia Cardiaca {% endcomment %}
+      {% comment %} Frec. Cardiaca {% endcomment %}
       <div>
         <label
           for="frecuencia_cardiaca"
           class="block mb-2 text-sm font-semibold uppercase"
-          >FC <span class="text-red-500">*</span></label
+          >Frec. Cardiaca <span class="text-red-500">*</span></label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
@@ -50,7 +50,7 @@
         <label
           for="frecuencia_respiratoria"
           class="block mb-2 text-sm font-semibold uppercase"
-          >FR <span class="text-red-500">*</span></label
+          >Frec. Respiratoria <span class="text-red-500">*</span></label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
@@ -67,7 +67,7 @@
       {% comment %} Oxigenacion {% endcomment %}
       <div>
         <label for="saturacion_oxigeno" class="block mb-2 text-sm font-semibold uppercase"
-          >SpO2 <span class="text-red-500">*</span></label
+          >SpO2</label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
@@ -87,14 +87,14 @@
       {% comment %} Temperatura {% endcomment %}
       <div>
         <label for="temperatura" class="block mb-2 text-sm font-semibold uppercase"
-          >Temp <span class="text-red-500">*</span></label
+          >Temperatura <span class="text-red-500">*</span></label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
             id="temperatura"
             name="temperatura"
             class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
+            type="text"
             value="{{ exploracion.temperatura|default_if_none:'' }}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">°C</p>
@@ -106,7 +106,7 @@
         <label
           for="presion_arterial"
           class="block mb-2 text-sm font-semibold uppercase"
-          >TA <span class="text-red-500">*</span></label
+          >presion arterial <span class="text-red-500">*</span></label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
@@ -125,14 +125,14 @@
         <label
           for="glucosa"
           class="block mb-2 text-sm font-semibold uppercase truncate"
-          >Guclosa Capilar <span class="text-red-500">*</span></label
+          >Guclosa Capilar</label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
             id="glucosa"
             name="glucosa"
             class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
+            type="text"
             value="{{ exploracion.glucosa|default_if_none:'' }}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">mg/dl</p>
@@ -145,7 +145,7 @@
       {% comment %} Talla {% endcomment %}
       <div>
         <label for="talla" class="block mb-2 text-sm font-semibold uppercase"
-          >cm <span class="text-red-500">*</span></label
+          >talla </label
         >
 
         <div class="w-full relative bg-white rounded-lg">
@@ -153,7 +153,7 @@
             id="talla"
             name="talla"
             class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
+            type="text"
             value="{{ exploracion.talla|default_if_none:'' }}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">cm</p>
@@ -163,14 +163,14 @@
       {% comment %} Peso {% endcomment %}
       <div>
         <label for="peso" class="block mb-2 text-sm font-semibold uppercase"
-          >kg <span class="text-red-500">*</span></label
+          >peso </label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
             id="peso"
             name="peso"
             class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
+            type="text"
             value="{{ exploracion.peso|default_if_none:'' }}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">kg</p>
@@ -180,15 +180,15 @@
       {% comment %} IMC {% endcomment %}
       <div>
         <label for="imc" class="block mb-2 text-sm font-semibold uppercase"
-          >IMC <span class="text-red-500">*</span></label
+          >IMC </label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
             id="imc"
             name="imc"
             class="w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
-            value="{{ exploracion.imc|default_if_none:'' }}"
+            type="text"
+            value=""
           />
         </div>
       </div>
@@ -205,7 +205,7 @@
       <label
         for="descripcion_exploracion"
         class="block mb-2 text-sm font-semibold uppercase"
-        >Hallagos <span class="text-red-500">*</span></label
+        >Hallazgos <span class="text-red-500">*</span></label
       >
       <textarea
         id="descripcion_exploracion"

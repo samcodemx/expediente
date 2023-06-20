@@ -2,10 +2,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from .forms import LoginForm
-from .models import Paciente, Antecedentes, Medico, PadecimientoActual, ExploracionFisica, Consulta
+from .models import Paciente, Antecedentes, PadecimientoActual, ExploracionFisica, Consulta
 from datetime import datetime, date
 import time
 from django.template import loader
@@ -90,6 +89,7 @@ def renderiza_consulta_view(request):
 
 @login_required
 def guarda_ficha_identificacion_view(request):
+    datos_formulario = request.POST.dict()
     if request.method == 'POST':
         campos_requeridos = ['nombre', 'apellido_pat', 'apellido_mat', 'fecha_nacimiento', 'genero', 'grupo_rh', 'alergias']
 
@@ -138,11 +138,11 @@ def guarda_ficha_identificacion_view(request):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg})
+            return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg, 'datos_formulario': datos_formulario})
 
         error_msg = validar_datos(paciente)
         if error_msg:
-            return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg})
+            return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg, 'datos_formulario': datos_formulario})
 
         paciente.save()
         paciente_id = paciente.id

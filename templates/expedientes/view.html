@@ -157,6 +157,9 @@
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales no patológicos: </span>{{ paciente.antecedentes.apnp }}</p>
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales patológicos: </span>{{ paciente.antecedentes.app }}</p>
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes gineco-obstétricos: </span>{{ paciente.antecedentes.ago }}</p>
+                {% if paciente.antecedentes.notas %}
+                  <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ paciente.antecedentes.notas }}</p>
+                {% endif %}
               {% else %}
                 <p class="uppercase">Sin datos</p>
               {% endif %}
@@ -169,12 +172,12 @@
         {% if padecimiento %}
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <div class="space-y-2">
-            <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimientos Actuales</h2>
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimiento Actual</h2>
             {% comment %} Padecimiento Actual {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">Padecimiento actual: </span>{{ padecimiento.padecimiento_actual }}</p>
+            <p class="uppercase"><span class="font-bold text-lg">Descripción: </span>{{ padecimiento.padecimiento_actual }}</p>
           </div>
           <div class="space-y-2">
-            <h2 class="text-xl font-bold text-main uppercase mb-2">Interrogativo por aparatos y sistemas</h2>
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Interrogatorio por aparatos y sistemas</h2>
             {% comment %} Piel y Tegumentos {% endcomment %}
             <p class="uppercase"><span class="font-bold text-lg">Piel y tegumentos: </span>{{ padecimiento.piel_tegumentos }}</p>
             {% comment %} Cabeza y Cuello {% endcomment %}
@@ -190,7 +193,9 @@
             {% comment %} Neurológico {% endcomment %}
             <p class="uppercase"><span class="font-bold text-lg">Neurológico: </span>{{ padecimiento.neurologico }}</p>
             {% comment %} Notas {% endcomment %}
+            {% if padecimiento.notas %}
             <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ padecimiento.notas }}</p>
+            {% endif %}
           </div>
         </div>
       {% else %}
@@ -229,6 +234,10 @@
             <p class="uppercase"><span class="font-bold text-lg">Peso: </span>{{ exploracion.peso }} kg</p>
             {% comment %} IMC {% endcomment %}
             <p class="uppercase"><span class="font-bold text-lg">IMC: </span>{{ exploracion.imc }}</p>
+            {% comment %} Notas {% endcomment %}
+            {% if exploracion.notas %}
+            <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ exploracion.notas }}</p>
+            {% endif %}
           </div>
         </div>
       {% else %}
@@ -254,7 +263,9 @@
               {% comment %} Folio {% endcomment %}
               <p class="uppercase"><span class="font-bold text-lg">Folio: </span>{{ consulta.folio_receta }}</p>
               {% comment %} Notas {% endcomment %}
+              {% if consulta.notas %}
               <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ consulta.notas }}</p>
+              {% endif %}
             </div>
           </div>
         {% endfor %}

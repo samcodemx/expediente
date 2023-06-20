@@ -32,5 +32,4 @@ urlpatterns = [
     path('update-file/<int:id_paciente>/exploracion/', views.update_exploracion_view, name='update_exploracion'),
     path('update-file/<int:id_paciente>/consultas/', views.updateConsultas_view, name='update_consultas'),
 
-
 ]
