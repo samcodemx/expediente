@@ -86,6 +86,9 @@ def renderiza_consulta_view(request):
     if request.method == 'GET':
         return render(request, 'expedientes/create_consultas.html')
 
+def renderiza_ayuda_view(request):
+    if request.method == 'GET':
+        return render(request, 'help.html')
 
 @login_required
 def guarda_ficha_identificacion_view(request):
@@ -145,10 +148,8 @@ def guarda_ficha_identificacion_view(request):
             return render(request, 'expedientes/create_ficha.html', {'error_msg_ficha': error_msg, 'datos_formulario': datos_formulario})
 
         paciente.save()
-        paciente_id = paciente.id
-        print(paciente.id)
         time.sleep(2)
-        return redirect(reverse('medical:guarda_antecedentes', args=[paciente_id]))
+        return redirect(reverse('medical:guarda_antecedentes', args=[paciente.id]))
 
         
     return render(request, 'expedientes/create_ficha.html')
@@ -353,7 +354,6 @@ def ver_expediente_view(request, id_paciente):
         'exploracion': exploracion,
         'consultas': consultas,
     }
-    print(paciente.escolaridad)
     return render(request, 'expedientes/view.html', context)
 
 
@@ -410,10 +410,6 @@ def update_ficha_identificacion_view(request, id_paciente):
         paciente.telefono_contacto_emergencia = telefono_contacto_emergencia
         paciente.notas = notas
 
-        #print(paciente)
-
-
-
         error_msg = validar_datos(paciente)
         if error_msg:
             return render(request, 'expedientes/update_ficha.html', {'error_msg_ficha': error_msg})
@@ -421,7 +417,7 @@ def update_ficha_identificacion_view(request, id_paciente):
         paciente.save()
         time.sleep(2)
         return render(request, 'expedientes/update_ficha.html', {'paciente': paciente})
-    #print(paciente)
+
     return render(request, 'expedientes/update_ficha.html', {'paciente': paciente})
 
 
@@ -494,8 +490,6 @@ def update_padecimiento_view(request, id_paciente):
         padecimiento.neurologico = neurologico
         padecimiento.notas = notas
 
-        print(padecimiento)
-
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
             return render(request, 'expedientes/update_padecimiento.html', {'error_msg_padecimiento': error_msg, 'paciente': paciente})
@@ -514,9 +508,6 @@ def update_padecimiento_view(request, id_paciente):
     template = loader.get_template('expedientes/update_padecimiento.html')
     context = {'paciente': paciente, 'padecimiento': padecimiento}
     return HttpResponse(template.render(context, request))
-
-
-
 
 
 def update_exploracion_view(request,id_paciente):
@@ -576,7 +567,7 @@ def update_exploracion_view(request,id_paciente):
     context = {'paciente': paciente, 'exploracion': exploracion}
     return HttpResponse(template.render(context, request))
 
-def updateConsultas_view(request,id_paciente):
+def update_consultas_view(request,id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
     
 
