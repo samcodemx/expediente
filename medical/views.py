@@ -385,6 +385,10 @@ def update_ficha_identificacion_view(request, id_paciente):
         telefono_contacto_emergencia = ''.join(filter(str.isdigit, request.POST.get('telefono_contacto_emergencia')))
         notas = request.POST.get('notas').upper()
 
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/update_ficha.html', {'error_msg_ficha': error_msg})
+
         # Actualizar los campos del paciente existente
         paciente.nombre = nombre
         paciente.apellido_pat = apellido_pat
@@ -408,9 +412,7 @@ def update_ficha_identificacion_view(request, id_paciente):
 
         #print(paciente)
 
-        error_msg = validar_campos_requeridos(request, campos_requeridos)
-        if error_msg:
-            return render(request, 'expedientes/update_ficha.html', {'error_msg_ficha': error_msg})
+
 
         error_msg = validar_datos(paciente)
         if error_msg:
@@ -574,6 +576,47 @@ def update_exploracion_view(request,id_paciente):
     context = {'paciente': paciente, 'exploracion': exploracion}
     return HttpResponse(template.render(context, request))
 
-
 def updateConsultas_view(request,id_paciente):
-    return render(request, 'expedientes/update_consultas.html')
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+    
+
+    if request.method == 'POST':
+        campos_requeridos = ['folio_receta','diagnostico']
+
+        #motivo_consulta = request.POST.get('motivo_consulta').upper()
+        fecha = request.POST.get('fecha')
+        diagnostico = request.POST.get('diagnostico').upper()
+        folio_receta = request.POST.get('folio_receta')
+        notas = request.POST.get('notas')
+        if notas:
+            notas = notas.upper()
+
+        # Obtener el último registro de Consulta asociado al paciente
+        if Consulta.objects.filter(paciente=paciente).exists():
+            consulta = Consulta.objects.filter(paciente=paciente).latest('fecha')
+        else:
+            consulta = Consulta()
+        consulta.paciente = paciente
+        consulta.medico = request.user.medico
+        consulta.fecha = fecha
+        consulta.diagnostico = diagnostico
+        consulta.folio_receta = folio_receta
+        consulta.notas = notas
+
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/update_consultas.html', {'error_msg_consulta': error_msg, 'paciente': paciente, 'consulta': consulta})
+
+        error_msg = validar_datos(consulta)
+        if error_msg:
+            return render(request, 'expedientes/update_consultas.html', {'error_msg_consulta': error_msg, 'paciente': paciente, 'consulta': consulta})
+
+        consulta.save()
+        time.sleep(2)
+        return render(request, 'expedientes/update_consultas.html', {'paciente': paciente, 'consulta': consulta})
+
+    consulta = Consulta.objects.filter(paciente=paciente).order_by('-fecha').first()
+
+    template = loader.get_template('expedientes/update_consultas.html')
+    context = {'paciente': paciente, 'consulta': consulta}
+    return HttpResponse(template.render(context, request))

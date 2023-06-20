@@ -1,100 +1,93 @@
 
-      <!-- ========================================
-       Mostrar alerta de Historia Clinica
-    ======================================== -->
-      {% if paciente %}
-      <div class="w-full bg-blue-200 border-blue-500 text-blue-500 rounded-lg p-3 text-center">
-        Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
-      </div>
-      {% endif %}
+  <!-- ========================================
+    Mostrar alerta de Historia Clinica
+  ======================================== -->
+  {% if paciente %}
+  <div class="w-full bg-blue-200 border-blue-500 text-blue-500 rounded-lg p-3 text-center">
+    Historia clínica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+  </div>
+  {% endif %}
 
-      <!-- ========================================
-       Alertas de error/success
-    ======================================== -->
-      {% if error_msg_consulta %}
-      <div
-        class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-        {{ error_msg_consulta }}
-      </div>
-      {% endif %}
+  <!-- ========================================
+    Alertas de error/success
+  ======================================== -->
+  {% if error_msg_consulta %}
+  <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+    {{ error_msg_consulta }}
+  </div>
+  {% endif %}
 
-      <h1 class="text-xl font-bold text-main uppercase">Consultas</h1>
-      {% csrf_token %}
+  <h1 class="text-xl font-bold text-main uppercase">Consultas</h1>
+  {% csrf_token %}
 
-      <div class="w-full flex gap-4">
-        {% comment %} Fecha de consulta {% endcomment %}
-        <div class="w-3/12">
-          <label for="fecha" class="block mb-2 text-sm font-semibold uppercase"
-            >Fecha <span class="text-red-500">*</span></label
-          >
-          <input
-            id="fecha"
-            name="fecha"
-            class="uppercase w-full border-none rounded-md bg-white shadow-sm"
-            type="date"
-          />
-        </div>
+  <div class="w-full flex gap-4">
+    <!-- Fecha de consulta -->
+    <div class="w-3/12">
+      <label for="fecha" class="block mb-2 text-sm font-semibold uppercase">
+        Fecha <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="fecha"
+        name="fecha"
+        class="uppercase w-full border-none rounded-md bg-white shadow-sm"
+        type="date"
+        value="{{ consulta.fecha | date:'Y-m-d' }}"
+      />
+    </div>
 
-        {% comment %} Diagnostico de consulta {% endcomment %}
-        <div class="w-6/12">
-          <label
-            for="diagnostico"
-            class="block mb-2 text-sm font-semibold uppercase"
-            >Diagnóstico <span class="text-red-500">*</span></label
-          >
-          <input
-            id="diagnostico"
-            name="diagnostico"
-            class="uppercase w-full border-none rounded-md bg-white shadow-sm"
-            type="text"
-            placeholder="Escribe el diagnóstico de la consulta"
-          />
-        </div>
+    <!-- Diagnóstico de consulta -->
+    <div class="w-6/12">
+      <label for="diagnostico" class="block mb-2 text-sm font-semibold uppercase">
+        Diagnóstico <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="diagnostico"
+        name="diagnostico"
+        class="uppercase w-full border-none rounded-md bg-white shadow-sm"
+        type="text"
+        placeholder="Escribe el diagnóstico de la consulta"
+        value="{{ consulta.diagnostico|default_if_none:'' }}"
+      />
+    </div>
 
-        {% comment %} Folio de consulta {% endcomment %}
-        <div class="w-3/12">
-          <label
-            for="folio_receta"
-            class="block mb-2 text-sm font-semibold uppercase"
-            >Folio <span class="text-red-500">*</span></label
-          >
-          <input
-            id="folio_receta"
-            name="folio_receta"
-            class="uppercase w-full border-none rounded-md bg-white shadow-sm"
-            type="number"
-            placeholder="Escribe el folio de la consulta"
-          />
-        </div>
-      </div>
+    <!-- Folio de consulta -->
+    <div class="w-3/12">
+      <label for="folio_receta" class="block mb-2 text-sm font-semibold uppercase">
+        Folio <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="folio_receta"
+        name="folio_receta"
+        class="uppercase w-full border-none rounded-md bg-white shadow-sm"
+        type="number"
+        placeholder="Escribe el folio de la consulta"
+        value="{{ consulta.folio_receta|default_if_none:'' }}"
+      />
+    </div>
+  </div>
 
-      {% comment %} Notas {% endcomment %}
-      <div class="w-full">
-        <label
-          for="notas_consulta"
-          class="block mb-2 text-sm font-semibold uppercase"
-          >Notas</label
-        >
-        <textarea
-          id="notas_consulta"
-          name="notas"
-          class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
-          placeholder="Agregue notas extra en caso de ser necesarias"
-        ></textarea>
-      </div>
+  <!-- Notas -->
+  <div class="w-full">
+    <label for="notas_consulta" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
+    <textarea
+      id="notas_consulta"
+      name="notas"
+      class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
+      placeholder="Agregue notas extra en caso de ser necesarias"
+    >{{ consulta.notas|default_if_none:'' }}</textarea>
+  </div>
 
-      {% comment %} Botones de formulario {% endcomment %}
-      <div class="flex justify-center gap-10 mt-20">
-        <a
-          href="/"
-          class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold"
-          >Cancelar</a
-        >
-        <button
-          type="submit"
-          class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold"
-          onclick="mostrarAlerta()"
-          >
-          Enviar Datos
-        </button>
-      </div>
+  <!-- Botones de formulario -->
+  <div class="flex justify-center gap-10 mt-20">
+    <a
+      href="/"
+      class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold"
+    >Cancelar</a>
+    <button
+      type="submit"
+      class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold"
+      onclick="mostrarAlerta()"
+    >
+      Enviar Datos
+    </button>
+  </div>

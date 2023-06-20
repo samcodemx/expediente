@@ -26,9 +26,14 @@
     ======================================== -->
 
     <div id="form_consultas" class="formulario">
+      <form
+      id="formData_consultas"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+      action="{% url 'medical:update_consultas' paciente.id %}"
+      method="post"
+    >
         {% include "expedientes/forms/consultas.html" %}
-      </div>
-
+    </form>
   </div>
 
 </section>
