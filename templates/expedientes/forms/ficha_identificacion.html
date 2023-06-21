@@ -12,7 +12,7 @@
 
           <div class="w-6/12">
             <label for="nombre" class="block mb-2 text-sm font-semibold uppercase">Nombre(s) <span class="text-red-500">*</span></label>
-            <input value="{% if paciente %}{{ paciente.nombre }} {% elif datos_formulario %} {{datos_formulario.nombre}} {% endif %}" id="nombre" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
+            <input value="{% if paciente %}{{ paciente.nombre }}{% elif datos_formulario %}{{datos_formulario.nombre}}{% endif %}" id="nombre" name="nombre" class="uppercase w-full border-none rounded-md bg-white shadow-sm" type="text" placeholder="Nombre(s)">
           </div>
   
           <div class="w-3/12">
