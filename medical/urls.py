@@ -16,6 +16,7 @@ urlpatterns = [
 
     # Ruta para ver el expediente
     path('view/<int:id_paciente>', views.ver_expediente_view, name='ver_expediente'),
+    path('delete/<int:id_paciente>', views.elimina_paciente_view, name='elimina_paciente'),
 
     # Rutas nuevas para los formularios (create)
     path('create-file/ficha/', views.guarda_ficha_identificacion_view, name='guarda_ficha_identificacion'),

@@ -662,3 +662,9 @@ def update_consultas_view(request,id_paciente):
     template = loader.get_template('expedientes/update_consultas.html')
     context = {'paciente': paciente, 'consulta': consulta}
     return HttpResponse(template.render(context, request))
+
+#eliminar un paciente
+def elimina_paciente_view(request, id_paciente):
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+    paciente.delete()
+    return redirect('medical:home')
