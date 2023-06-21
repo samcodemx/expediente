@@ -15,25 +15,25 @@
     {% comment %} Antecedentes Heredofamiliares {% endcomment %}
     <div class="w-full">
       <label for="ahf" class="block mb-2 text-sm font-semibold uppercase">Antecedentes Heredofamiliares <span class="text-red-500">*</span></label>
-      <textarea name="ahf" id="ahf" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="ahf">{{ paciente.antecedentes.ahf|default_if_none:'' }}</textarea>
+      <textarea name="ahf" id="ahf" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="ahf">{% if paciente %}{{ paciente.antecedentes.ahf }}{% elif datos_formulario %}{{ datos_formulario.ahf }}{% endif %}</textarea>
     </div>
     
     {% comment %} Antecedentes Personales No Patologicos {% endcomment %}
     <div class="w-full">
       <label for="apnp" class="block mb-2 text-sm font-semibold uppercase">Antecedentes Personales No Patológicos <span class="text-red-500">*</span></label>
-      <textarea name="apnp" id="apnp" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="apnp">{{ paciente.antecedentes.apnp|default_if_none:'' }}</textarea>
+      <textarea name="apnp" id="apnp" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="apnp">{% if paciente %}{{ paciente.antecedentes.apnp }}{% elif datos_formulario %}{{ datos_formulario.apnp }}{% endif %}</textarea>
     </div>
     
     {% comment %} Antecedentes Personales Patologicos {% endcomment %}
     <div class="w-full">
       <label for="app" class="block mb-2 text-sm font-semibold uppercase">Antecedentes Personales Patológicos <span class="text-red-500">*</span></label>
-      <textarea name="app" id="app" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="app">{{ paciente.antecedentes.app|default_if_none:'' }}</textarea>
+      <textarea name="app" id="app" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="app">{% if paciente %}{{ paciente.antecedentes.app }}{% elif datos_formulario %}{{ datos_formulario.app }}{% endif %}</textarea>
     </div>
     
     {% comment %} Antecedentes Gineco Obstetricos {% endcomment %}
     <div class="w-full">
       <label for="ago" class="block mb-2 text-sm font-semibold uppercase">Antecedentes Gineco-Obstétricos</label>
-      <textarea name="ago" id="ago" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="ago">{{ paciente.antecedentes.ago|default_if_none:'' }}</textarea>
+      <textarea name="ago" id="ago" class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm" placeholder="Escriba los antecedentes correspondientes" name="ago">{% if paciente %}{{ paciente.antecedentes.ago }}{% elif datos_formulario %}{{ datos_formulario.ago }}{% endif %}</textarea>
     </div>
     
     <input type="hidden" name="historia_clinica_id" value="{{ historia_clinica_id }}">

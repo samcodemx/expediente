@@ -31,7 +31,7 @@
         name="fecha"
         class="uppercase w-full border-none rounded-md bg-white shadow-sm"
         type="date"
-        value="{{ consulta.fecha | date:'Y-m-d' }}"
+        value="{% if consulta %}{{ consulta.fecha|default_if_none:''|date:'YYYY-MM-DD' }}{% elif datos_formulario %}{{ datos_formulario.fecha|default_if_none:''|date:'YYYY-MM-DD' }}{% endif %}"
       />
     </div>
 
@@ -46,7 +46,7 @@
         class="uppercase w-full border-none rounded-md bg-white shadow-sm"
         type="text"
         placeholder="Escribe el diagnóstico de la consulta"
-        value="{{ consulta.diagnostico|default_if_none:'' }}"
+        value="{%if consulta %}{{ consulta.diagnostico|default_if_none:'' }}{% elif datos_formulario %}{{ datos_formulario.diagnostico|default_if_none:'' }}{% endif %}"
       />
     </div>
 
@@ -61,7 +61,7 @@
         class="uppercase w-full border-none rounded-md bg-white shadow-sm"
         type="number"
         placeholder="Escribe el folio de la consulta"
-        value="{{ consulta.folio_receta|default_if_none:'' }}"
+        value="{%if consulta %}{{ consulta.folio_receta|default_if_none:'' }}{% elif datos_formulario %}{{ datos_formulario.folio_receta|default_if_none:'' }}{% endif %}"
       />
     </div>
   </div>
@@ -74,7 +74,7 @@
       name="notas"
       class="uppercase resize-none w-full border-none rounded-md bg-white shadow-sm"
       placeholder="Agregue notas extra en caso de ser necesarias"
-    >{{ consulta.notas|default_if_none:'' }}</textarea>
+    >{% if consulta%} {{ consulta.notas|default_if_none:'' }}{% elif datos_formulario %}{{ datos_formulario.notas|default_if_none:'' }}{% endif %}</textarea>
   </div>
 
   <!-- Botones de formulario -->

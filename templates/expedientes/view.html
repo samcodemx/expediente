@@ -156,7 +156,9 @@
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes heredofamiliares: </span>{{ paciente.antecedentes.ahf }}</p>
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales no patológicos: </span>{{ paciente.antecedentes.apnp }}</p>
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales patológicos: </span>{{ paciente.antecedentes.app }}</p>
+                {% if paciente.antecedentes.ago %}
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes gineco-obstétricos: </span>{{ paciente.antecedentes.ago }}</p>
+                {% endif %}
                 {% if paciente.antecedentes.notas %}
                   <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ paciente.antecedentes.notas }}</p>
                 {% endif %}
@@ -216,28 +218,57 @@
           <h2 class="text-xl font-bold text-main uppercase mb-2">Exploración Física</h2>
           <div class="space-y-2">
             <p class="uppercase"><span class="font-bold text-lg">Descripción: </span>{{ exploracion.descripcion_exploracion }}</p>
+            
             {% comment %} FC {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">FC: </span>{{ exploracion.frecuencia_cardiaca }} lpm</p>
+            {% if exploracion.frecuencia_cardiaca %}
+              <p class="uppercase"><span class="font-bold text-lg">FC: </span>{{ exploracion.frecuencia_cardiaca }} lpm</p>
+            {% endif %}
+            
             {% comment %} FR {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">FR: </span>{{ exploracion.frecuencia_respiratoria }} rpm</p>
+            {% if exploracion.frecuencia_respiratoria %}
+              <p class="uppercase"><span class="font-bold text-lg">FR: </span>{{ exploracion.frecuencia_respiratoria }} rpm</p>
+            {% endif %}
+            
             {% comment %} SPO2 {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">SPO2: </span>{{ exploracion.saturacion_oxigeno }}%</p>
+            {% if exploracion.saturacion_oxigeno %}
+              <p class="uppercase"><span class="font-bold text-lg">SPO2: </span>{{ exploracion.saturacion_oxigeno }}%</p>
+            {% endif %}
+            
             {% comment %} TEMP {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">TEMP: </span>{{ exploracion.temperatura }} °C</p>
+            {% if exploracion.temperatura %}
+              <p class="uppercase"><span class="font-bold text-lg">TEMP: </span>{{ exploracion.temperatura }} °C</p>
+            {% endif %}
+            
             {% comment %} TA {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">TA: </span>{{ exploracion.presion_arterial }} mmHg</p>
+            {% if exploracion.presion_arterial %}
+              <p class="uppercase"><span class="font-bold text-lg">TA: </span>{{ exploracion.presion_arterial }} mmHg</p>
+            {% endif %}
+            
             {% comment %} Glucosa capilar {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">Glucosa capilar: </span>{{ exploracion.glucosa }} mg/dL</p>
+            {% if exploracion.glucosa %}
+              <p class="uppercase"><span class="font-bold text-lg">Glucosa capilar: </span>{{ exploracion.glucosa }} mg/dL</p>
+            {% endif %}
+            
             {% comment %} CM {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">Talla: </span>{{ exploracion.talla }} cm</p>
+            {% if exploracion.talla %}
+              <p class="uppercase"><span class="font-bold text-lg">Talla: </span>{{ exploracion.talla }} cm</p>
+            {% endif %}
+            
             {% comment %} KG {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">Peso: </span>{{ exploracion.peso }} kg</p>
+            {% if exploracion.peso %}
+              <p class="uppercase"><span class="font-bold text-lg">Peso: </span>{{ exploracion.peso }} kg</p>
+            {% endif %}
+            
             {% comment %} IMC {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">IMC: </span>{{ exploracion.imc }}</p>
+            {% if exploracion.imc %}
+              <p class="uppercase"><span class="font-bold text-lg">IMC: </span>{{ exploracion.imc }}</p>
+            {% endif %}
+            
             {% comment %} Notas {% endcomment %}
             {% if exploracion.notas %}
-            <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ exploracion.notas }}</p>
+              <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ exploracion.notas }}</p>
             {% endif %}
+            
           </div>
         </div>
       {% else %}
@@ -252,10 +283,11 @@
            Consultas
         ======================================== -->
         {% if consultas %}
-        {% for consulta in consultas %}
+       
           <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
             <h2 class="text-xl font-bold text-main uppercase mb-2">Consultas</h2>
             <div class="space-y-2">
+              {% for consulta in consultas %}
               {% comment %} Fecha {% endcomment %}
               <p class="uppercase"><span class="font-bold text-lg">Fecha: </span>{{ consulta.fecha }}</p>
               {% comment %} Diagnóstico {% endcomment %}
@@ -266,9 +298,13 @@
               {% if consulta.notas %}
               <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ consulta.notas }}</p>
               {% endif %}
+              <br>
+              <br>
+              {% endfor %}
+
             </div>
           </div>
-        {% endfor %}
+        
       {% else %}
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <h2 class="text-xl font-bold text-main uppercase mb-2">Consultas</h2>
@@ -276,11 +312,6 @@
         </div>
       {% endif %}
       
-
-
     </div>
-
-  
-  
   </section>
 {% endblock %}

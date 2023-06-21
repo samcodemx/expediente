@@ -157,6 +157,7 @@ def guarda_ficha_identificacion_view(request):
 @login_required
 def guarda_antecedentes_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
+    datos_formulario = request.POST.dict()
 
     if request.method == 'POST':
         campos_requeridos = ['ahf', 'apnp', 'app']
@@ -179,11 +180,11 @@ def guarda_antecedentes_view(request, id_paciente):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente, 'error_msg_antecedentes': error_msg})
+            return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente, 'error_msg_antecedentes': error_msg, 'datos_formulario': datos_formulario})
 
         error_msg = validar_datos(antecedentes)
         if error_msg:
-            return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente, 'error_msg_antecedentes': error_msg})
+            return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente, 'error_msg_antecedentes': error_msg, 'datos_formulario': datos_formulario})
 
         antecedentes.save()
         time.sleep(2)
@@ -196,11 +197,12 @@ def guarda_antecedentes_view(request, id_paciente):
 @login_required
 def guarda_padecimiento_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
+    datos_formulario = request.POST.dict()
 
     if request.method == 'POST':
         campos_requeridos = ['padecimiento_actual','piel_tegumentos','cabeza_cuello','torax','abdomen','genitourinario','musculo_extremidades','neurologico',]
 
-        paciente_id = request.POST.get('paciente_id')
+        #paciente_id = request.POST.get('paciente_id')
         padecimiento_actual = request.POST.get('padecimiento_actual').upper()
         piel_tegumentos = request.POST.get('piel_tegumentos').upper()
         cabeza_cuello = request.POST.get('cabeza_cuello').upper()
@@ -230,39 +232,57 @@ def guarda_padecimiento_view(request, id_paciente):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente,'error_msg_padecimiento': error_msg})
+            return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente,'error_msg_padecimiento': error_msg, 'datos_formulario': datos_formulario})
 
         error_msg = validar_datos(padecimiento)
         if error_msg:
-            return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente,'error_msg_padecimiento': error_msg})
+            return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente,'error_msg_padecimiento': error_msg, 'datos_formulario': datos_formulario})
 
         # Guardar el objeto PadecimientoActual en la base de datos
         padecimiento.save()
         time.sleep(2)
         return redirect(reverse('medical:guarda_exploracion', args=[paciente.id]))
     
-    return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente,})
+    return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente, })
 
 def guarda_exploracion_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
+    datos_formulario = request.POST.dict()
 
     if request.method == 'POST':
         campos_requeridos = ['frecuencia_cardiaca','frecuencia_respiratoria','presion_arterial','temperatura','descripcion_exploracion']
 
         paciente_id = request.POST.get('paciente_id')
-        peso = request.POST.get('peso')
-        talla = request.POST.get('talla')
         frecuencia_cardiaca = request.POST.get('frecuencia_cardiaca')
         frecuencia_respiratoria = request.POST.get('frecuencia_respiratoria')
         temperatura = request.POST.get('temperatura')
         presion_arterial = request.POST.get('presion_arterial')
         descripcion_exploracion = request.POST.get('descripcion_exploracion').upper()
+
+        peso = request.POST.get('peso')
+        if not peso:
+            peso = None
+
+        talla = request.POST.get('talla')
+        if not talla:
+            talla = None
+
         saturacion_oxigeno = request.POST.get('saturacion_oxigeno')
+        if not saturacion_oxigeno:
+            saturacion_oxigeno = None
+
         imc = request.POST.get('imc')
+        if not imc:
+            imc = None
+
         glucosa = request.POST.get('glucosa')
+        if not glucosa:
+            glucosa = None
+
         notas = request.POST.get('notas')
         if notas:
             notas = notas.upper()
+
 
         exploracion = ExploracionFisica(
             paciente=paciente,
@@ -283,11 +303,11 @@ def guarda_exploracion_view(request, id_paciente):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/create_exploracion.html', {'paciente': paciente,'error_msg_exploracion': error_msg})
+            return render(request, 'expedientes/create_exploracion.html', {'paciente': paciente,'error_msg_exploracion': error_msg, 'datos_formulario': datos_formulario})
 
         error_msg = validar_datos(exploracion)
         if error_msg:
-            return render(request, 'expedientes/create_exploracion.html', {'paciente': paciente,'error_msg_exploracion': error_msg})
+            return render(request, 'expedientes/create_exploracion.html', {'paciente': paciente,'error_msg_exploracion': error_msg, 'datos_formulario': datos_formulario})
 
         # Guardar el objeto PadecimientoActual en la base de datos
         exploracion.save()
@@ -299,6 +319,7 @@ def guarda_exploracion_view(request, id_paciente):
 
 def guarda_consulta_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
+    datos_formulario = request.POST.dict()
 
     if request.method == 'POST':
         campos_requeridos = ['folio_receta','diagnostico']
@@ -324,11 +345,11 @@ def guarda_consulta_view(request, id_paciente):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/create_consultas.html', {'paciente': paciente,'error_msg_consulta': error_msg})
+            return render(request, 'expedientes/create_consultas.html', {'paciente': paciente,'error_msg_consulta': error_msg, 'datos_formulario': datos_formulario})
 
         error_msg = validar_datos(consulta)
         if error_msg:
-            return render(request, 'expedientes/create_consultas.html', {'paciente': paciente,'error_msg_consulta': error_msg})
+            return render(request, 'expedientes/create_consultas.html', {'paciente': paciente,'error_msg_consulta': error_msg, 'datos_formulario': datos_formulario})
 
         # Guardar el objeto PadecimientoActual en la base de datos
         consulta.save()
@@ -424,6 +445,7 @@ def update_ficha_identificacion_view(request, id_paciente):
 
 def update_antecedentes_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
+    antecedentes = Antecedentes.objects.filter(paciente=paciente)
 
     if request.method == 'POST':
         campos_requeridos = ['ahf', 'apnp', 'app']
@@ -434,7 +456,13 @@ def update_antecedentes_view(request, id_paciente):
         ago = request.POST.get('ago').upper()
 
         # Actualizar los campos de antecedentes existentes
-        antecedentes, created = Antecedentes.objects.get_or_create(paciente=paciente)
+        antecedentes = Antecedentes.objects.filter(paciente=paciente).first()
+        
+        if antecedentes is None:
+            antecedentes = Antecedentes(paciente=paciente)
+
+        antecedentes.paciente = paciente
+        antecedentes.medico = request.user.medico 
         antecedentes.ahf = ahf
         antecedentes.apnp = apnp
         antecedentes.app = app
@@ -443,17 +471,21 @@ def update_antecedentes_view(request, id_paciente):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/update_antecedentes.html', {'error_msg_antecedentes': error_msg, 'paciente': paciente})
+            return render(request, 'expedientes/update_antecedentes.html', {'error_msg_antecedentes': error_msg, 'paciente': paciente, 'antecedentes': antecedentes})
 
         error_msg = validar_datos(antecedentes)
         if error_msg:
-            return render(request, 'expedientes/update_antecedentes.html', {'error_msg_antecedentes': error_msg, 'paciente': paciente})
+            return render(request, 'expedientes/update_antecedentes.html', {'error_msg_antecedentes': error_msg, 'paciente': paciente, 'antecedentes': antecedentes})
 
         antecedentes.save()
         time.sleep(2)
-        return render(request, 'expedientes/update_antecedentes.html', {'paciente': paciente})
+        return render(request, 'expedientes/update_antecedentes.html', {'paciente': paciente, 'antecedentes': antecedentes})
 
-    return render(request, 'expedientes/update_antecedentes.html', {'paciente': paciente})
+    template = loader.get_template('expedientes/update_antecedentes.html')
+    context = {'paciente': paciente, 'antecedentes': antecedentes}
+    return HttpResponse(template.render(context, request))
+    #return render(request, 'expedientes/update_antecedentes.html', {'paciente': paciente})
+
 
 
 def update_padecimiento_view(request, id_paciente):
@@ -492,11 +524,11 @@ def update_padecimiento_view(request, id_paciente):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/update_padecimiento.html', {'error_msg_padecimiento': error_msg, 'paciente': paciente})
+            return render(request, 'expedientes/update_padecimiento.html', {'error_msg_padecimiento': error_msg, 'paciente': paciente, 'padecimiento': padecimiento})
 
         error_msg = validar_datos(padecimiento)
         if error_msg:
-            return render(request, 'expedientes/update_padecimiento.html', {'error_msg_padecimiento': error_msg, 'paciente': paciente})
+            return render(request, 'expedientes/update_padecimiento.html', {'error_msg_padecimiento': error_msg, 'paciente': paciente, 'padecimiento': padecimiento})
 
         padecimiento.save()
         time.sleep(2)
@@ -516,17 +548,36 @@ def update_exploracion_view(request,id_paciente):
     if request.method == 'POST':
         campos_requeridos = ['frecuencia_cardiaca','frecuencia_respiratoria','presion_arterial','temperatura','descripcion_exploracion']
 
-        peso = request.POST.get('peso')
-        talla = request.POST.get('talla')
+        paciente_id = request.POST.get('paciente_id')
         frecuencia_cardiaca = request.POST.get('frecuencia_cardiaca')
         frecuencia_respiratoria = request.POST.get('frecuencia_respiratoria')
         temperatura = request.POST.get('temperatura')
         presion_arterial = request.POST.get('presion_arterial')
         descripcion_exploracion = request.POST.get('descripcion_exploracion').upper()
+
+        peso = request.POST.get('peso')
+        if not peso:
+            peso = None
+
+        talla = request.POST.get('talla')
+        if not talla:
+            talla = None
+
         saturacion_oxigeno = request.POST.get('saturacion_oxigeno')
+        if not saturacion_oxigeno:
+            saturacion_oxigeno = None
+
         imc = request.POST.get('imc')
+        if not imc:
+            imc = None
+
         glucosa = request.POST.get('glucosa')
+        if not glucosa:
+            glucosa = None
+
         notas = request.POST.get('notas')
+        if notas:
+            notas = notas.upper()
 
         # Obtener el último registro de Exploracion asociado al paciente
         if ExploracionFisica.objects.filter(paciente=paciente).exists():
@@ -550,11 +601,11 @@ def update_exploracion_view(request,id_paciente):
 
         error_msg = validar_campos_requeridos(request, campos_requeridos)
         if error_msg:
-            return render(request, 'expedientes/update_exploracion.html', {'error_msg_exploracion': error_msg, 'paciente': paciente})
+            return render(request, 'expedientes/update_exploracion.html', {'error_msg_exploracion': error_msg, 'paciente': paciente, 'exploracion': exploracion})
 
         error_msg = validar_datos(exploracion)
         if error_msg:
-            return render(request, 'expedientes/update_exploracion.html', {'error_msg_exploracion': error_msg, 'paciente': paciente})
+            return render(request, 'expedientes/update_exploracion.html', {'error_msg_exploracion': error_msg, 'paciente': paciente, 'exploracion': exploracion})
 
         exploracion.save()
         time.sleep(2)

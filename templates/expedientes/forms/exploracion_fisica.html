@@ -20,7 +20,7 @@
 
 <div class="w-full gap-10 grid lg:grid-cols-2 ">
   <!-- ========================================
-   Contenedor de Exploracion Fisica
+   Contenedor de Exploración Física
 ======================================== -->
   <div class="space-y-5">
     {% comment %} Frecuencia cardiaca, frecuencia respiratoria y Oxigeno
@@ -39,7 +39,7 @@
             name="frecuencia_cardiaca"
             class="w-full border-none rounded-md bg-white shadow-sm appearance-none"
             type="number"
-            value="{{ exploracion.frecuencia_cardiaca|default_if_none:'' }}"
+            value="{% if datos_formulario and datos_formulario.frecuencia_cardiaca is not none %}{{ datos_formulario.frecuencia_cardiaca }}{% elif paciente and exploracion.frecuencia_cardiaca is not none %}{{ exploracion.frecuencia_cardiaca }}{% endif %}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">Ipm</p>
         </div>
@@ -58,13 +58,13 @@
             name="frecuencia_respiratoria"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="number"
-            value="{{ exploracion.frecuencia_respiratoria|default_if_none:'' }}"
+            value="{% if datos_formulario and datos_formulario.frecuencia_respiratoria is not none %}{{ datos_formulario.frecuencia_respiratoria }}{% elif paciente and exploracion.frecuencia_respiratoria is not none %}{{ exploracion.frecuencia_respiratoria }}{% endif %}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">Rpm</p>
         </div>
       </div>
 
-      {% comment %} Oxigenacion {% endcomment %}
+      {% comment %} Oxigenación {% endcomment %}
       <div>
         <label for="saturacion_oxigeno" class="block mb-2 text-sm font-semibold uppercase"
           >SpO2</label
@@ -75,14 +75,14 @@
             name="saturacion_oxigeno"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="number"
-            value="{{ exploracion.saturacion_oxigeno|default_if_none:'' }}"
+            value="{% if datos_formulario and datos_formulario.saturacion_oxigeno is not none %}{{ datos_formulario.saturacion_oxigeno }}{% elif paciente and exploracion.saturacion_oxigeno is not none %}{{ exploracion.saturacion_oxigeno }}{% endif %}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">%</p>
         </div>
       </div>
     </div>
 
-    {% comment %} Temperatura, Presion Arterial y Glucosa {% endcomment %}
+    {% comment %} Temperatura, Presión Arterial y Glucosa {% endcomment %}
     <div class="grid grid-cols-3 gap-4">
       {% comment %} Temperatura {% endcomment %}
       <div>
@@ -95,18 +95,18 @@
             name="temperatura"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="text"
-            value="{{ exploracion.temperatura|default_if_none:'' }}"
+            value="{% if datos_formulario and datos_formulario.temperatura is not none %}{{ datos_formulario.temperatura }}{% elif paciente and exploracion.temperatura is not none %}{{ exploracion.temperatura }}{% endif %}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">°C</p>
         </div>
       </div>
 
-      {% comment %} Presion Arterial {% endcomment %}
+      {% comment %} Presión Arterial {% endcomment %}
       <div>
         <label
           for="presion_arterial"
           class="block mb-2 text-sm font-semibold uppercase"
-          >presion arterial <span class="text-red-500">*</span></label
+          >Presión Arterial <span class="text-red-500">*</span></label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
@@ -114,7 +114,7 @@
             name="presion_arterial"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="text"
-            value="{{ exploracion.presion_arterial|default_if_none:'' }}"
+            value="{% if datos_formulario and datos_formulario.presion_arterial is not none %}{{ datos_formulario.presion_arterial }}{% elif paciente and exploracion.presion_arterial is not none %}{{ exploracion.presion_arterial }}{% endif %}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">mmHg</p>
         </div>
@@ -125,7 +125,7 @@
         <label
           for="glucosa"
           class="block mb-2 text-sm font-semibold uppercase truncate"
-          >Guclosa Capilar</label
+          >Glucosa Capilar</label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
@@ -133,7 +133,7 @@
             name="glucosa"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="text"
-            value="{{ exploracion.glucosa|default_if_none:'' }}"
+            value="{% if datos_formulario and datos_formulario.glucosa is not none %}{{ datos_formulario.glucosa }}{% elif paciente and exploracion.glucosa is not none %}{{ exploracion.glucosa }}{% endif %}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">mg/dl</p>
         </div>
@@ -145,7 +145,7 @@
       {% comment %} Talla {% endcomment %}
       <div>
         <label for="talla" class="block mb-2 text-sm font-semibold uppercase"
-          >talla </label
+          >Talla</label
         >
 
         <div class="w-full relative bg-white rounded-lg">
@@ -154,7 +154,7 @@
             name="talla"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="text"
-            value="{{ exploracion.talla|default_if_none:'' }}"
+            value="{% if datos_formulario and datos_formulario.talla is not none %}{{ datos_formulario.talla }}{% elif paciente and exploracion.talla is not none %}{{ exploracion.talla }}{% endif %}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">cm</p>
         </div>
@@ -163,7 +163,7 @@
       {% comment %} Peso {% endcomment %}
       <div>
         <label for="peso" class="block mb-2 text-sm font-semibold uppercase"
-          >peso </label
+          >Peso</label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
@@ -171,7 +171,7 @@
             name="peso"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="text"
-            value="{{ exploracion.peso|default_if_none:'' }}"
+            value="{% if datos_formulario and datos_formulario.peso is not none %}{{ datos_formulario.peso }}{% elif paciente and exploracion.peso is not none %}{{ exploracion.peso }}{% endif %}"
           />
           <p class="absolute inset-y-0 flex items-center right-2">kg</p>
         </div>
@@ -180,7 +180,7 @@
       {% comment %} IMC {% endcomment %}
       <div>
         <label for="imc" class="block mb-2 text-sm font-semibold uppercase"
-          >IMC </label
+          >IMC</label
         >
         <div class="w-full relative bg-white rounded-lg">
           <input
@@ -188,7 +188,7 @@
             name="imc"
             class="w-full border-none rounded-md bg-white shadow-sm"
             type="text"
-            value=""
+            value="{% if datos_formulario and datos_formulario.imc is not none %}{{ datos_formulario.imc }}{% elif paciente and exploracion.imc is not none %}{{ exploracion.imc }}{% endif %}"
           />
         </div>
       </div>
@@ -212,13 +212,13 @@
         name="descripcion_exploracion"
         class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
         placeholder="Escriba los hallazgos correspondientes"
-      >{{ exploracion.descripcion_exploracion|default_if_none:'' }}</textarea>
+      >{% if datos_formulario %}{{ datos_formulario.descripcion_exploracion }}{% elif paciente %}{{ exploracion.descripcion_exploracion }}{% endif %}</textarea>
     </div>
 
     {% comment %} Notas {% endcomment %}
     <div class="w-full">
       <label for="notes_exploracion" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
-      <textarea id="notes_exploracion" name="notas" class=" resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias">{{ exploracion.notas|default_if_none:'' }}</textarea>
+      <textarea id="notes_exploracion" name="notas" class=" resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias">{% if datos_formulario %}{{ datos_formulario.notas }}{% elif paciente %}{{ exploracion.notas }}{% endif %}</textarea>
     </div>
   </div>
 </div>
@@ -232,10 +232,10 @@
     >Cancelar</a
   >
   <button
-    onclick="mostrarAlerta()"
-    type="submit"
-    class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold"
-  >
-    Enviar Datos
-  </button>
+  type="submit"
+  class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold"
+  onclick="mostrarAlerta()"
+>
+  Enviar Datos
+</button>
 </div>
