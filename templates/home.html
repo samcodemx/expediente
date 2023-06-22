@@ -54,7 +54,7 @@
         <!-- Tarjeta -->
         {% if pacientes %}
         {% for paciente in pacientes %}
-        <div class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm">
+        <div class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm paciente-card" data-search="{{ paciente.id }} {{ paciente.nombre }} {{ paciente.empleador }} {{ paciente.antecedentes.medico }}">
           <!-- Datos del paciente -->
           <div>
             <!-- No. Expediente -->
@@ -116,4 +116,29 @@
     </div>
   </div>
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchBar = document.getElementById('default-search');
+    searchBar.addEventListener('input', function() {
+      const searchValue = searchBar.value.toLowerCase();
+      const pacienteCards = document.getElementsByClassName('paciente-card');
+      
+      for (let i = 0; i < pacienteCards.length; i++) {
+        const card = pacienteCards[i];
+        const searchAttribute = card.getAttribute('data-search');
+        
+        if (searchAttribute.toLowerCase().includes(searchValue)) {
+          card.classList.remove('hidden');  // Mostrar la tarjeta si coincide con la búsqueda
+          card.classList.add('block');
+        } else {
+          card.classList.remove('block');   // Ocultar la tarjeta si no coincide con la búsqueda
+          card.classList.add('hidden');
+        }
+      }
+    });
+  });
+</script>
+
+
+
 {% endblock %}
