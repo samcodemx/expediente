@@ -14,63 +14,53 @@
 
 <h1 class="text-xl font-bold text-main uppercase">Padecimiento Actual</h1>
 
-<!-- Padecimiento Actual -->
 <div class="w-full">
   <label for="padecimiento_actual" class="block mb-2 text-sm font-semibold uppercase">Padecimiento Actual <span class="text-red-500">*</span></label>
-  <textarea id="padecimiento_actual" name="padecimiento_actual" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Escriba el padecimiento actual">{{ padecimiento.padecimiento_actual|default_if_none:'' }}</textarea>
+  <textarea id="padecimiento_actual" name="padecimiento_actual" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Escriba el padecimiento actual">{% if datos_formulario %}{{ datos_formulario.padecimiento_actual }}{% elif paciente %}{{ padecimiento.padecimiento_actual }}{% endif %}</textarea>
 </div>
 
-<!-- Interrogativo por aparatos y sistemas -->
 <div class="w-full space-y-8">
   <label class="block mb-4 font-semibold uppercase">Interrogatorio por Aparatos y Sistemas</label>
 
-  <!-- Piel y Tegumentos -->
   <div class="w-full">
     <label for="piel_tegumentos" class="block mb-2 text-sm font-semibold uppercase">Piel y Tegumentos <span class="text-red-500">*</span></label>
-    <textarea id="piel_tegumentos" name="piel_tegumentos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{{ padecimiento.piel_tegumentos }}</textarea>
+    <textarea id="piel_tegumentos" name="piel_tegumentos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.piel_tegumentos }}{% elif paciente %}{{ padecimiento.piel_tegumentos }}{% endif %}</textarea>
   </div>
 
-  <!-- Cabeza y Cuello -->
   <div class="w-full">
     <label for="cabeza_cuello" class="block mb-2 text-sm font-semibold uppercase">Cabeza y Cuello <span class="text-red-500">*</span></label>
-    <textarea id="cabeza_cuello" name="cabeza_cuello" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{{ padecimiento.cabeza_cuello }}</textarea>
+    <textarea id="cabeza_cuello" name="cabeza_cuello" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.cabeza_cuello }}{% elif paciente %}{{ padecimiento.cabeza_cuello }}{% endif %}</textarea>
   </div>
 
-  <!-- Torax -->
   <div class="w-full">
     <label for="torax" class="block mb-2 text-sm font-semibold uppercase">Torax <span class="text-red-500">*</span></label>
-    <textarea id="torax" name="torax" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{{ padecimiento.torax }}</textarea>
+    <textarea id="torax" name="torax" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.torax }}{% elif paciente %}{{ padecimiento.torax }}{% endif %}</textarea>
   </div>
 
-  <!-- Abdomen -->
   <div class="w-full">
     <label for="abdomen" class="block mb-2 text-sm font-semibold uppercase">Abdomen <span class="text-red-500">*</span></label>
-    <textarea id="abdomen" name="abdomen" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{{ padecimiento.abdomen }}</textarea>
+    <textarea id="abdomen" name="abdomen" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.abdomen }}{% elif paciente %}{{ padecimiento.abdomen }}{% endif %}</textarea>
   </div>
 
-  <!-- Genitourinario -->
   <div class="w-full">
     <label for="genitourinario" class="block mb-2 text-sm font-semibold uppercase">Genitourinario <span class="text-red-500">*</span></label>
-    <textarea id="genitourinario" name="genitourinario" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{{ padecimiento.genitourinario }}</textarea>
+    <textarea id="genitourinario" name="genitourinario" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.genitourinario }}{% elif paciente %}{{ padecimiento.genitourinario }}{% endif %}</textarea>
   </div>
 
-  <!-- Músculo Esquelético y Extremidades -->
   <div class="w-full">
     <label for="musculo_extremidades" class="block mb-2 text-sm font-semibold uppercase">Músculo Esquelético y Extremidades <span class="text-red-500">*</span></label>
-    <textarea id="musculo_extremidades" name="musculo_extremidades" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{{ padecimiento.musculo_extremidades }}</textarea>
+    <textarea id="musculo_extremidades" name="musculo_extremidades" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.musculo_extremidades }}{% elif paciente %}{{ padecimiento.musculo_extremidades }}{% endif %}</textarea>
   </div>   
 
-  <!-- Neurológico -->
   <div class="w-full">
     <label for="neurologico" class="block mb-2 text-sm font-semibold uppercase">Neurológico <span class="text-red-500">*</span></label>
-    <textarea id="neurologico" name="neurologico" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{{ padecimiento.neurologico }}</textarea>
+    <textarea id="neurologico" name="neurologico" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.neurologico }}{% elif paciente %}{{ padecimiento.neurologico }}{% endif %}</textarea>
   </div>
 </div>
 
-<!-- Notas -->
 <div class="w-full">
   <label for="notas_padecimientos" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
-  <textarea id="notas_padecimientos" name="notas_padecimientos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias">{{ padecimiento.notas }}</textarea>
+  <textarea id="notas_padecimientos" name="notas" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias">{% if datos_formulario %}{{ datos_formulario.notas }}{% elif paciente %}{{ padecimiento.notas }}{% endif %}</textarea>
 </div>
 
 {% csrf_token %}

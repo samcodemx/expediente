@@ -28,7 +28,7 @@
   
               {% comment %} Nombre {% endcomment %}
               {% if paciente.nombre %}
-                  <p class="uppercase"><span class="font-bold text-lg">Nombre completo: </span>{{paciente.nombre}} {{paciente.apellido_pat}} {{paciente.apellido_mat}}</p>
+                  <p class="uppercase"><span class="font-bold text-lg">Nombre: </span>{{paciente.nombre}} {{paciente.apellido_pat}} {{paciente.apellido_mat}}</p>
               {% endif %}
   
               {% comment %} Género {% endcomment %}
@@ -156,7 +156,12 @@
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes heredofamiliares: </span>{{ paciente.antecedentes.ahf }}</p>
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales no patológicos: </span>{{ paciente.antecedentes.apnp }}</p>
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes personales patológicos: </span>{{ paciente.antecedentes.app }}</p>
+                {% if paciente.antecedentes.ago %}
                 <p class="uppercase"><span class="font-bold text-lg">Antecedentes gineco-obstétricos: </span>{{ paciente.antecedentes.ago }}</p>
+                {% endif %}
+                {% if paciente.antecedentes.notas %}
+                  <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ paciente.antecedentes.notas }}</p>
+                {% endif %}
               {% else %}
                 <p class="uppercase">Sin datos</p>
               {% endif %}
@@ -169,12 +174,12 @@
         {% if padecimiento %}
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <div class="space-y-2">
-            <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimientos Actuales</h2>
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimiento Actual</h2>
             {% comment %} Padecimiento Actual {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">Padecimiento actual: </span>{{ padecimiento.padecimiento_actual }}</p>
+            <p class="uppercase"><span class="font-bold text-lg">Descripción: </span>{{ padecimiento.padecimiento_actual }}</p>
           </div>
           <div class="space-y-2">
-            <h2 class="text-xl font-bold text-main uppercase mb-2">Interrogativo por aparatos y sistemas</h2>
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Interrogatorio por aparatos y sistemas</h2>
             {% comment %} Piel y Tegumentos {% endcomment %}
             <p class="uppercase"><span class="font-bold text-lg">Piel y tegumentos: </span>{{ padecimiento.piel_tegumentos }}</p>
             {% comment %} Cabeza y Cuello {% endcomment %}
@@ -190,13 +195,15 @@
             {% comment %} Neurológico {% endcomment %}
             <p class="uppercase"><span class="font-bold text-lg">Neurológico: </span>{{ padecimiento.neurologico }}</p>
             {% comment %} Notas {% endcomment %}
+            {% if padecimiento.notas %}
             <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ padecimiento.notas }}</p>
+            {% endif %}
           </div>
         </div>
       {% else %}
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <div class="space-y-2">
-            <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimientos Actuales</h2>
+            <h2 class="text-xl font-bold text-main uppercase mb-2">Padecimiento Actual</h2>
             <p class="uppercase">Sin datos</p>
           </div>
         </div>
@@ -211,24 +218,57 @@
           <h2 class="text-xl font-bold text-main uppercase mb-2">Exploración Física</h2>
           <div class="space-y-2">
             <p class="uppercase"><span class="font-bold text-lg">Descripción: </span>{{ exploracion.descripcion_exploracion }}</p>
+            
             {% comment %} FC {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">FC: </span>{{ exploracion.frecuencia_cardiaca }} lpm</p>
+            {% if exploracion.frecuencia_cardiaca %}
+              <p class="uppercase"><span class="font-bold text-lg">FC: </span>{{ exploracion.frecuencia_cardiaca }} lpm</p>
+            {% endif %}
+            
             {% comment %} FR {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">FR: </span>{{ exploracion.frecuencia_respiratoria }} rpm</p>
+            {% if exploracion.frecuencia_respiratoria %}
+              <p class="uppercase"><span class="font-bold text-lg">FR: </span>{{ exploracion.frecuencia_respiratoria }} rpm</p>
+            {% endif %}
+            
             {% comment %} SPO2 {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">SPO2: </span>{{ exploracion.saturacion_oxigeno }}%</p>
+            {% if exploracion.saturacion_oxigeno %}
+              <p class="uppercase"><span class="font-bold text-lg">SPO2: </span>{{ exploracion.saturacion_oxigeno }}%</p>
+            {% endif %}
+            
             {% comment %} TEMP {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">TEMP: </span>{{ exploracion.temperatura }} °C</p>
+            {% if exploracion.temperatura %}
+              <p class="uppercase"><span class="font-bold text-lg">TEMP: </span>{{ exploracion.temperatura }} °C</p>
+            {% endif %}
+            
             {% comment %} TA {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">TA: </span>{{ exploracion.presion_arterial }} mmHg</p>
+            {% if exploracion.presion_arterial %}
+              <p class="uppercase"><span class="font-bold text-lg">TA: </span>{{ exploracion.presion_arterial }} mmHg</p>
+            {% endif %}
+            
             {% comment %} Glucosa capilar {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">Glucosa capilar: </span>{{ exploracion.glucosa }} mg/dL</p>
+            {% if exploracion.glucosa %}
+              <p class="uppercase"><span class="font-bold text-lg">Glucosa capilar: </span>{{ exploracion.glucosa }} mg/dL</p>
+            {% endif %}
+            
             {% comment %} CM {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">Talla: </span>{{ exploracion.talla }} cm</p>
+            {% if exploracion.talla %}
+              <p class="uppercase"><span class="font-bold text-lg">Talla: </span>{{ exploracion.talla }} cm</p>
+            {% endif %}
+            
             {% comment %} KG {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">Peso: </span>{{ exploracion.peso }} kg</p>
+            {% if exploracion.peso %}
+              <p class="uppercase"><span class="font-bold text-lg">Peso: </span>{{ exploracion.peso }} kg</p>
+            {% endif %}
+            
             {% comment %} IMC {% endcomment %}
-            <p class="uppercase"><span class="font-bold text-lg">IMC: </span>{{ exploracion.imc }}</p>
+            {% if exploracion.imc %}
+              <p class="uppercase"><span class="font-bold text-lg">IMC: </span>{{ exploracion.imc }}</p>
+            {% endif %}
+            
+            {% comment %} Notas {% endcomment %}
+            {% if exploracion.notas %}
+              <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ exploracion.notas }}</p>
+            {% endif %}
+            
           </div>
         </div>
       {% else %}
@@ -243,21 +283,28 @@
            Consultas
         ======================================== -->
         {% if consultas %}
-        {% for consulta in consultas %}
+       
           <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
             <h2 class="text-xl font-bold text-main uppercase mb-2">Consultas</h2>
             <div class="space-y-2">
+              {% for consulta in consultas %}
               {% comment %} Fecha {% endcomment %}
               <p class="uppercase"><span class="font-bold text-lg">Fecha: </span>{{ consulta.fecha }}</p>
               {% comment %} Diagnóstico {% endcomment %}
               <p class="uppercase"><span class="font-bold text-lg">Diagnóstico: </span>{{ consulta.diagnostico }}</p>
               {% comment %} Folio {% endcomment %}
-              <p class="uppercase"><span class="font-bold text-lg">Folio: </span>{{ consulta.folio }}</p>
+              <p class="uppercase"><span class="font-bold text-lg">Folio: </span>{{ consulta.folio_receta }}</p>
               {% comment %} Notas {% endcomment %}
+              {% if consulta.notas %}
               <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ consulta.notas }}</p>
+              {% endif %}
+              <br>
+              <br>
+              {% endfor %}
+
             </div>
           </div>
-        {% endfor %}
+        
       {% else %}
         <div class="lg:container lg:mx-auto bg-white p-10 space-y-5 rounded-lg">
           <h2 class="text-xl font-bold text-main uppercase mb-2">Consultas</h2>
@@ -265,11 +312,6 @@
         </div>
       {% endif %}
       
-
-
     </div>
-
-  
-  
   </section>
 {% endblock %}
