@@ -668,3 +668,7 @@ def elimina_paciente_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
     paciente.delete()
     return redirect('medical:home')
+
+# Agregar consulta desde el view
+def add_consulta_view(request):
+    return render(request, 'expedientes/add_consulta.html' )

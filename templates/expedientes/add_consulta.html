@@ -9,28 +9,27 @@
   <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
     <div class="lg:container lg:mx-auto">
       <h1 class="uppercase font-semibold text-main text-xl">
-        Editar Expediente
+        Nuevo Expediente
       </h1>
-      <p>Modifica los campos necesarios a continuacion.</p>
+      <p>Registra un nuevo expediente aquí.</p>
     </div>
   </div>
 
   <div class="py-10 bg-white md:px-6">
-    <!-- ========================================
-       Barra de navegacion para los formularios
-    ======================================== -->
-    {% include "plantillas/navbarFormulariosUpdate.html" %}
 
     <!-- ========================================
        Formularios
     ======================================== -->
+    <div id="form_consultas" class="formulario">
+      <form
+      id="formData_consultas"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-lg"
+      action=""
+      method="post"
+    >
+        {% include "expedientes/forms/consultas.html" %}
+    </form>
 
-    <div id="form_historia_clinica">
-      <form id="formData_antecedentes" class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
-        action="{% url 'medical:update_antecedentes' paciente.id %}" method="post">
-        {% include "expedientes/forms/antecedentes.html" %}
-      </form>
-    </div>
 
   </div>
 
@@ -40,7 +39,7 @@
   function mostrarAlerta() {
     Swal.fire({
       title: 'Guardado',
-      text: 'Paciente actualizado correctamente',
+      text: 'Consulta guardada correctamente',
       icon: 'success',
       timer: 1500,
       timerProgressBar: true,
