@@ -33,5 +33,5 @@ urlpatterns = [
     path('update-file/<int:id_paciente>/consultas/', views.update_consultas_view, name='update_consultas'),
 
     # Consulta desde el view
-    path('add/consulta/', views.add_consulta_view, name='agregar_consulta'),
+    path('add/consulta/<int:id_paciente>/', views.add_consulta_view, name='agregar_consulta'),
 ]

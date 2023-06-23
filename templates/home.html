@@ -98,10 +98,9 @@
               type="button">
               <span class="group-hover:text-white text-yellow-300"><i class="fas fa-pen"></i></span>
             </a>
-            <a href="delete/{{paciente.id}}" class="border-2 flex items-center justify-center border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-              type="button">
+            <a href="#" class="border-2 flex items-center justify-center border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors" type="button" onclick="confirmDelete('{{paciente.id}}')">
               <span class="group-hover:text-white text-red-400"><i class="fas fa-trash"></i></span>
-          </a>
+            </a>
           </div>
         </div>
         {% endfor %}
@@ -137,6 +136,12 @@
       }
     });
   });
+
+  function confirmDelete(pacienteId) {
+    if (confirm('¿Estás seguro de que deseas eliminar este paciente? Esta acción no se puede deshacer.')) {
+      window.location.href = 'delete/' + pacienteId;
+    }
+  }
 </script>
 
 

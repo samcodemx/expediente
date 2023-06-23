@@ -9,6 +9,7 @@ from datetime import datetime, date
 import time
 from django.template import loader
 from django.urls import reverse
+from operator import attrgetter
 
 
 # Create your views here.
@@ -69,19 +70,22 @@ def validar_datos(datos):
         return error_message
     return None
 
-
+@login_required
 def renderiza_antecedentes_view(request):
     if request.method == 'GET':
         return render(request, 'expedientes/create_antecedentes.html')
 
+@login_required
 def renderiza_padecimiento_view(request):
     if request.method == 'GET':
         return render(request, 'expedientes/create_padecimiento.html')
 
+@login_required
 def renderiza_exploracion_view(request):
     if request.method == 'GET':
         return render(request, 'expedientes/create_exploracion.html')
 
+@login_required
 def renderiza_consulta_view(request):
     if request.method == 'GET':
         return render(request, 'expedientes/create_consultas.html')
@@ -193,7 +197,6 @@ def guarda_antecedentes_view(request, id_paciente):
     print('get')
     return render(request, 'expedientes/create_antecedentes.html', {'paciente': paciente})
 
-
 @login_required
 def guarda_padecimiento_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
@@ -245,6 +248,7 @@ def guarda_padecimiento_view(request, id_paciente):
     
     return render(request, 'expedientes/create_padecimiento.html', {'paciente': paciente, })
 
+@login_required
 def guarda_exploracion_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
     datos_formulario = request.POST.dict()
@@ -316,7 +320,7 @@ def guarda_exploracion_view(request, id_paciente):
 
     return render(request, 'expedientes/create_exploracion.html', {'paciente': paciente,})
 
-
+@login_required
 def guarda_consulta_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
     datos_formulario = request.POST.dict()
@@ -359,7 +363,6 @@ def guarda_consulta_view(request, id_paciente):
 
     return render(request, 'expedientes/create_consultas.html', {'paciente': paciente,})
 
-
 @login_required
 def ver_expediente_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
@@ -367,7 +370,10 @@ def ver_expediente_view(request, id_paciente):
     padecimiento = PadecimientoActual.objects.filter(paciente=paciente).last()
     exploracion = ExploracionFisica.objects.filter(paciente=paciente).last()
     consultas = Consulta.objects.filter(paciente=paciente)
-    
+
+    # Ordenar las consultas por la propiedad 'fecha' en orden cronológico
+    consultas = sorted(consultas, key=attrgetter('fecha'))
+
     context = {
         'paciente': paciente,
         'antecedentes': antecedentes,
@@ -378,7 +384,6 @@ def ver_expediente_view(request, id_paciente):
     return render(request, 'expedientes/view.html', context)
 
 
-# Enlaces de los formularios (update)
 @login_required
 def update_ficha_identificacion_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
@@ -441,8 +446,7 @@ def update_ficha_identificacion_view(request, id_paciente):
 
     return render(request, 'expedientes/update_ficha.html', {'paciente': paciente})
 
-
-
+@login_required
 def update_antecedentes_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
     antecedentes = Antecedentes.objects.filter(paciente=paciente)
@@ -486,8 +490,7 @@ def update_antecedentes_view(request, id_paciente):
     return HttpResponse(template.render(context, request))
     #return render(request, 'expedientes/update_antecedentes.html', {'paciente': paciente})
 
-
-
+@login_required
 def update_padecimiento_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
 
@@ -541,7 +544,7 @@ def update_padecimiento_view(request, id_paciente):
     context = {'paciente': paciente, 'padecimiento': padecimiento}
     return HttpResponse(template.render(context, request))
 
-
+@login_required
 def update_exploracion_view(request,id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
 
@@ -618,10 +621,10 @@ def update_exploracion_view(request,id_paciente):
     context = {'paciente': paciente, 'exploracion': exploracion}
     return HttpResponse(template.render(context, request))
 
+@login_required
 def update_consultas_view(request,id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
     
-
     if request.method == 'POST':
         campos_requeridos = ['folio_receta','diagnostico']
 
@@ -663,12 +666,48 @@ def update_consultas_view(request,id_paciente):
     context = {'paciente': paciente, 'consulta': consulta}
     return HttpResponse(template.render(context, request))
 
-#eliminar un paciente
+@login_required
 def elimina_paciente_view(request, id_paciente):
     paciente = get_object_or_404(Paciente, id=id_paciente)
     paciente.delete()
     return redirect('medical:home')
 
-# Agregar consulta desde el view
-def add_consulta_view(request):
-    return render(request, 'expedientes/add_consulta.html' )
+@login_required
+def add_consulta_view(request, id_paciente):
+    paciente = get_object_or_404(Paciente, id=id_paciente)
+    if request.method == 'POST':
+        campos_requeridos = ['folio_receta','diagnostico']
+
+        #motivo_consulta = request.POST.get('motivo_consulta').upper()
+        fecha = request.POST.get('fecha')
+        diagnostico = request.POST.get('diagnostico').upper()
+        folio_receta = request.POST.get('folio_receta')
+        notas = request.POST.get('notas')
+        if notas:
+            notas = notas.upper()
+
+        consulta = Consulta()
+        consulta.paciente = paciente
+        consulta.medico = request.user.medico
+        consulta.fecha = fecha
+        consulta.diagnostico = diagnostico
+        consulta.folio_receta = folio_receta
+        consulta.notas = notas
+
+        error_msg = validar_campos_requeridos(request, campos_requeridos)
+        if error_msg:
+            return render(request, 'expedientes/add_consulta.html', {'error_msg_consulta': error_msg, 'paciente': paciente, 'consulta': consulta})
+
+        error_msg = validar_datos(consulta)
+        if error_msg:
+            return render(request, 'expedientes/add_consulta.html', {'error_msg_consulta': error_msg, 'paciente': paciente, 'consulta': consulta})
+
+        consulta.save()
+        time.sleep(2)
+        return redirect(reverse('medical:ver_expediente', args=[paciente.id]))
+
+    #consulta = Consulta.objects.filter(paciente=paciente).order_by('-fecha').first()
+
+    template = loader.get_template('expedientes/add_consulta.html')
+    context = {'paciente': paciente,}
+    return HttpResponse(template.render(context, request))

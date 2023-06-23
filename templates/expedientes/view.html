@@ -288,13 +288,13 @@
             <div class="flex gap-5 items-center">
               <h2 class="text-xl font-bold text-main uppercase">Consultas</h2>
             {% comment %} Agregar consulta {% endcomment %}
-            <a href="/add/consulta/" class=" bg-main py-1 px-3 rounded-lg group transition-colors"
+            <a href="/add/consulta/{{paciente.id}}" class=" bg-main py-1 px-3 rounded-lg group transition-colors"
               type="button">
               <span class="text-white"><i class="fas fa-plus"></i> Agregar consulta</span>
             </a>
             </div>
             <div class="space-y-2">
-              {% for consulta in consultas %}
+              {% for consulta in consultas%}
               <div class="py-2">
                 {% comment %} Fecha {% endcomment %}
               <p class="uppercase"><span class="font-bold text-lg">Fecha: </span>{{ consulta.fecha }}</p>
@@ -305,8 +305,8 @@
               {% comment %} Notas {% endcomment %}
               {% if consulta.notas %}
               <p class="uppercase"><span class="font-bold text-lg">Notas: </span>{{ consulta.notas }}</p>
-              </div>
               {% endif %}
+            </div>
               {% endfor %}
 
             </div>
@@ -317,7 +317,7 @@
           <div class="flex gap-5 items-center">
             <h2 class="text-xl font-bold text-main uppercase">Consultas</h2>
           {% comment %} Agregar consulta {% endcomment %}
-          <a href="/add/consulta/" class=" bg-main py-1 px-3 rounded-lg group transition-colors"
+          <a href="/add/consulta/{{paciente.id}}" class=" bg-main py-1 px-3 rounded-lg group transition-colors"
             type="button">
             <span class="text-white"><i class="fas fa-plus"></i> Agregar consulta</span>
           </a>
