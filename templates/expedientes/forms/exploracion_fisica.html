@@ -1,223 +1,241 @@
-<!DOCTYPE html>
-<html lang="es">
-  <body>
-    <form
-      id="form_exploracion_fisica"
-      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
-    >
-      <h1 class="text-xl font-bold text-main uppercase">Exploración Física</h1>
+<!-- ========================================
+   Mostrar alerta de Historia Clinica
+======================================== -->
+{% if paciente %}
+<div class="w-full bg-blue-200 border-blue-500 text-blue-500  rounded-lg p-3 text-center">
+  Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+</div>
+{% endif %}
 
-      <div class="w-full gap-10 grid lg:grid-cols-2 ">
-        <!-- ========================================
-         Contenedor de Exploracion Fisica
-      ======================================== -->
-      <div class="space-y-5">
-        {% comment %} Frecuencia cardiaca, frecuencia respiratoria y Oxigeno
-        {% endcomment %}
-        <div class="grid grid-cols-3 gap-4">
-          {% comment %} Frecuencia Cardiaca {% endcomment %}
-          <div>
-            <label
-              for="cardiac_frecuency"
-              class="block mb-2 text-sm font-semibold uppercase"
-              >FC <span class="text-red-500">*</span></label
-            >
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="cardiac_frecuency"
-                name="frecuencia_cardiaca"
-                class="w-full border-none rounded-md bg-white shadow-sm appearance-none"
-                type="number"
-              />
-              <p class="absolute inset-y-0 flex items-center right-2">Ipm</p>
-            </div>
-        </div>
+<!-- ========================================
+   Alertas de error/success
+======================================== -->
+{% if error_msg_exploracion %}
+<div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+  {{ error_msg_exploracion }}
+</div>
+{% endif %}
 
-          {% comment %} Frecuencia Respiratoria {% endcomment %}
-          <div>
-            <label
-              for="respiratory_frecuency"
-              class="block mb-2 text-sm font-semibold uppercase"
-              >FR <span class="text-red-500">*</span></label
-            >
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="respiratory_frecuency"
-                name="frecuencia_respiratoria"
-                class="w-full border-none rounded-md bg-white shadow-sm"
-                type="number"
-              />
-              <p class="absolute inset-y-0 flex items-center right-2">Rpm</p>
-            </div>
-          </div>
+<h1 class="text-xl font-bold text-main uppercase">Exploración Física</h1>
 
-          {% comment %} Oxigenacion {% endcomment %}
-          <div>
-            <label for="oxygenation" class="block mb-2 text-sm font-semibold uppercase"
-              >SpO2 <span class="text-red-500">*</span></label
-            >
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="oxygenation"
-                name="saturacion_oxigeno"
-                class="w-full border-none rounded-md bg-white shadow-sm"
-                type="number"
-              />
-              <p class="absolute inset-y-0 flex items-center right-2">%</p>
-            </div>
-          </div>
-        </div>
-
-        {% comment %} Temperatura, Presion Arterial y Glucosa {% endcomment %}
-        <div class="grid grid-cols-3 gap-4">
-          {% comment %} Temperatura {% endcomment %}
-          <div>
-            <label for="temperature" class="block mb-2 text-sm font-semibold uppercase"
-              >Temp <span class="text-red-500">*</span></label
-            >
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="temperature"
-                name="temperatura"
-                class="w-full border-none rounded-md bg-white shadow-sm"
-                type="number"
-              />
-              <p class="absolute inset-y-0 flex items-center right-2">°C</p>
-            </div>
-          </div>
-
-          {% comment %} Presion Arterial {% endcomment %}
-          <div>
-            <label
-              for="arterial_pressure"
-              class="block mb-2 text-sm font-semibold uppercase"
-              >TA <span class="text-red-500">*</span></label
-            >
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="arterial_pressure"
-                name="presion_arterial"
-                class="w-full border-none rounded-md bg-white shadow-sm"
-                type="text"
-              />
-              <p class="absolute inset-y-0 flex items-center right-2">mmHg</p>
-            </div>
-          </div>
-
-          {% comment %} Glucosa Capilar {% endcomment %}
-          <div>
-            <label
-              for="capillary_glucose"
-              class="block mb-2 text-sm font-semibold uppercase truncate"
-              >Guclosa Capilar <span class="text-red-500">*</span></label
-            >
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="capillary_glucose"
-                name="glucosa"
-                class="w-full border-none rounded-md bg-white shadow-sm"
-                type="number"
-              />
-              <p class="absolute inset-y-0 flex items-center right-2">mg/dl</p>
-            </div>
-          </div>
-        </div>
-
-        {% comment %} Contenedor Talla, Peso y IMC {% endcomment %}
-        <div class="grid grid-cols-3 gap-4">
-          {% comment %} Talla {% endcomment %}
-          <div>
-            <label for="size" class="block mb-2 text-sm font-semibold uppercase"
-              >cm <span class="text-red-500">*</span></label
-            >
-
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="size"
-                name="talla"
-                class="w-full border-none rounded-md bg-white shadow-sm"
-                type="number"
-              />
-              <p class="absolute inset-y-0 flex items-center right-2">cm</p>
-            </div>
-          </div>
-
-          {% comment %} Peso {% endcomment %}
-          <div>
-            <label for="weight" class="block mb-2 text-sm font-semibold uppercase"
-              >kg <span class="text-red-500">*</span></label
-            >
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="weight"
-                name="peso"
-                class="w-full border-none rounded-md bg-white shadow-sm"
-                type="number"
-              />
-              <p class="absolute inset-y-0 flex items-center right-2">kg</p>
-            </div>
-          </div>
-
-          {% comment %} IMC {% endcomment %}
-          <div>
-            <label for="imc" class="block mb-2 text-sm font-semibold uppercase"
-              >IMC <span class="text-red-500">*</span></label
-            >
-            <div class="w-full relative bg-white rounded-lg">
-              <input
-                id="imc"
-                name="imc"
-                class="w-full border-none rounded-md bg-white shadow-sm"
-                type="number"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    
-
-        <!-- ========================================
-           Contenedor de Hallazgos
-        ======================================== -->
-        <div class="space-y-5">
-          {% comment %} Hallazgoz {% endcomment %}
-          <div>
-            <label
-              for="hallazgos"
-              class="block mb-2 text-sm font-semibold uppercase"
-              >Hallazgos <span class="text-red-500">*</span></label
-            >
-            <textarea
-              id="hallazgos"
-              name="descripcion_exploracion"
-              class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-              placeholder="Escriba los hallazgos correspondientes"
-            ></textarea>
-          </div>
-
-          {% comment %} Notas {% endcomment %}
-          <div class="w-full">
-            <label for="notes_exploracion" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
-            <textarea id="notes_exploracion" name="notas" class=" resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
-          </div>
-        </div>
-      </div>
-
-
-      {% comment %} Botones de formulario {% endcomment %}
-      <div class="flex justify-center gap-10 mt-20">
-        <a
-          href="/"
-          class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold"
-          >Cancelar</a
+<div class="w-full gap-10 grid lg:grid-cols-2 ">
+  <!-- ========================================
+   Contenedor de Exploración Física
+======================================== -->
+  <div class="space-y-5">
+    {% comment %} Frecuencia cardiaca, frecuencia respiratoria y Oxigeno
+    {% endcomment %}
+    <div class="grid grid-cols-3 gap-4">
+      {% comment %} Frec. Cardiaca {% endcomment %}
+      <div>
+        <label
+          for="frecuencia_cardiaca"
+          class="block mb-2 text-sm font-semibold uppercase"
+          >Frec. Cardiaca <span class="text-red-500">*</span></label
         >
-        <button
-          type="submit"
-          class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold"
-        >
-          Enviar Datos
-        </button>
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="frecuencia_cardiaca"
+            name="frecuencia_cardiaca"
+            class="w-full border-none rounded-md bg-white shadow-sm appearance-none"
+            type="number"
+            value="{% if datos_formulario and datos_formulario.frecuencia_cardiaca is not none %}{{ datos_formulario.frecuencia_cardiaca }}{% elif paciente and exploracion.frecuencia_cardiaca is not none %}{{ exploracion.frecuencia_cardiaca }}{% endif %}"
+          />
+          <p class="absolute inset-y-0 flex items-center right-2">Ipm</p>
+        </div>
       </div>
-    </form>
-  </body>
-</html>
+
+      {% comment %} Frecuencia Respiratoria {% endcomment %}
+      <div>
+        <label
+          for="frecuencia_respiratoria"
+          class="block mb-2 text-sm font-semibold uppercase"
+          >Frec. Respiratoria <span class="text-red-500">*</span></label
+        >
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="frecuencia_respiratoria"
+            name="frecuencia_respiratoria"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            value="{% if datos_formulario and datos_formulario.frecuencia_respiratoria is not none %}{{ datos_formulario.frecuencia_respiratoria }}{% elif paciente and exploracion.frecuencia_respiratoria is not none %}{{ exploracion.frecuencia_respiratoria }}{% endif %}"
+          />
+          <p class="absolute inset-y-0 flex items-center right-2">Rpm</p>
+        </div>
+      </div>
+
+      {% comment %} Oxigenación {% endcomment %}
+      <div>
+        <label for="saturacion_oxigeno" class="block mb-2 text-sm font-semibold uppercase"
+          >SpO2</label
+        >
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="saturacion_oxigeno"
+            name="saturacion_oxigeno"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="number"
+            value="{% if datos_formulario and datos_formulario.saturacion_oxigeno is not none %}{{ datos_formulario.saturacion_oxigeno }}{% elif paciente and exploracion.saturacion_oxigeno is not none %}{{ exploracion.saturacion_oxigeno }}{% endif %}"
+          />
+          <p class="absolute inset-y-0 flex items-center right-2">%</p>
+        </div>
+      </div>
+    </div>
+
+    {% comment %} Temperatura, Presión Arterial y Glucosa {% endcomment %}
+    <div class="grid grid-cols-3 gap-4">
+      {% comment %} Temperatura {% endcomment %}
+      <div>
+        <label for="temperatura" class="block mb-2 text-sm font-semibold uppercase"
+          >Temperatura <span class="text-red-500">*</span></label
+        >
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="temperatura"
+            name="temperatura"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="text"
+            value="{% if datos_formulario and datos_formulario.temperatura is not none %}{{ datos_formulario.temperatura }}{% elif paciente and exploracion.temperatura is not none %}{{ exploracion.temperatura }}{% endif %}"
+          />
+          <p class="absolute inset-y-0 flex items-center right-2">°C</p>
+        </div>
+      </div>
+
+      {% comment %} Presión Arterial {% endcomment %}
+      <div>
+        <label
+          for="presion_arterial"
+          class="block mb-2 text-sm font-semibold uppercase"
+          >Presión Arterial <span class="text-red-500">*</span></label
+        >
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="presion_arterial"
+            name="presion_arterial"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="text"
+            value="{% if datos_formulario and datos_formulario.presion_arterial is not none %}{{ datos_formulario.presion_arterial }}{% elif paciente and exploracion.presion_arterial is not none %}{{ exploracion.presion_arterial }}{% endif %}"
+          />
+          <p class="absolute inset-y-0 flex items-center right-2">mmHg</p>
+        </div>
+      </div>
+
+      {% comment %} Glucosa Capilar {% endcomment %}
+      <div>
+        <label
+          for="glucosa"
+          class="block mb-2 text-sm font-semibold uppercase truncate"
+          >Glucosa Capilar</label
+        >
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="glucosa"
+            name="glucosa"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="text"
+            value="{% if datos_formulario and datos_formulario.glucosa is not none %}{{ datos_formulario.glucosa }}{% elif paciente and exploracion.glucosa is not none %}{{ exploracion.glucosa }}{% endif %}"
+          />
+          <p class="absolute inset-y-0 flex items-center right-2">mg/dl</p>
+        </div>
+      </div>
+    </div>
+
+    {% comment %} Contenedor Talla, Peso y IMC {% endcomment %}
+    <div class="grid grid-cols-3 gap-4">
+      {% comment %} Talla {% endcomment %}
+      <div>
+        <label for="talla" class="block mb-2 text-sm font-semibold uppercase"
+          >Talla</label
+        >
+
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="talla"
+            name="talla"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="text"
+            value="{% if datos_formulario and datos_formulario.talla is not none %}{{ datos_formulario.talla }}{% elif paciente and exploracion.talla is not none %}{{ exploracion.talla }}{% endif %}"
+          />
+          <p class="absolute inset-y-0 flex items-center right-2">cm</p>
+        </div>
+      </div>
+
+      {% comment %} Peso {% endcomment %}
+      <div>
+        <label for="peso" class="block mb-2 text-sm font-semibold uppercase"
+          >Peso</label
+        >
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="peso"
+            name="peso"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="text"
+            value="{% if datos_formulario and datos_formulario.peso is not none %}{{ datos_formulario.peso }}{% elif paciente and exploracion.peso is not none %}{{ exploracion.peso }}{% endif %}"
+          />
+          <p class="absolute inset-y-0 flex items-center right-2">kg</p>
+        </div>
+      </div>
+
+      {% comment %} IMC {% endcomment %}
+      <div>
+        <label for="imc" class="block mb-2 text-sm font-semibold uppercase"
+          >IMC</label
+        >
+        <div class="w-full relative bg-white rounded-lg">
+          <input
+            id="imc"
+            name="imc"
+            class="w-full border-none rounded-md bg-white shadow-sm"
+            type="text"
+            value="{% if datos_formulario and datos_formulario.imc is not none %}{{ datos_formulario.imc }}{% elif paciente and exploracion.imc is not none %}{{ exploracion.imc }}{% endif %}"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================
+     Contenedor de Hallazgos
+  ======================================== -->
+  <div class="space-y-5">
+    {% comment %} Hallazgoz {% endcomment %}
+    <div>
+      <label
+        for="descripcion_exploracion"
+        class="block mb-2 text-sm font-semibold uppercase"
+        >Hallazgos <span class="text-red-500">*</span></label
+      >
+      <textarea
+        id="descripcion_exploracion"
+        name="descripcion_exploracion"
+        class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
+        placeholder="Escriba los hallazgos correspondientes"
+      >{% if datos_formulario %}{{ datos_formulario.descripcion_exploracion }}{% elif paciente %}{{ exploracion.descripcion_exploracion }}{% endif %}</textarea>
+    </div>
+
+    {% comment %} Notas {% endcomment %}
+    <div class="w-full">
+      <label for="notes_exploracion" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
+      <textarea id="notes_exploracion" name="notas" class=" resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias">{% if datos_formulario %}{{ datos_formulario.notas }}{% elif paciente %}{{ exploracion.notas }}{% endif %}</textarea>
+    </div>
+  </div>
+</div>
+
+{% csrf_token %}
+{% comment %} Botones de formulario {% endcomment %}
+<div class="flex justify-center gap-10 mt-20">
+  <a
+    href="/"
+    class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold"
+    >Cancelar</a
+  >
+  <button
+  type="submit"
+  class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold"
+  onclick="mostrarAlerta()"
+>
+  Enviar Datos
+</button>
+</div>

@@ -1,0 +1,51 @@
+{% extends "base_2.html" %} {% load static %} {% block content %}
+<section class="lg:px-0 min-h-screen">
+  <!-- ========================================
+    AQUI VA EL NAVBAR
+ ======================================== -->
+  {% include "plantillas/navbar.html" %}
+
+  <!-- Header -->
+  <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
+    <div class="lg:container lg:mx-auto">
+      <h1 class="uppercase font-semibold text-main text-xl">
+        Nuevo Expediente
+      </h1>
+      <p>Registra un nuevo expediente aquí.</p>
+    </div>
+  </div>
+
+  <div class="py-10 bg-white md:px-6">
+
+    <!-- ========================================
+       Formularios
+    ======================================== -->
+    <div id="form_consultas" class="formulario">
+      <form
+      id="formData_consultas"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-lg"
+      action=""
+      method="post"
+    >
+        {% include "expedientes/forms/consultas.html" %}
+    </form>
+
+
+  </div>
+
+</section>
+
+<script>
+  function mostrarAlerta() {
+    Swal.fire({
+      title: 'Guardado',
+      text: 'Consulta guardada correctamente',
+      icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
+      showConfirmButton: false
+    })
+  }
+</script>
+
+{% endblock %}

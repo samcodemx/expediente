@@ -37,7 +37,7 @@
       </form>
       <!-- Boton para agregar expediente nuevo -->
 
-      <a href="/create-file"><button type="submit"
+      <a href="/create-file/ficha"><button type="submit"
           class="text-whitebg-main bg-main hover:bg-sky-800 transition-colors text-white font-medium rounded-lg text-sm px-8 py-4">
           Nuevo
         </button></a>
@@ -54,7 +54,7 @@
         <!-- Tarjeta -->
         {% if pacientes %}
         {% for paciente in pacientes %}
-        <div class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm">
+        <div class="bg-white rounded-lg p-5 flex justify-between items-center shadow-sm paciente-card" data-search="{{ paciente.id }} {{ paciente.nombre }} {{ paciente.empleador }} {{ paciente.antecedentes.medico }}">
           <!-- Datos del paciente -->
           <div>
             <!-- No. Expediente -->
@@ -73,7 +73,7 @@
               {% if paciente.empleador %}
                 <p>{{paciente.empleador}}</p>
               {% else %}
-                <p>NA</p>
+                <p> -</p>
               {% endif %}
               <p></p>
             </div>
@@ -89,18 +89,18 @@
           </div>
           <!-- Botones de la tarjeta -->
           <div class="flex gap-2">
-            <button class="border-2 border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
+            <a href="view/{{paciente.id}}" class="border-2 flex items-center justify-center border-blue-400 h-10 w-10 rounded-lg hover:bg-blue-400 group transition-colors"
               type="button">
               <span class="group-hover:text-white text-blue-400"><i class="fas fa-file-alt"></i></span>
-            </button>
-            <button class="border-2 border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
+            </a>
+            
+            <a href="update-file/{{paciente.id}}/ficha/" class="border-2 flex items-center justify-center border-yellow-300 h-10 w-10 rounded-lg hover:bg-yellow-300 group transition-colors"
               type="button">
               <span class="group-hover:text-white text-yellow-300"><i class="fas fa-pen"></i></span>
-            </button>
-            <button class="border-2 border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors"
-              type="button">
+            </a>
+            <a href="#" class="border-2 flex items-center justify-center border-red-400 h-10 w-10 rounded-lg hover:bg-red-400 group transition-colors" type="button" onclick="confirmDelete('{{paciente.id}}')">
               <span class="group-hover:text-white text-red-400"><i class="fas fa-trash"></i></span>
-            </button>
+            </a>
           </div>
         </div>
         {% endfor %}
@@ -115,4 +115,35 @@
     </div>
   </div>
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchBar = document.getElementById('default-search');
+    searchBar.addEventListener('input', function() {
+      const searchValue = searchBar.value.toLowerCase();
+      const pacienteCards = document.getElementsByClassName('paciente-card');
+      
+      for (let i = 0; i < pacienteCards.length; i++) {
+        const card = pacienteCards[i];
+        const searchAttribute = card.getAttribute('data-search');
+        
+        if (searchAttribute.toLowerCase().includes(searchValue)) {
+          card.classList.remove('hidden');  // Mostrar la tarjeta si coincide con la búsqueda
+          card.classList.add('block');
+        } else {
+          card.classList.remove('block');   // Ocultar la tarjeta si no coincide con la búsqueda
+          card.classList.add('hidden');
+        }
+      }
+    });
+  });
+
+  function confirmDelete(pacienteId) {
+    if (confirm('¿Estás seguro de que deseas eliminar este paciente? Esta acción no se puede deshacer.')) {
+      window.location.href = 'delete/' + pacienteId;
+    }
+  }
+</script>
+
+
+
 {% endblock %}

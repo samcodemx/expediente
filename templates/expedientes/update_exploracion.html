@@ -1,0 +1,86 @@
+{% extends "base_2.html" %} {% load static %} {% block content %}
+<section class="lg:px-0 min-h-screen">
+  <!-- ========================================
+    AQUI VA EL NAVBAR
+ ======================================== -->
+  {% include "plantillas/navbar.html" %}
+
+  <!-- Header -->
+  <div class="py-10 border-b-2 border-gray-200 bg-white md:px-6">
+    <div class="lg:container lg:mx-auto">
+      <h1 class="uppercase font-semibold text-main text-xl">
+        Editar Expediente
+      </h1>
+      <p>Modifica los campos necesarios a continuacion.</p>
+    </div>
+  </div>
+
+  <div class="py-10 bg-white md:px-6">
+    <!-- ========================================
+       Barra de navegacion para los formularios
+    ======================================== -->
+    {% include "plantillas/navbarFormulariosUpdate.html" %}
+
+    <!-- ========================================
+       Formularios
+    ======================================== -->
+
+    <div id="form_exploracion_fisica" class="formulario">
+      <form
+      id="formData_exploracion_fisica"
+      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
+      action="{% url 'medical:update_exploracion' paciente.id %}"
+      method="post"
+    >
+        {% include "expedientes/forms/exploracion_fisica.html" %}
+    </form>
+  </div>
+
+</section>
+
+<script>
+  function mostrarAlerta() {
+    Swal.fire({
+      title: 'Guardado',
+      text: 'Paciente actualizado correctamente',
+      icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
+      showConfirmButton: false
+    })
+  }
+
+
+  function calcularIMC() {
+    // Obtener los valores de altura y peso
+    var alturaInput = document.getElementById('talla').value;
+    var pesoInput = document.getElementById('peso').value;
+  
+    // Eliminar cualquier carácter no numérico excepto el punto decimal
+    var altura = parseFloat(alturaInput.replace(/[^0-9.]/g, ''));
+    var peso = parseFloat(pesoInput.replace(/[^0-9.]/g, ''));
+  
+    // Verificar si los valores son válidos
+    if (isNaN(altura) || isNaN(peso) || altura <= 0 || peso <= 0) {
+      // Si uno o ambos campos están vacíos o no son válidos, salir de la función
+      return;
+    }
+  
+    // Calcular el IMC
+    var imc = peso / Math.pow(altura / 100, 2);
+  
+    // Redondear el resultado a dos decimales
+    imc = imc.toFixed(1);
+  
+    // Colocar el resultado en el campo IMC
+    document.getElementById('imc').value = imc;
+  }
+  
+  // Llamar a la función calcularIMC cuando se cambie el valor de los campos de altura y peso
+  document.getElementById('talla').addEventListener('input', calcularIMC);
+  document.getElementById('peso').addEventListener('input', calcularIMC);
+  
+  
+</script>
+
+{% endblock %}

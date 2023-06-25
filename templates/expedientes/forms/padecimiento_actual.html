@@ -1,148 +1,74 @@
-<!DOCTYPE html>
-<html lang="es">
-  <body>
-    <form
-      id="form_padecimiento_actual"
-      class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-b-lg"
-      action="{% url 'medical:guarda_padecimiento' %}"
-      method="post"
-    >
-    
-        {% if error_msg_padecimiento %}
-    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-      {{ error_msg_padecimiento }}
-    </div>
-    {% endif %}
-
-    {% if success_msg_padecimiento %}
-    <div class="alert alert-success" style="color: green;">
-        {{ success_msg_padecimiento }}
-    </div>
+<!-- Mostrar alerta de Historia Clínica -->
+{% if paciente %}
+<div class="w-full bg-blue-200 border-blue-500 text-blue-500 rounded-lg p-3 text-center">
+  Historia clínica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
+</div>
 {% endif %}
 
+<!-- Alertas de error/success -->
+{% if error_msg_padecimiento %}
+<div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
+  {{ error_msg_padecimiento }}
+</div>
+{% endif %}
 
-    {% if paciente %}
-    <div class="w-full bg-red-200 border-red-500 text-red-500 rounded-lg p-3 text-center">
-      Historia clinica del paciente: {{ paciente.nombre }} {{ paciente.apellido_pat }} {{ paciente.apellido_mat }}
-    </div>
-    {% endif %}
-    
-    <h1 class="text-xl font-bold text-main uppercase">Padecimientos Actuales</h1>
+<h1 class="text-xl font-bold text-main uppercase">Padecimiento Actual</h1>
 
-      {% comment %} Padecimiento Actual {% endcomment %}
-      <div class="w-full">
-        <label for="current_condition" class="block mb-2 text-sm font-semibold uppercase"
-          >Padecimiento Actual <span class="text-red-500">*</span></label
-        >
-        <textarea
-          name="padecimiento_actual"
-          id="current_condition"
-          class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-          placeholder="Escriba el padecimiento actual"
-          name="padecimiento_actual"
-        ></textarea>
-      </div>
+<div class="w-full">
+  <label for="padecimiento_actual" class="block mb-2 text-sm font-semibold uppercase">Padecimiento Actual <span class="text-red-500">*</span></label>
+  <textarea id="padecimiento_actual" name="padecimiento_actual" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Escriba el padecimiento actual">{% if datos_formulario %}{{ datos_formulario.padecimiento_actual }}{% elif paciente %}{{ padecimiento.padecimiento_actual }}{% endif %}</textarea>
+</div>
 
-      <!-- ========================================
-         Interrogativo por aparatos y sistemas
-      ======================================== -->
-      <div class="w-full space-y-8">
-        <label class="block mb-4 font-semibold uppercase"
-          >Interrogativo por Aparatos y Sistemas</label
-        >
-        {% comment %} Piel y Tegumentos {% endcomment %}
-        <div class="w-full">
-          <label for="skin" class="block mb-2 text-sm font-semibold uppercase"
-            >Piel y Tegumentos <span class="text-red-500">*</span></label
-          >
-          <textarea
-            name="piel_tegumentos"
-            id="skin"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-            placeholder="Escriba los interrogativos correspondientes"
-            name="piel_tegumentos"
-          ></textarea>
-        </div>
+<div class="w-full space-y-8">
+  <label class="block mb-4 font-semibold uppercase">Interrogatorio por Aparatos y Sistemas</label>
 
-        {% comment %} Cabeza y Cuello {% endcomment %}
-        <div class="w-full">
-          <label for="head_neck" class="block mb-2 text-sm font-semibold uppercase"
-            >Cabeza y Cuello <span class="text-red-500">*</span></label
-          >
-          <textarea
-            name="cabeza_cuello"
-            id="head_neck"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-            placeholder="Escriba los interrogativos correspondientes"
-            name="cabeza_cuello"
-          ></textarea>
-        </div>
+  <div class="w-full">
+    <label for="piel_tegumentos" class="block mb-2 text-sm font-semibold uppercase">Piel y Tegumentos <span class="text-red-500">*</span></label>
+    <textarea id="piel_tegumentos" name="piel_tegumentos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.piel_tegumentos }}{% elif paciente %}{{ padecimiento.piel_tegumentos }}{% endif %}</textarea>
+  </div>
 
-        {% comment %} Torax {% endcomment %}
-        <div class="w-full">
-          <label for="thorax" class="block mb-2 text-sm font-semibold uppercase">Torax <span class="text-red-500">*</span></label>
-          <textarea
-            name="torax"
-            id="thorax"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-            placeholder="Escriba los interrogativos correspondientes"></textarea>
-        </div>
+  <div class="w-full">
+    <label for="cabeza_cuello" class="block mb-2 text-sm font-semibold uppercase">Cabeza y Cuello <span class="text-red-500">*</span></label>
+    <textarea id="cabeza_cuello" name="cabeza_cuello" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.cabeza_cuello }}{% elif paciente %}{{ padecimiento.cabeza_cuello }}{% endif %}</textarea>
+  </div>
 
-        {% comment %} Abdomen {% endcomment %}
-        <div class="w-full">
-          <label for="abdomen" class="block mb-2 text-sm font-semibold uppercase">Abdomen <span class="text-red-500">*</span></label>
-          <textarea
-            name="abdomen"
-            id="abdomen"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-            placeholder="Escriba los interrogativos correspondientes"></textarea>
-        </div>
+  <div class="w-full">
+    <label for="torax" class="block mb-2 text-sm font-semibold uppercase">Torax <span class="text-red-500">*</span></label>
+    <textarea id="torax" name="torax" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.torax }}{% elif paciente %}{{ padecimiento.torax }}{% endif %}</textarea>
+  </div>
 
-        {% comment %} Genitourinario {% endcomment %}
-        <div class="w-full">
-          <label for="genitourinary" class="block mb-2 text-sm font-semibold uppercase">Genitourinario <span class="text-red-500">*</span></label>
-          <textarea
-            name="genitourinario"
-            id="genitourinary"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-            placeholder="Escriba los interrogativos correspondientes"></textarea>
-        </div>
+  <div class="w-full">
+    <label for="abdomen" class="block mb-2 text-sm font-semibold uppercase">Abdomen <span class="text-red-500">*</span></label>
+    <textarea id="abdomen" name="abdomen" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.abdomen }}{% elif paciente %}{{ padecimiento.abdomen }}{% endif %}</textarea>
+  </div>
 
-        {% comment %} Musculo Esqueletico y Extremidades {% endcomment %}
-        <div class="w-full">
-          <label for="skeletal_muscle_and_extremities" class="block mb-2 text-sm font-semibold uppercase">Músculo Esquelético y Extremidades <span class="text-red-500">*</span></label>
-          <textarea
-            name="musculo_extremidades"
-            id="skeletal_muscle_and_extremities"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-            placeholder="Escriba los interrogativos correspondientes"></textarea>
-        </div>   
-        
-        {% comment %} Neurologico {% endcomment %}
-        <div class="w-full">
-          <label for="neurological" class="block mb-2 text-sm font-semibold uppercase">Neurológico <span class="text-red-500">*</span></label>
-          <textarea
-            name="neurologico"
-            id="neurological"
-            class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"
-            placeholder="Escriba los interrogativos correspondientes"></textarea>
-        </div>
-      </div>
+  <div class="w-full">
+    <label for="genitourinario" class="block mb-2 text-sm font-semibold uppercase">Genitourinario <span class="text-red-500">*</span></label>
+    <textarea id="genitourinario" name="genitourinario" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.genitourinario }}{% elif paciente %}{{ padecimiento.genitourinario }}{% endif %}</textarea>
+  </div>
 
-        {% comment %} Notas {% endcomment %}
-        <div class="w-full">
-          <label for="notes_padecimientos" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
-          <textarea name="notas" id="notes_padecimientos" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias"></textarea>
-        </div>
-        
-        {% csrf_token %}
-        <!-- Campo oculto para almacenar el ID del paciente -->
-        <input type="hidden" name="paciente_id" value="{{ paciente.id }}">
-        {% comment %} Botones de formulario {% endcomment %}
-        <div class="flex justify-center gap-10 mt-20">
-          <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
-          <button type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
-        </div>
-    </form>
-  </body>
-</html>
+  <div class="w-full">
+    <label for="musculo_extremidades" class="block mb-2 text-sm font-semibold uppercase">Músculo Esquelético y Extremidades <span class="text-red-500">*</span></label>
+    <textarea id="musculo_extremidades" name="musculo_extremidades" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.musculo_extremidades }}{% elif paciente %}{{ padecimiento.musculo_extremidades }}{% endif %}</textarea>
+  </div>   
+
+  <div class="w-full">
+    <label for="neurologico" class="block mb-2 text-sm font-semibold uppercase">Neurológico <span class="text-red-500">*</span></label>
+    <textarea id="neurologico" name="neurologico" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Describa lo referido por el paciente">{% if datos_formulario %}{{ datos_formulario.neurologico }}{% elif paciente %}{{ padecimiento.neurologico }}{% endif %}</textarea>
+  </div>
+</div>
+
+<div class="w-full">
+  <label for="notas_padecimientos" class="block mb-2 text-sm font-semibold uppercase">Notas</label>
+  <textarea id="notas_padecimientos" name="notas" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase" placeholder="Agregue notas extra en caso de ser necesarias">{% if datos_formulario %}{{ datos_formulario.notas }}{% elif paciente %}{{ padecimiento.notas }}{% endif %}</textarea>
+</div>
+
+{% csrf_token %}
+<!-- Campo oculto para almacenar el ID del paciente -->
+<input type="hidden" name="paciente_id" value="{{ paciente.id }}">
+
+<!-- Botones de formulario -->
+<div class="flex justify-center gap-10 mt-20">
+  <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+  <button onclick="mostrarAlerta()" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Datos</button>
+</div>
