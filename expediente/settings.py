@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-=ci^!c^3hl=p_=m^m!*p!u$4m^dbd7osowy+)n5u60=-1b0*dc"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['samp456.pythonanywhere.com']
 
 
 # Application definition
@@ -67,7 +67,7 @@ ROOT_URLCONF = "expediente.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ['/home/samp456/expediente/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -98,18 +98,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    # },
-    # {
-    #     "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    # },
-    # {
-    #     "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    # },
-    # {
-    #     "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    # },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
@@ -128,7 +128,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# STATIC_URL = "/static/"
 STATIC_URL = "/theme/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'expediente/static')]
 
@@ -141,3 +140,6 @@ LOGIN_REDIRECT_URL = "/"
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 # NPM_BIN_PATH = "/usr/local/bin/npm"
+
+#STATIC_ROOT = '/home/samp456/expediente/theme/static'
+
