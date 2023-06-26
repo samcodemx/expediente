@@ -16,4 +16,11 @@
     <label for="descripcion" class="block mb-2 text-sm font-semibold uppercase">Cuerpo del correo<span class="text-red-500">*</span></label>
     <textarea id="descripcion" name="descripcion" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"></textarea>
   </div>
+
+  {% comment %} Botones de formulario {% endcomment %}
+  <div class="flex justify-center gap-10 mt-20">
+    <a href="/" class="w-3/12 py-3 border-none bg-rojo focus:ring-2 focus:ring-offset-2 focus:ring-rojo text-center rounded-lg text-white font-semibold">Cancelar</a>
+    <button onclick="mostrarAlerta()" type="submit" class="w-3/12 py-3 border-none bg-main focus:ring-2 focus:ring-offset-2 focus:ring-main text-center rounded-lg text-white font-semibold">Enviar Correo</button>
+  </div>
+  
 </form>
