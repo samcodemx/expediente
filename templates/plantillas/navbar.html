@@ -50,7 +50,7 @@
             <div class="px-4 py-3 text-sm text-gray-900">
               <div>{% if request.user.medico.nombre %} {{ request.user.medico.nombre }} {{request.user.medico.apellido_pat}} {% else %} {{ request.user.username }} {% endif %}</div>
               <div class="font-medium truncate">{{request.user.email}}</div>
-            </div>
+            </div>  
             <div class="py-2">
               <a
                 href="/logout"
