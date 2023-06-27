@@ -1,4 +1,4 @@
-<form class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-lg">
+<form class="lg:container lg:mx-auto bg-background p-10 space-y-8 rounded-lg" method="post">
   <div class="w-full">
     <label for="asunto" class="block mb-2 text-sm font-semibold uppercase"
       >¿Cuál es el motivo de su correo?<span class="text-red-500">*</span></label
@@ -16,6 +16,7 @@
     <label for="descripcion" class="block mb-2 text-sm font-semibold uppercase">Cuerpo del correo<span class="text-red-500">*</span></label>
     <textarea id="descripcion" name="descripcion" class="resize-none w-full border-none rounded-md bg-white shadow-sm uppercase"></textarea>
   </div>
+  {% csrf_token %}
 
   {% comment %} Botones de formulario {% endcomment %}
   <div class="flex justify-center gap-10 mt-20">
@@ -24,3 +25,16 @@
   </div>
   
 </form>
+
+<script>
+  function mostrarAlerta() {
+    Swal.fire({
+      title: 'Enviado',
+      text: 'Correo enviado correctamente',
+      icon: 'success',
+      timer: 1900,
+      timerProgressBar: true,
+      showConfirmButton: false
+    })
+  }
+</script>
