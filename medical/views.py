@@ -93,6 +93,8 @@ def renderiza_consulta_view(request):
 def renderiza_ayuda_view(request):
     if request.method == 'GET':
         return render(request, 'help.html')
+    time.sleep(2)
+    return redirect('medical:home')
 
 @login_required
 def guarda_ficha_identificacion_view(request):

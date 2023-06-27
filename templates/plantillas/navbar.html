@@ -50,29 +50,7 @@
             <div class="px-4 py-3 text-sm text-gray-900">
               <div>{% if request.user.medico.nombre %} {{ request.user.medico.nombre }} {{request.user.medico.apellido_pat}} {% else %} {{ request.user.username }} {% endif %}</div>
               <div class="font-medium truncate">{{request.user.email}}</div>
-            </div>
-            <ul
-              class="py-2 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownUserAvatarButton"
-            >
-              <li>
-                <a
-                  href="/create-file"
-                  class="block px-4 py-2 hover:bg-background"
-                  >Crear expediente</a
-                >
-              </li>
-              <li>
-                <a href="/" class="block px-4 py-2 hover:bg-background"
-                  >Consultar expedientes</a
-                >
-              </li>
-              <li>
-                <a href="/help" class="block px-4 py-2 hover:bg-background"
-                  >Ayuda</a
-                >
-              </li>
-            </ul>
+            </div>  
             <div class="py-2">
               <a
                 href="/logout"
